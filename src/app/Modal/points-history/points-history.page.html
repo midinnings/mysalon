@@ -1,0 +1,55 @@
+<ion-content>
+
+  <div style="text-align: right;">
+    <ion-icon name="close-circle" class="close_btn" (click)="Close()"></ion-icon>
+  </div>
+
+
+  <!-- *ngFor="let points of PointsHistory; let i=index" -->
+
+  <div class="">
+    <p *ngIf="PointsHistory.length == 0 " style="text-align: center;">Loyalty points history not found..</p>
+    <ion-row class="listing_points shadow_ion" *ngFor="let points of PointsHistory; let i=index">
+      <ion-col size="3">
+        <img [src]="common.Url+'Files/'+points.SalonData.logo" class='round-img border-primary'
+          style="width: 55px;height: 55px;" />
+      </ion-col>
+
+      <ion-col size="7" *ngIf=" UserId == points.userid ">
+        <ion-row>
+          <ion-col size="10" class="ion-no-padding">
+            <p class="video-heading">
+              {{points.SalonData.name}}
+            </p>
+            <span class="dated">Dated - {{points.AppointmentData.prefeerddate}}</span>
+            <p class="services_list"> <span *ngFor="let service of points.Services"> {{service.servicename}}, </span>
+            </p>
+            <!-- <span class="costing_btn">₹ {{points.AppointmentData.cost}}/-</span> -->
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="10" class="ion-no-padding">
+            <p class="video-desciption"></p>
+          </ion-col>
+        </ion-row>
+
+      </ion-col>
+
+      <ion-col size="7" *ngIf=" UserId != points.userid ">
+        <ion-row>
+          <ion-col size="10" class="ion-no-padding">
+            <span>You have recieved loyalty bonus from refered user</span>
+            <span class="dated">Dated - {{points.AppointmentData.prefeerddate}}</span>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+
+      <ion-col size="2">
+        <p class="points">{{points.no_points}}</p>
+        <span class="dated" style="font-size: 12px;">Points</span>
+      </ion-col>
+
+
+    </ion-row>
+  </div>
+</ion-content>

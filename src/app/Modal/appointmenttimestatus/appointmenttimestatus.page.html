@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-row>
+      <ion-col size="2" class="ion-text-center">
+        <ion-buttons>
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col size="8" style="color:white" class="ion-text-center">
+        <ion-title class="p-0"> {{'Appointments'|language}}
+        </ion-title>
+      </ion-col>
+      <ion-col size="2" text-center>
+        <ion-icon class="myicon" (click)="close()" name="close-circle-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item *ngFor="let a of  lists" lines="none" class="list-box" style="margin-bottom:16px;">
+    <!-- <ion-avatar slot="start">
+      <img src="./assets/img/logo.png" class="list-img">
+    </ion-avatar> -->
+    <ion-label>
+      <h2 class="ion-text-uppercase font-w-600">{{a.customer_name}}</h2>
+      <h3>+91 {{a.contactno}}</h3>
+      <span class="small-font">{{a.serviceinfo|arraytostring:'service'}}</span><br>
+      <span class="small-font" sytle="white-space: normal !important">Stylist : {{a.employeeinfo.name}}</span>
+    </ion-label>
+    <ion-note class="p-padding">
+      <p>{{a.prefeerddate|date:'dd.MMM.yyyy'}}</p>
+      <p>{{a.prefeerddate|date:'HH:MM:SS a'}}</p>
+      <p class="ion-text-uppercase letter-spacing-1">{{a.appointmentstatus}}</p>
+    </ion-note>
+  </ion-item>
+
+</ion-content>

@@ -1,0 +1,26 @@
+.header-md:after {
+    background-image: none !important;
+}
+
+ion-toolbar {
+    background: transparent !important;
+    height: 27px !important;
+}
+
+ion-content {
+    --background: white !important;
+}
+
+ion-button {
+    font-size: 10px !important;
+    height: 30px !important;
+}
+
+h5 {
+    margin: 0px !important;
+}
+
+.iconsclose {
+    color: #808080ab !important;
+    font-size: 18px !important;
+}

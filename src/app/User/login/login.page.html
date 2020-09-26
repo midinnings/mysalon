@@ -1,0 +1,70 @@
+<ion-content class="login-bg">
+    <ion-grid>
+        <form [formGroup]="loginform" class="item-width login-wrapper">
+            <ion-row>
+                <ion-col size="12" text-center class="m-t-p-5">
+                    <img class="image mb-3" src="./assets/img/logo.png" />
+                </ion-col>
+                <ion-col size="12">
+                    <ion-item class="input-border">
+                        <ion-icon slot="start" class="user-icon"></ion-icon>
+                        <ion-label class="inputlabel" position="stacked">{{'Mobile Number'|language}} </ion-label>
+                        <ion-input formControlName="mobile" type="tel" maxlength="10"></ion-input>
+                    </ion-item>
+                    <div *ngFor="let item of valid.validation_messages.mobile;let i=index">
+                        <div class="errormessage"
+                            *ngIf="loginform.get('mobile').hasError(item.type) && (loginform.get('mobile').dirty || loginform.get('mobile').touched)">
+                            <ion-icon name="alert"></ion-icon>{{item.message}}
+                        </div>
+                    </div>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-item class="input-border">
+                        <ion-icon slot="start" class="lock-icon"></ion-icon>
+                        <ion-label class="inputlabel" position="stacked">{{'Password'|language}}
+                        </ion-label>
+                        <ion-input formControlName="password" type="{{lists.passwordtype}}"></ion-input>
+                        <p class="dtft showpassword" *ngIf="lists.passwordtype=='password'"
+                            (click)="lists.passwordtype='text'">
+                            <ion-icon name="eye"></ion-icon> {{'Show Password'|language}}
+                        </p>
+                        <p class="dtft showpassword" (click)="lists.passwordtype='password'"
+                            *ngIf="lists.passwordtype=='text'">
+                            <ion-icon name="eye-off"></ion-icon> {{'Hide Password'|language}}
+                        </p>
+                    </ion-item>
+                    <div *ngFor="let item of valid.validation_messages.password;let i=index">
+                        <div class="errormessage"
+                            *ngIf="loginform.get('password').hasError(item.type) && (loginform.get('password').dirty || loginform.get('password').touched)">
+                            <ion-icon name="alert"></ion-icon>{{item.message}}
+                        </div>
+                    </div>
+                </ion-col>
+                <ion-col size="12" text-right>
+                    <a (click)="common.PageGoto('Forward','forgot')"
+                        class="dtft forgotpass">{{'Forgot Password'|language}} ?</a>
+                </ion-col>
+                <ion-col size="12" text-center class="m-t-p-10" style="text-align:-webkit-center !important">
+                    <ion-button class="loginbutton" expand="full" (click)="Login()" shape="round"
+                        [disabled]="!loginform.valid">{{'Login'|language}}
+                    </ion-button>
+                </ion-col>
+                <ion-col size="12" text-center class="dtft m-t-p-10 ls-1">
+
+                    <div>{{('Do not have an account?')|language}}
+                    </div>
+                    <div class="mt-1">
+                        <a class="registerft" (click)="common.PageGoto('Forward','register')">
+                            <strong> {{'Register'|language}}
+                            </strong></a>
+                    </div>
+                    <!-- <div class="mt-1" (click)="Openpopup()">{{'Change Language'|language}}</div> -->
+                </ion-col>
+            </ion-row>
+        </form>
+    </ion-grid>
+    <ion-select style="display: none;" (ionChange)="ChangeLanguage()" #stylistselect [(ngModel)]="lists.language">
+        <ion-select-option value="Hindi">Hindi</ion-select-option>
+        <ion-select-option value="English">English</ion-select-option>
+    </ion-select>
+</ion-content>

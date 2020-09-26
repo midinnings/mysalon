@@ -1,0 +1,21 @@
+.otp {
+    border: 1px solid;
+    width: 35px;
+    text-align: center;
+    border-radius: 50%;
+    height: 35px;
+    padding-top: 5px;
+    background: gray;
+    color: white;
+}
+
+ion-title {
+    color: #FFFF !important;
+    text-align: center !important;
+}
+
+ion-grid {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}

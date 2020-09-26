@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end" style="margin-top: -18px;">
+      <ion-button (click)="close()">
+        <ion-icon class="iconsclose" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="listtype==='timing'">
+  <h5 text-center>{{'Weekly Schedule'|language}}:
+  </h5>
+  <ion-grid style="font-size: 13px;">
+    <ion-row class="griddata" *ngFor="let item of lists">
+      <ion-col size="12">
+        <ion-row *ngIf="item.salonstatus=='closed'">
+          <ion-col size="3">{{item.week}}</ion-col>
+          <ion-col size="9">{{item.salonstatus}}</ion-col>
+        </ion-row>
+        <ion-row *ngIf="item.salonstatus!='closed'">
+          <ion-col size="3">{{item.week}}</ion-col>
+          <ion-col size="9">{{item.day}} - {{item.evening}}</ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
+<ion-content *ngIf="listtype==='service'">
+  <h5 text-center>{{'Services'|language}}:</h5>
+  <br>
+  <ion-grid style="font-size: 12px; height: 50em; overflow-y: scroll;padding-bottom: 10em;">
+    <ion-row class="griddata" *ngFor="let item of lists">
+      <ion-col size="9"><span
+          class="ion-text-uppercase font-w-600">{{('language'|user)=='Hindi'?item.service_hi:item.service}}</span>
+      </ion-col>
+      <ion-col size="3" text-right><span class="small-font"><i class="fa fa-inr"></i> {{item.serviceprice}}</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

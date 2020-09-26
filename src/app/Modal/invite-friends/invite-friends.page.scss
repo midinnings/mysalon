@@ -1,0 +1,36 @@
+.contactsrow{
+    margin: 5px 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e3e3e3;
+
+    .contactname{
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+        margin-bottom: 5px;
+    }
+
+    ion-button{
+        height: 22px;
+        font-size: 12px;
+    }
+
+    ion-icon{
+        color: #c73130;
+    }
+
+    .checkmark_icon {
+            color:white;
+    }
+
+
+
+}
+
+.bottom_row{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #c73130cc;
+    text-align: center;
+}

@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-row>
+            <ion-col size="2" class="ion-text-center">
+                <ion-buttons>
+                    <ion-back-button></ion-back-button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col size="8" class="ion-text-center">
+                <ion-title>{{'Events'|language}}</ion-title>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+
+    <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let e of lists.eventlist | slice:0:4">
+            <img class="backimg" [src]="e.coverImage?common.Url+'Files/'+ e.coverImage:'./assets/img/app/homeback.png'">
+            <div class="userdiv">
+                <p class="sliderheader">{{e.eventname}}</p>
+                <span class="slidersubheader">{{e.startdatetime|date}}</span>
+            </div>
+        </ion-slide>
+    </ion-slides>
+
+    <h3 class="header mt-3"> {{'Top Events'|language}}</h3>
+    <ion-item *ngFor="let e of lists.eventlist" lines=none class="input-border">
+        <ion-thumbnail slot="start">
+            <img [src]="e.coverImage?common.Url+'Files/'+ e.coverImage:'./assets/img/logo.png'">
+        </ion-thumbnail>
+        <ion-label>
+            <h3 class="gray-text">{{e.startdatetime|date}}</h3>
+            <h4 class="font-w-600">{{e.eventname}}</h4>
+            <p [innerHTML]="e.description|limitto:150">{{e.description}}</p>
+            <p><a (click)="GOtoDetails(e)">{{'Know More'|language}}.....</a>
+            </p>
+        </ion-label>
+    </ion-item>
+</ion-content>

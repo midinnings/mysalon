@@ -1,0 +1,105 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-row>
+            <ion-col size="2" class="ion-text-center">
+                <ion-buttons>
+                    <ion-back-button></ion-back-button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col size="8" class="ion-text-center">
+                <ion-title>{{title}}</ion-title>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-item lines="none" class="list-box mb-2 pt-1 pb-1">
+        <ion-row class="d-block">
+            <ion-col class="ion-float-left" size="7">
+                <ion-label position="fixed" class="font-w-600 small-font ion-text-uppercase">{{'Total Income'|language}} </ion-label>
+                <div class="large-text-35 mt-1"><i class="fa fa-rupee"></i>{{lists.Totalincome}}</div>
+            </ion-col>
+            <ion-col class="ion-float-right ion-text-right" size="5">
+                <ion-label class="small-font ion-text-right pr-2 pb-1">{{'Details'|language}}</ion-label>
+                <ion-select [(ngModel)]="Type" (ionChange)="GetReport()" interface="popover" class="report-btn"
+                    size="small">
+                    <ion-select-option value="Daily">{{'Daily'|language}}</ion-select-option>
+                    <ion-select-option value="Weekly">{{'Weekly'|language}}</ion-select-option>
+                    <ion-select-option value="Monthly">{{'Monthly'|language}}</ion-select-option>
+                    <ion-select-option value="Custom">{{'Custom Date'|language}}</ion-select-option>
+
+                </ion-select>
+            </ion-col>
+        </ion-row>
+    </ion-item>
+    <ion-item lines="none" class="list-box mb-2 pt-1 pb-1">
+        <ion-row class="d-block">
+            <ion-col class="ion-float-left" size="7">
+                <ion-label position="fixed" class="font-w-600 small-font ion-text-uppercase">{{'Total Expenses'|language}} </ion-label>
+                <div class="large-text-35 mt-1"><i class="fa fa-rupee"></i>{{lists.Totalexpenses}}</div>
+            </ion-col>
+            <ion-col class="ion-float-right ion-text-right" size="5">
+                <ion-label class="small-font ion-text-right pr-2 pb-1">{{'Details'|language}}</ion-label>
+                <ion-select [(ngModel)]="Type" interface="popover" class="report-btn" size="small">
+                    <ion-select-option value="Daily">{{'Daily'|language}}</ion-select-option>
+                    <ion-select-option value="Weekly">{{'Weekly'|language}}</ion-select-option>
+                    <ion-select-option value="Monthly">{{'Monthly'|language}}</ion-select-option>
+                    <ion-select-option value="Custom">{{'Custom Date'|language}}</ion-select-option>
+
+                </ion-select>
+            </ion-col>
+        </ion-row>
+    </ion-item>
+    <ion-item lines="none" class="list-box mb-2 pt-1 pb-1">
+        <ion-row class="d-block">
+            <ion-col class="ion-float-left" size="7">
+                <ion-label position="fixed" class="font-w-600 small-font ion-text-uppercase"> {{'Total Appointments'|language}}
+                </ion-label>
+                <div class="large-text-35 mt-1">{{lists.Totalappointment}}</div>
+            </ion-col>
+            <ion-col class="ion-float-right ion-text-right" size="5">
+                <ion-label class="small-font ion-text-right pr-2 pb-1">{{'Details'|language}}</ion-label>
+                <ion-select [(ngModel)]="Type" interface="popover" class="report-btn" size="small">
+                    <ion-select-option value="Daily">{{'Daily'|language}}</ion-select-option>
+                    <ion-select-option value="Weekly">{{'Weekly'|language}}</ion-select-option>
+                    <ion-select-option value="Monthly">{{'Monthly'|language}}</ion-select-option>
+                    <ion-select-option value="Custom">{{'Custom Date'|language}}</ion-select-option>
+
+                </ion-select>
+            </ion-col>
+        </ion-row>
+    </ion-item>
+    <ion-item lines="none" class="list-box mb-2 pt-1 pb-1">
+        <ion-row class="d-block">
+            <ion-col class="ion-float-left" size="7">
+                <ion-label position="fixed" class="font-w-600 small-font ion-text-uppercase"> {{'New Customer'|language}} </ion-label>
+                <div class="large-text-35 mt-1">{{lists.Newcustomer}}</div>
+            </ion-col>
+            <ion-col class="ion-float-right ion-text-right" size="5">
+                <ion-label class="small-font ion-text-right pr-2 pb-1">{{'Details'|language}}</ion-label>
+                <ion-select [(ngModel)]="Type" interface="popover" class="report-btn" size="small">
+                    <ion-select-option value="Daily">{{'Daily'|language}}</ion-select-option>
+                    <ion-select-option value="Weekly">{{'Weekly'|language}}</ion-select-option>
+                    <ion-select-option value="Monthly">{{'Monthly'|language}}</ion-select-option>
+                    <ion-select-option value="Custom">{{'Custom Date'|language}}</ion-select-option>
+
+                </ion-select>
+            </ion-col>
+        </ion-row>
+    </ion-item>
+    <ion-item lines="none" class="list-box mb-2 pt-1 pb-1" *ngIf="title=='Reports'">
+        
+                <ion-row class="d-block">
+                    <ion-col class="ion-float-left" size="12">
+                        <ion-label position="fixed" class="font-w-600 small-font ion-text-uppercase"> {{'Total Employees'|language}}
+                        </ion-label>
+                        <div class="large-text-35 mt-1">{{lists.Totalemployee}}</div>
+                    </ion-col>
+                </ion-row>
+          
+    </ion-item>
+
+</ion-content>

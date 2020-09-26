@@ -1,0 +1,154 @@
+<ion-header *ngIf="!UpdatePass">
+  <ion-toolbar color="primary">
+    <ion-row>
+      <ion-col size="2">
+        <ion-buttons>
+          <ion-button (click)="goBack()">
+            <ion-icon name="arrow-back" style="color:#fff;"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col size="10">
+        <ion-title style="color:white;padding: 0;font-size: 15px !important;">
+          {{UserData.name}}
+        </ion-title>
+      </ion-col>
+      <!-- <ion-col size="2"></ion-col> -->
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content *ngIf="!UpdatePass">
+  <form [formGroup]="UpdateUserDetail" class="item-width login-wrapper">
+    <ion-grid style="height: 100%" style="margin-top: 20px;">
+      <ion-row justify-content-center align-items-center style="height: 100%; flex-direction: column">
+        <div text-center>
+          <img (click)="selectImage()"
+            src="{{UserData.logo?common.Url+'Files/'+UserData.logo:'./assets/img/app/profile_placeholder.jpg'}}"
+            class='round-img border-primary' style="width: 120px;height:120px;" />
+          <!-- <h4>{{UserData.name}}   </h4> -->
+          <ion-input formControlName="name" [(ngModel)]="UserData.name" name="name" placeholder="Full Name"
+            style="border-bottom: 1px solid #b6b6b6;"> </ion-input>
+        </div>
+      </ion-row>
+
+      <!-- <ion-row>
+        <ion-col size="12">
+          <ion-item class="input-border">
+            <ion-label position="fixed">
+              *Contact Number
+            </ion-label>
+            <ion-input  formControlName="mobileno" type="text" placeholder="Contact Number" [(ngModel)]="UserData.mobileno">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row> -->
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item class="input-border">
+            <ion-label position="fixed">
+              *Email
+            </ion-label>
+            <ion-input formControlName="email" type="text" placeholder="Email Address" [(ngModel)]="UserData.email">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item class="input-border">
+            <ion-label position="fixed">
+              *DOB Number
+            </ion-label>
+            <ion-input type="text" formControlName="dob" placeholder="DOB" readonly
+              (ionChange)="CheckDateValidate($event)" [liIonic4Datepicker]="datePickerObj" [(ngModel)]="UserData.dob">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item class="input-border" (click)="UpdatePass = true;">
+            <ion-label position="fixed">
+              Update Password
+            </ion-label>
+            <ion-icon style="margin-left: 4rem;    color: #c73130;
+            " name="create"></ion-icon>
+            <!-- <ion-input type="text" placeholder="DOB" [(ngModel)]="UserData.password"></ion-input> -->
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item lines="none">
+            <ion-button [disabled]="!UpdateUserDetail.valid" class="loginbutton" (click)="Update()" shape="round"
+              size="small">
+              Update
+            </ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </form>
+</ion-content>
+
+<ion-content *ngIf="UpdatePass">
+  <form [formGroup]="UpdatePassForm" class="item-width login-wrapper">
+    <br> <br> <br> <br>
+    <ion-row>
+      <ion-col size="12">
+        <ion-item class="input-border">
+          <ion-label position="fixed">
+            *Current Password
+          </ion-label>
+          <ion-input formControlName="currentpass" type="password" [(ngModel)]="UserData.currentpassword">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-item class="input-border">
+          <ion-label position="fixed">
+            *New Password
+          </ion-label>
+          <ion-input formControlName="newpass" type="{{newpassword_type}}" [(ngModel)]="UserData.newpassword">
+          </ion-input>
+          <p class="dtft showpassword" *ngIf="newpassword_type=='password'" style="top:-15px !important"
+            (click)="newpassword_type='text'">
+            <ion-icon name="eye" style="vertical-align: bottom;"></ion-icon>
+            Show Password
+          </p>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-item lines="none">
+          <ion-button class="loginbutton" (click)="SavePassword()" shape="round" size="small"
+            [disabled]="!UpdatePassForm.valid">
+            Update
+          </ion-button>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item lines="none">
+          <ion-button class="loginbutton" (click)="UpdatePass = false" shape="round" size="small">
+            Back
+          </ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+</ion-content>

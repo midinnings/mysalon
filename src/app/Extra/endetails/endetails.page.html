@@ -1,0 +1,62 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-row>
+            <ion-col size="2" class="ion-text-center">
+                <ion-buttons>
+                    <ion-back-button></ion-back-button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col size="8" class="ion-text-center">
+                <ion-title>{{'Event Details'|language}}</ion-title>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button size="small" (click)="Shareevent()">
+            <ion-icon name="share"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <div>
+        <img [src]="lists.coverImage?common.Url+'Files/'+ lists.coverImage:'./assets/img/app/homeback.png'">
+    </div>
+    <ion-row>
+        <!-- <ion-col size="12" text-align: right>
+            <ion-label> Event Date:{{lists.startdatetime|date}}</ion-label>
+        </ion-col> -->
+        <ion-col size="12" class="ion-padding pt-0 pb-0">
+            <h4 class="mb-0">{{lists.eventname}}</h4>
+        </ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-1">
+            <p class="mb-0 font-w-600 small-font">{{'Details'|language}}</p>
+        </ion-col>
+        <!-- <ion-col size="12" class="ion-padding pt-0 pb-1 small-font">
+            <ion-icon name="calendar" class="primary-text"></ion-icon> {{lists.startdatetime|date}}
+        </ion-col> -->
+        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font">
+            <ion-icon name="calendar" class="primary-text"></ion-icon> {{lists.startdatetime|date}}
+            -{{lists.enddatetime|date}}
+        </ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-0 small-font">
+            <ion-icon name="pin" class="primary-text"> </ion-icon>{{lists.venu}}
+        </ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-0">
+            <p [innerHTML]="lists.description" class="small-font lh-small-p" style="text-align: justify;"></p>
+        </ion-col>
+        <ion-col class="ion-padding pt-0 pb-0" size="12" *ngIf="lists.eventvidoe">
+            <iframe height="315" [src]="lists.eventvidoe" frameborder="0" allowfullscreen></iframe>
+        </ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.contactno">{{'Contact Details'|language}}:<br><span>{{lists.contactno}}</span></ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.email">{{'Email Address'|language}}:<br>{{lists.email}}</ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.url">{{'Other Information'|language}}:<br><a (click)="common.OpenUrl(lists.url,0)">{{lists.url}}</a></ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.informationurl">{{'Registration Details'|language}}:<br>{{lists.informationurl}}</ion-col>
+    </ion-row>
+
+
+</ion-content>

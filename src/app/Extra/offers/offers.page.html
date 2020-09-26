@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-row>
+            <ion-col size="2" class="ion-text-center">
+                <ion-buttons>
+                    <ion-back-button></ion-back-button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col size="8" class="ion-text-center" style="color:white">
+                <ion-title>{{'Offers/ Deals'|language}}</ion-title>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-fab vertical="bottom" *ngIf="('usertype'|user)=='2'||('usertype'|user)=='6'" horizontal="end" slot="fixed">
+        <ion-fab-button size="small" (click)="AddCoupon()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+    <div>
+        <ion-row class="input-border" *ngFor="let o of lists.Myoffers">
+            <ion-col size="9">
+                <h6 class="font-w-600">
+                    {{o.title}}
+                </h6>
+                <div class="gray-text small-font ">{{'Coupon Code'|language}}</div>
+                <div class="small-font" style="margin-top: 3px;">{{o.couponcode}}</div>
+            </ion-col>
+            <ion-col size="3">
+
+                <ion-button shape="round" size="small" class="mt-2" (click)="ShareCoupon(o)">
+                    Share
+                </ion-button>
+
+                <ion-button shape="round" size="small" (click)="NotifiyMe()">{{'Notify'|language}}</ion-button>
+            </ion-col>
+            <ion-col size="9">
+                <div class="small-font primary-text mb-2">{{'Valid till'|language}} {{o.enddate|date}}</div>
+            </ion-col>
+
+            <ion-col size="3">
+                <div class="small-font primary-text mb-2" (click)="o.hide?o.hide=false:o.hide=true;">{{'Details'|language}} </div>
+            </ion-col>
+            <ion-col size="3">
+                <div class="small-font primary-text mb-2"><b>{{'Discount'|language}}</b>
+                    {{o.discounttype=='A'?o.discount:o.discount+'%'}}</div>
+            </ion-col>
+            <ion-col size="9" *ngIf="o.hide">
+                <div class="small-font primary-text mb-2"> {{o.description}}</div>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-content>

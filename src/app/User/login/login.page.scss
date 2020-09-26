@@ -1,0 +1,72 @@
+ion-grid {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.wd-50 {
+    width: 50%;
+}
+
+.image {
+    width: 100px;
+}
+
+.inputicon {
+    text-align: center !important;
+    i {
+        font-size: 25px !important;
+        // position: absolute !important;
+        // top: 25px !important;
+        color: #1F1F1F !important;
+    }
+}
+
+.inputlabel {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    color: #070404 !important;
+    letter-spacing: 1px;
+}
+
+ion-input {
+    color: #7c7b7b !important;
+}
+
+.registerft {
+    color: #050303 !important;
+}
+
+.dtft {
+    color: #7c7b7b !important;
+}
+
+.loginbutton {
+    width: 100% !important;
+    height: 55px !important;
+    font-weight: 500;
+    font-size: 17px;
+    text-transform: capitalize !important;
+    letter-spacing: 1px;
+}
+
+// f6f6f6f6
+.forgotpass {
+    position: absolute !important;
+    z-index: 9999 !important;
+    right: 5px !important;
+    top: -35px !important;
+    font-size: 14px !important;
+}
+
+
+/*ion-content{
+  --background: url('../../../assets/img/loginnew.png') no-repeat center/cover fixed !important;
+}*/
+
+.iconimage {
+    height: 30px !important;
+    margin-top: 12px !important;
+    margin-left: 12px !important;
+}

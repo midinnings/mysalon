@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end" style="margin-top: -18px;">
+      <ion-button (click)="close()">
+        <ion-icon class="iconsclose" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content style="--background: white !important;">
+  <h5 text-center>{{'Confirm Your Request'|language}}</h5>
+  <ion-row style="margin-top: 5%;">
+      <!-- <ion-col size="12" text-right>
+        <a (click)="OpenContactBook()" class="small-font">Pick From ContactBook</a>
+      </ion-col> -->
+      <ion-col size="12">
+        <div>
+          <ion-row class="input-border pb-1">
+            <ion-col size="1"></ion-col>
+            <ion-col size="8" class="font-w-600 small-font">{{'Salon Name'|language}}</ion-col>
+            <ion-col size="3" class="font-w-600 small-font" *ngIf="lists.serviceinfo"><i
+                class="fa fa-inr"></i>{{lists.salon}}
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <div>
+          <ion-row class="input-border pb-1">
+            <ion-col size="1"></ion-col>
+            <ion-col size="8" class="font-w-600 small-font">{{'Stylist Name'|language}}</ion-col>
+            <ion-col size="3" class="font-w-600 small-font" *ngIf="lists.serviceinfo"><i
+                class="fa fa-inr"></i>{{lists.employee}}
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <div>
+          <ion-row class="input-border pb-1">
+            <ion-col size="1"></ion-col>
+            <ion-col size="8" class="font-w-600 small-font">{{'Services'|language}}</ion-col>
+            <ion-col size="3" class="font-w-600 small-font" *ngIf="lists.serviceinfo"><i
+                class="fa fa-inr"></i>{{lists.service}}
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <div>
+          <ion-row class="input-border pb-1">
+            <ion-col size="1"></ion-col>
+            <ion-col size="8" class="font-w-600 small-font">{{'Total'|language}}</ion-col>
+            <ion-col size="3" class="font-w-600 small-font" *ngIf="lists.serviceinfo"><i class="fa fa-inr"></i>₹
+              {{amount.total}}
+            </ion-col>
+
+            <ion-col size="1"></ion-col>
+            <ion-col size="8" class="font-w-600 small-font">{{'Discount'|language}}</ion-col>
+            <ion-col size="3" class="font-w-600 small-font" style="color:green">
+              ₹ {{amount.discount}}
+            </ion-col>
+            <ion-col size="1"></ion-col>
+            <ion-col size="8" class="font-w-600 small-font">{{'Grand Total'|language}}</ion-col>
+            <ion-col size="3" class="font-w-600 small-font" style="color:red">
+              ₹ {{amount.totalamount}}
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+      <ion-col size="12" class="input-border pb-1 mb-1">
+        <ion-list class="transparent-bg">
+          <ion-radio-group [ngModelOptions]="{standalone: true}" [(ngModel)]="lists.PaymentMode">
+            <ion-item lines="none" class="item-height-30">
+              <ion-label class="inputlabel ion-text-uppercase">{{'Payments'|language}}</ion-label>
+            </ion-item>
+            <ion-item lines="none" class="item-height-35 small-font">
+              <ion-label>{{'Paytm'|language}}</ion-label>
+              <ion-radio slot="start" disabled value="Paytm"></ion-radio>
+            </ion-item>
+
+            <ion-item lines="none" class="item-height-35 small-font">
+              <ion-label>{{'Cash'|language}}</ion-label>
+              <ion-radio slot="start" value="Cash"></ion-radio>
+            </ion-item>
+
+            <ion-item lines="none" class="item-height-35 small-font">
+              <ion-label>{{'Google Pay'|language}}</ion-label>
+              <ion-radio slot="start" disabled value="Googlepay"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </ion-col>
+      <ion-col size="12" text-center>
+        <ion-button shape="round" style="padding-right: 16px;" (click)="Save()">
+          {{'Procced'|language}}</ion-button>
+        <ion-button shape="round" (click)="close()">{{'Edit'|language}}</ion-button>
+      </ion-col>
+    </ion-row>
+</ion-content>

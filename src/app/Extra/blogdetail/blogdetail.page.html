@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-row>
+            <ion-col size="2" class="ion-text-center">
+                <ion-buttons>
+                    <ion-back-button></ion-back-button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col size="8" class="ion-text-center">
+                <ion-title>{{'Blog Detail'|language}}</ion-title>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button size="small" (click)="Shareblog()">
+            <ion-icon name="share"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <div>
+        <img [src]="lists.coverImage?common.Url+'Files/'+ lists.coverImage:'./assets/img/app/homeback.png'">
+    </div>
+    <ion-row>
+        <ion-col size="12" class="ion-padding pt-0 pb-0">
+            <h4 class="mb-0">{{lists.title}}</h4>
+        </ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-0">
+            <p class="btn-text mb-0">{{lists.publishedon|date}}</p>
+        </ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-0">
+            <p [innerHTML]="lists.description|santize" class="small-font lh-small-p" style="text-align: justify;"></p>
+        </ion-col>
+    </ion-row>
+
+</ion-content>

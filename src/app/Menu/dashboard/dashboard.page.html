@@ -1,0 +1,211 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-row>
+            <ion-col size="10">
+                <ion-title style="color:white">
+                    Hi, {{'name'|user}}
+                </ion-title>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+                <ion-badge class="notifybadge">
+                    {{lists.dashboardwid.notifications||0}}</ion-badge>
+                <ion-icon name="notifications" size="large" (click)="common.PageGoto('Forward','notifications')"
+                    style="color: #fff !important;"></ion-icon>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-grid class="dashboard_content">
+        <ion-slides pager="true">
+            <ion-slide *ngFor="let s of lists.sliders">
+                <img [src]="common.Url+'Files/'+s.image">
+                <div class=" userdiv">
+                    <p class="sliderheader"></p>
+                </div>
+            </ion-slide>
+        </ion-slides>
+        <ion-grid class="no_padding margin_top">
+            <ion-card class="no_margin">
+                <ion-row class="griddata">
+                    <ion-col size="10" (click)="Openpopup()">
+                        <p style="    line-height: 27px;" class="no_margin">{{lists.search}}</p>
+                    </ion-col>
+                    <ion-col size="2">
+                        <!-- <ion-button > -->
+                        <ion-icon (click)="common.PageGoto('Forward','/tabs/employer', {'searchKey':lists.search})" name="search"
+                            class="search_icon">
+                        </ion-icon>
+                        <!-- </ion-button> -->
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+        </ion-grid>
+
+        <h3 class="heading_dash">{{'Featured Salons'|language}} </h3>
+        <ion-row>
+            <ion-col size="12" class="no_padding_LR">
+                <ion-slides class="" [options]="FeaturedSlideOptions"
+                    (ionSlideDidChange)="SlideDidChange(sliderThree,slideWithNav3)">
+                    <ion-slide *ngFor="let salons of Dashboard_Data.FeaturedSalons"
+                        (click)="common.PageGoto('Forward','salon-details',salons)" class="featured_salon_slide shine">
+                        <ion-card class="ion-no-margin recipe-card" style="margin-right:20px;padding-bottom: 10px;">
+                            <img (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded"
+                                [src]="common.Url+'Files/'+salons.logo"
+                                onerror="this.src='./assets/img/placeholder.jfif';" alt="{{salons.name}}" width="100%"
+                                height="auto">
+                            <ion-spinner [ngClass]="{'center_spinner':true}" *ngIf="!loaded"></ion-spinner>
+                            <h4 class="salon-title px-10 L_10PX">{{salons.name}}</h4>
+                            <span class="L_10PX font_normal" style="float: left;">Rating: </span>
+                            <ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline"
+                                activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="true" readonly="true"
+                                [rating]="GetFirstRating(salons.salon_rating)" fontSize="8px">
+                            </ionic4-star-rating>
+                        </ion-card>
+                    </ion-slide>
+                </ion-slides>
+            </ion-col>
+        </ion-row>
+
+        <ion-grid class="no_padd_marg">
+            <h3 class="heading_dash" *ngIf="LastVisited">{{'Last Visited Salon'|language}}</h3>
+            <ion-card class="no_padd_marg " *ngIf="LastVisited">
+                <!--only enable when user visited at list one time to a salon-->
+                <!-- <ion-row class="griddata">
+                <ion-col size="12">
+                    
+                </ion-col>
+            </ion-row> -->
+
+                <ion-row class="griddata no_padd_marg">
+                    <ion-col size="3" size-lg="3" size-md="3"
+                        (click)="common.PageGoto('Forward','salon-details',LastVisited)">
+                        <img src="{{('logo'|user)?common.Url+'Files/'+LastVisited.logo:'./assets/img/app/user-1.jpg'}}"
+                            class='round-img border-primary' style="width: 120px;margin-top: 5px;">
+                    </ion-col>
+                    <ion-col size="5" size-lg="9" size-md="9"
+                        (click)="common.PageGoto('Forward','salon-details', LastVisited)">
+                        <p class="video-heading">{{LastVisited.name}}</p>
+                        <p class="video-time">{{LastVisited.lastvisited_date | date: 'dd MMM yyyy' }}</p>
+
+                    </ion-col>
+                    <ion-col size="4" size-lg="3" size-md="3">
+                        <ion-button (click)="common.PageGoto('Forward','appointments', LastVisited)"
+                            style="margin-top: 25%;" color="danger" size="small" fill="solid">
+                            Book Us
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+        </ion-grid>
+
+        <ion-grid class="no_padding" *ngIf="lists.bloglist.length!=0 && lists.newslist.length!=0">
+            <ion-row class="no_padding">
+                <ion-col size="12" class="no_padding">
+                    <h3 class="header">{{'NEWS'|language}}</h3>
+                    <ion-row class=" griddata ">
+                        <ion-icon (click)="pre(2)" name="ios-arrow-back" class="leftarrow"></ion-icon>
+                        <ion-col size="12">
+                            <ion-slides #slides2 pager="true" [options]="slideOpts1" class="bottomslide">
+                                <ion-slide class="transparency" *ngFor="let b of lists.newslist"
+                                    (click)="Gotoenpage('news')">
+                                    <ion-card class="slidecard">
+                                        <p>{{b.title}} <br> <span>{{b.ndatetime|date:'dd-MMM-yyyy'}}</span></p>
+                                        <img onerror="this.src='./assets/img/placeholder.jfif';"
+                                            [src]="common.Url+'Files/'+ b.coverimage" />
+                                    </ion-card>
+                                </ion-slide>
+                            </ion-slides>
+                        </ion-col>
+                        <ion-icon (click)="next(2)" class="rightarrow" name="ios-arrow-forward">
+                        </ion-icon>
+                    </ion-row>
+                    <h3 class="header">{{'BLOGS'|language}}</h3>
+                    <ion-row class=" griddata">
+                        <ion-icon (click)="pre(1)" name="ios-arrow-back" class="leftarrow"></ion-icon>
+                        <ion-col size="12">
+                            <ion-slides #slides1 pager="true" [options]="slideOpts2" class="bottomslide">
+                                <ion-slide class="transparency" *ngFor="let b of lists.bloglist"
+                                    (click)="Gotoenpage('blog')">
+                                    <ion-card class="slidecard">
+                                        <p>{{b.title}}<br> <span>{{b.publishedon|date:'dd-MMM-yyyy'}}</span></p>
+                                        <!-- <span>{{b.publishedon|date:'dd-MMM-yyyy'}}</span> -->
+                                        <img onerror="this.src='./assets/img/placeholder.jfif';"
+                                            [src]="common.Url+'Files/'+ b.coverImage" />
+                                    </ion-card>
+                                </ion-slide>
+                            </ion-slides>
+                        </ion-col>
+                        <ion-icon (click)="next(1)" class="rightarrow" name="ios-arrow-forward">
+                        </ion-icon>
+                    </ion-row>
+
+                    <h3 class="header">{{'EVENTS'|language}}</h3>
+                    <ion-row class=" griddata ">
+                        <ion-icon (click)="pre(3)" name="ios-arrow-back" class="leftarrow"></ion-icon>
+                        <ion-col size="12">
+                            <ion-slides #slides3 [options]="slideOpts3" pager="true" class="bottomslide">
+                                <ion-slide class="transparency" *ngFor="let b of lists.eventlist"
+                                    (click)="Gotoenpage('event')">
+                                    <ion-card class="slidecard">
+                                        <p>{{b.eventname}}<br> <span>{{b.publishingdate|date:'dd-MMM-yyyy'}}</span></p>
+                                        <!-- <span>{{b.publishingdate|date:'dd-MMM-yyyy'}}</span> -->
+                                        <img onerror="this.src='./assets/img/placeholder.jfif';"
+                                            [src]="common.Url+'Files/'+ b.coverImage" />
+                                    </ion-card>
+                                </ion-slide>
+                            </ion-slides>
+                        </ion-col>
+                        <ion-icon (click)="next(3)" class="rightarrow" name="ios-arrow-forward">
+                        </ion-icon>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <h3 class="header">{{'Testimonials'|language}}</h3>
+        <ion-slides #slides4 [options]="slideOpts4" (ionSlideDidChange)="SlideDidChange(sliderThree,slideWithNav3)">
+            <ion-slide *ngFor="let testimonial of Testimonials" class="testimonial_slide">
+                <ion-card class="ion-no-margin recipe-card testimonials_cards" style="padding-bottom: 10px;">
+                    <img [src]="common.Url+'Files/'+testimonial.image" alt=""
+                        class="round-img-testimonials border-primary">
+
+                    <span class=" testimonial_text">{{testimonial.text}}</span>
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
+
+        <br>
+
+
+        <!-- <ion-row class="griddata">
+        <ion-col size="12">
+            <ion-card class="mycardinfo cardsqr">
+                <ion-slides #slides3 [options]="slideOpts3">
+                    <ion-slide *ngFor="let s of lists.sliders">
+                        <ion-row>
+                            <img src="{{('logo'|user)?common.Url+'Files/'+('logo'|user):'./assets/img/app/user-1.jpg'}}"
+                                class='round-img border-primary' style="width: 60px">
+                        </ion-row>
+                        <br />
+                        <ion-row>
+                            <p class="video-heading"> {{'name'|user}}</p>
+                        </ion-row>
+                        <br />
+                        <ion-row>
+                            <p class="video-time">{{comments|user}}</p>
+                        </ion-row>
+                    </ion-slide>
+                </ion-slides>
+
+            </ion-card>
+        </ion-col>
+    </ion-row> -->
+        <ion-select style="display: none;" (ionChange)="ChooseOption($event.target.value)" #searchSalon [(ngModel)]="lists.search">
+            <ion-select-option *ngFor="let s of lists.searchList"
+                value="{{('language'|user)=='Hindi'?s.name_hi:s.name}}">
+                {{('language'|user)=='Hindi'?s.name_hi:s.name}}
+            </ion-select-option>
+        </ion-select>
+    </ion-grid>
+</ion-content>

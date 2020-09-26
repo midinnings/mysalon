@@ -1,0 +1,79 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title style="color:white">{{'name'|user}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-grid style="height: 100%">
+        <ion-row justify-content-center align-items-center style="height: 100%; flex-direction: column">
+            <div text-center (click)="GotoUpdate()">
+                <img (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded"
+                    src="{{UserData.logo?common.Url+'Files/'+UserData.logo:'./assets/img/app/profile_placeholder.jpg'}}"
+                    class='round-img border-primary' style="width: 120px" />
+                <ion-spinner [ngClass]="{'center_spinner':true}" *ngIf="!loaded"></ion-spinner>
+                <h4 style="margin:0px">{{'name'|user}} <ion-icon style="color: #c73130;" ios="ios-create" md="md-create"
+                        name="ios-create"></ion-icon>
+                </h4>
+            </div>
+            <ion-col>
+                <ion-list class="menu_listing">
+                    <ion-item style="color: #c73130;" *ngIf="PrefSalon" class="input-border small-font"
+                        (click)="LeaveSalon()">
+                        {{'Leave Salon'|language}}
+                    </ion-item>
+                    <ion-item class="input-border small-font" (click)="common.PageGoto('Forward','about')">
+                        {{'About'|language}}
+                    </ion-item>
+                    <ion-item class="input-border small-font" (click)="common.PageGoto('Forward','vision')">
+                        {{'Vision/Mission'|language}}
+                    </ion-item>
+                    <ion-item class="input-border small-font" (click)="ShareApp()">{{'Share App'|language}}</ion-item>
+                    <ion-item class="input-border small-font" (click)="common.PageGoto('Forward','faq')">
+                        {{'FAQ'|language}}</ion-item>
+                    <ion-item class="input-border small-font" (click)="common.PageGoto('Forward','contact')">
+                        {{'Contact Us/Help'|language}}
+                    </ion-item>
+                    <ion-item class="input-border small-font" (click)="common.PageGoto('Forward','terms')">
+                        {{'Terms And Condition'|language}}</ion-item>
+                    <ion-item class="input-border small-font" (click)="common.PageGoto('Forward','privacy')">
+                        {{'Privacy Policy'|language}}
+                    </ion-item>
+                    <ion-item class="input-border small-font" (click)="common.PageGoto('Forward','disclaimer')">
+                        {{'Disclaimer'|language}}
+                    </ion-item>
+
+                    <!-- <ion-item class="input-border small-font" (click)="Openpopup()">
+                        {{'Change Language'|language}}
+                    </ion-item> -->
+                    <ion-item lines="none">
+                        <ion-button class="loginbutton" (click)="logout()" shape="round" size="small">
+                            {{'Logout'|language}}
+                        </ion-button>
+                    </ion-item>
+                    <ion-item text-center lines="none" class="sociallinks">
+                        <div text-center style="width: 100%;">
+                            <ion-icon class="fb" name="logo-facebook" (click)="common.OpenUrl('
+                                https://www.facebook.com/mysalonzone/',false)"></ion-icon>
+                            <ion-icon class="insta" name="logo-instagram" (click)="common.OpenUrl('
+                                https://www.instagram.com/mysalonzone/',false)"></ion-icon>
+                            <ion-icon class="you" name="logo-youtube" (click)="common.OpenUrl('
+                                https://www.youtube.com/user/mysalonzone',false)"></ion-icon>
+                            <ion-icon class="twitt" name="logo-twitter" (click)="common.OpenUrl('
+                                https://twitter.com/mysalonzone',false)"></ion-icon>
+                        </div>
+                    </ion-item>
+                    <ion-item text-center class="input-border" lines="none">
+                        <div style="width: 100%;" text-center>
+                            <span class="small-font">Version 1.0</span>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <!-- <ion-select style="display: none;" (ionChange)="ChangeLanguage()" #stylistselect [(ngModel)]="lists.language">
+        <ion-select-option value="Hindi">Hindi</ion-select-option>
+        <ion-select-option value="English">English</ion-select-option>
+    </ion-select> -->
+</ion-content>

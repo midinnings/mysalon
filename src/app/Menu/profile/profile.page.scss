@@ -1,0 +1,45 @@
+.sociallinks{
+    width: 100% !important;
+    ion-icon{
+    font-size: 25px !important;
+    /* padding: 5px; */
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    }
+    .fb{
+        color:#3b5998 !important
+    }
+    .insta{
+        color:#DD2A7B !important;
+    }
+    .you{
+        color:#c4302b !important;
+    }
+    .twitt{
+        color:#00acee !important;
+    }
+}
+.round-img{
+    height: 120px !important;
+    width: 120px !important;
+}
+
+ion-list{
+    background:none !important;
+}
+
+// .menu_listing {
+//     ion-item{
+//         height: 42px;
+//         font-size:12px !important;
+//     }
+// }
+
+.logout_btn{
+        width: 100% !important;
+        height: 30px !important;
+        font-weight: 500;
+        font-size: 17px;
+        text-transform: capitalize !important;
+        letter-spacing: 1px;
+}

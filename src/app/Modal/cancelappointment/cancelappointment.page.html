@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="end" style="margin-top: -18px;">
+            <ion-button (click)="close()">
+                <ion-icon class="iconsclose" name="close-circle-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content style="--background: white !important;">
+    <h6 text-center>{{'Are You Sure you want to Cancel this Appointment'|language}}?</h6>
+    <ion-row style="margin-top: 5%;">
+        <ion-col size="12" text-center>
+            <ion-avatar text-center>
+                <img style="margin-left: 169% !important;" src="./assets/img/logo.png">
+            </ion-avatar>
+        </ion-col>
+        <ion-col size="12" text-center>
+            {{lists.customer_name}}
+        </ion-col>
+
+        <ion-col size="12" text-center>
+            <ion-button shape="round" style="padding-right: 16px;" (click)="OpenPopUp()">
+                {{'Confirm'|language}}
+            </ion-button>
+            <ion-button shape="round" (click)="close()">{{'Back'|language}}
+            </ion-button>
+        </ion-col>
+    </ion-row>
+
+
+</ion-content>

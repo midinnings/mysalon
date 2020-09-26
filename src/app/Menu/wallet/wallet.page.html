@@ -1,0 +1,94 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>{{'Wallet'|language}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-card>
+
+        <ion-row style="    padding: 10px 20px;">
+
+            <ion-col size="6" (click)="OpenHistory()">
+                <p class="points">{{item.wallet.current_amt}}</p>
+                <span class="">{{'Loyalty Points'|language}}</span> <br>
+                <!-- <span style="font-size: 10px;"> {{'Expires on 2-Sep-2020'|language}} </span> -->
+            </ion-col>
+
+            <ion-col size="6" *ngIf="SalonLogo">
+                <img src="{{common.Url+'Files/'+SalonLogo}}" onerror="this.src='./assets/img/placeholder.jfif';"
+                    class='round-img border-primary' style="width: 80px;margin:0 auto">
+            </ion-col>
+
+            <!-- <ion-col size="12" class="redeem_sec">
+                <ion-button fill="solid" color="success" (click)="Redeem()">{{'Redeem'|language}}</ion-button>
+            </ion-col> -->
+
+        </ion-row>
+
+        <!-- <ion-row>
+                <ion-col size="8"><p>{{'Loyalty Points'|language}}:{{item.wallet.current_amt}}</p></ion-col>
+                <ion-col size="4">
+                    <ion-button fill="solid" color="success" class="redeem_btn">{{'Redeem'|language}}</ion-button>
+                </ion-col>
+            </ion-row> -->
+        <!-- <ion-row>
+                <ion-col size="12">{{item.wallet.wanted_amt-item.wallet.current_amt}}  {{'earn more coins to get discount'|language}}</ion-col>
+            </ion-row> -->
+        <!-- <ion-row> 
+                <ion-col size="12" class=""> <span class="F_Right" style="    font-size: 10px;"> {{'Expires on 2-Sep-2020'|language}} </span> </ion-col>
+            </ion-row> -->
+
+    </ion-card>
+    <ion-segment scrollable class="segment-button-month" [(ngModel)]="item.segment" (ionChange)="segmentChange($event)">
+
+        <ion-segment-button class="br-6" value="refer">{{'Refer'|language}}
+        </ion-segment-button>
+        <ion-segment-button class="br-6" value="disclaimer" checked>{{'Disclaimer'|language}}
+        </ion-segment-button>
+
+    </ion-segment>
+
+    <ion-card  *ngIf="item.segment==='refer'">
+        <ion-card-content>
+            <ion-row>
+                <ion-col size="12" text-center>
+                    <p>
+                        {{'You can share this link to refer this app with your friends and family.'|language}}</p>
+                </ion-col>
+                <ion-col size="5" text-center>
+                    <ion-button [disabled]="!inviteFriends" class="invite_btn" shape="round" (click)="OpenInvite()">{{'Invite Friends'|language}}
+                    </ion-button>
+                </ion-col>
+                <ion-col size="2"></ion-col>
+                <ion-col size="5" text-center>
+                    <ion-button class="invite_btn" shape="round" (click)="ShareApp()">{{'Share App'|language}}</ion-button>
+                </ion-col>
+
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+    <ion-card class="card" *ngIf="item.segment==='disclaimer'">
+        <ion-card-content>
+            <ion-row>
+                <ion-col size="12">
+                    <p>{{'Loyalty points are awarded amount per spend.'|language}}
+                    </p>
+                </ion-col>
+                <ion-col size="12">
+                    <p>{{'Loyalty points expired after a specific time.'|language}}
+                    </p>
+
+                </ion-col>
+                <ion-col size="12">
+                    <p>
+                        {{'Loyalty points per amount is specified by salon owner.'|language}}</p>
+                </ion-col>
+                <ion-col size="12">
+                    <p>
+                        {{'Loyalty points per salon are managed by salon owner only and are not reponsibility of MYSALONZONE Application.'|language}}
+                    </p>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

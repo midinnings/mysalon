@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-row>
+            <ion-col size="2" class="ion-text-center">
+                <ion-buttons>
+                    <ion-back-button></ion-back-button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col size="8" class="ion-text-center" style="color: #fff;">
+                <ion-title>{{'News & Details'|language}}</ion-title>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button size="small" (click)="Sharenews()">
+            <ion-icon name="share"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <div *ngIf="lists.coverimage">
+        <img [src]="lists.coverimage?common.Url+'Files/'+ lists.coverimage:'./assets/img/app/homeback.png'">
+    </div>
+    <ion-row>
+        <ion-col size="12" class="ion-padding pt-0 pb-0">
+            <h4 class="mb-0">{{lists.title}}</h4>
+        </ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-0">
+            <p class="btn-text mb-0">{{lists.ndatetime|date}}</p>
+        </ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-0">
+            <p [innerHTML]="lists.news|santize" class="small-font lh-small-p" style="text-align: justify;"></p>
+        </ion-col>
+    </ion-row>
+
+</ion-content>

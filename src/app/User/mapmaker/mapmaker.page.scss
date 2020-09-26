@@ -1,0 +1,23 @@
+.map{
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.searchbar{
+    background: transparent !important;
+    position: absolute !important;
+    z-index: 9999 !important;
+
+}
+.auto-list{
+    margin-top: 12% !important;
+    width: 94% !important;
+    margin-left: 3% !important; 
+}
+
+.continuebutton{
+    position: absolute !important;
+    z-index: 99999 !important;
+    bottom: 5% !important;
+    left: 18% !important;
+}

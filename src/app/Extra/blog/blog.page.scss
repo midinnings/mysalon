@@ -1,0 +1,171 @@
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.myCard {
+    position: relative;
+}
+
+h4{
+    white-space: normal !important;
+}
+
+.myOverlay {
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    z-index: 99;
+    bottom: 0px;
+    opacity: 0.5;
+    background: transparent;
+    color: #fff;
+}
+
+.userdiv {
+    position: absolute;
+    color: #fff;
+    bottom: 30px;
+}
+
+.employer {
+    position: absolute !important;
+    top: 0 !important;
+    right: 16px !important;
+    color: #ffff !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    font-weight: 500 !important;
+}
+
+.backimg {
+    height: 100% !important;
+}
+
+.sliderheader {
+    font-size: 19px !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0px !important;
+}
+
+.slidersubheader {
+    font-size: 12px !important;
+}
+
+.mycardinfo {
+    background: #7c7b7b30 !important;
+    ion-card-content {
+        padding: 5px !important;
+        text-align: center !important;
+        .info {
+            color: #c73130 !important;
+        }
+        .infoname {
+            font-size: 10px !important;
+            text-transform: uppercase !important;
+            font-weight: 600 !important;
+            color: black !important;
+        }
+    }
+}
+
+ion-slides {
+    ion-slide {
+        background: #000;
+        ;
+    }
+    img {
+        opacity: 0.6;
+    }
+}
+
+.iconimg {
+    text-align: -webkit-center !important;
+    img {
+        width: 20px !important;
+    }
+}
+
+ion-title {
+    color: white !important;
+}
+
+.bottomslide {
+    .swiper-container-horizontal>.swiper-pagination-bullets,
+    .swiper-pagination-custom,
+    .swiper-pagination-fraction {
+        bottom: 0px !important;
+    }
+    ion-card {
+        height: 150px !important;
+    }
+    p {
+        position: absolute !important;
+        bottom: 3px !important;
+        left: 5px !important;
+        color: white !important;
+        font-weight: 600 !important;
+        z-index: 9999 !important;
+    }
+    span {
+        position: absolute !important;
+        left: 5px !important;
+        bottom: 5px !important;
+        color: white !important;
+        font-size: 9px !important;
+        z-index: 99999 !important;
+    }
+}
+
+.cardsqr {
+    height: 60px !important;
+    width: 84px !important;
+    padding-top: 3px !important;
+    margin: 0px !important
+}
+
+.griddata {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    text-align: -webkit-center !important;
+}
+
+.leftarrow {
+    font-size: 20px !important;
+    position: absolute !important;
+    left: 0 !important;
+    padding-top: 25px !important;
+    padding-left: 3% !important;
+    color: gray !important;
+}
+
+.rightarrow {
+    font-size: 20px !important;
+    position: absolute !important;
+    right: 0 !important;
+    padding-top: 25px !important;
+    padding-right: 3% !important;
+    color: gray !important;
+}
+
+.slidecard {
+    width: 100% !important;
+    margin: 1px !important;
+    img {
+        width: 100% !important;
+        transform: scaleY(1.5) !important;
+    }
+}
+
+.header {
+    text-align: center !important;
+    text-transform: uppercase !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+}
+
+ion-thumbnail {
+    width: 75px;
+    height: 75px;
+}

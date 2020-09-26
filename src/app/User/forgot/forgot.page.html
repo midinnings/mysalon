@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-row>
+            <ion-col size="2" class="ion-text-center">
+                <ion-buttons>
+                    <ion-back-button></ion-back-button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col size="8" class="ion-text-center">
+                <ion-title>{{'Forgot Password'|language}}</ion-title>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <form [formGroup]="forgotForm" *ngIf="!lists.ShowOTP">
+        <ion-grid>
+            <ion-row class="item-width">
+                <ion-col size="12">
+                    <ion-item class="input-border">
+                        <ion-label position="stacked">{{'Mobile Number'|language}}</ion-label>
+                        <ion-input formControlName="mobile" type="tel" maxlength="10"></ion-input>
+                    </ion-item>
+                    <div *ngFor="let item of valid.validation_messages.mobile;let i=index">
+                        <div class="errormessage" *ngIf="forgotForm.get('mobile').hasError(item.type) && (forgotForm.get('mobile').dirty || forgotForm.get('mobile').touched)">
+                            <ion-icon name="alert"></ion-icon>{{item.message}}
+                        </div>
+                    </div>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-button class="button-round mt-1" expand="full" (click)="Forgotpassword()" [disabled]="!forgotForm.valid">{{'OTP'|language}}</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </form>
+    <form [formGroup]="OTPForm" *ngIf="lists.ShowOTP">
+        <ion-grid>
+            <ion-row>
+                <ion-col size="12">
+                    <ng-otp-input formControlName="OTP" (onInputChange)="onOtpChange($event)" #ngOtpInput text-center class="no-bg" [config]="{length:6,allowNumbersOnly:true}"></ng-otp-input>
+                </ion-col>
+                <ion-col size="12" text-center>
+                    <h4 text-center style="padding-left:45%">
+                        <div class="otp">{{lists.Timer}}</div>
+                    </h4>
+                </ion-col>
+                <ion-col size="12" text-right><a (click)="Forgotpassword()">{{'Resend OTP'|language}}</a></ion-col>
+                <ion-col size="12">
+                    <ion-button expand="full" (click)="VerifyOTP()">{{'Verify OTP'|language}}</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </form>
+</ion-content>

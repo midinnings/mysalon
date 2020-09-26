@@ -1,0 +1,183 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-row>
+            <ion-col size="2" class="ion-text-center">
+                <ion-buttons>
+                    <ion-button (click)="goBack()">
+                        <ion-icon name="arrow-back" style="color:#fff;"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col size="10" class="ion-text-center" style="color:white">
+                <ion-title>{{'Book an Appointment'|language}}</ion-title>
+            </ion-col>
+
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-row>
+        <ion-col size="6" class="small-font mb-1">{{'Selected Date'|language}}</ion-col>
+        <ion-col size="6" class="small-font mb-1" text-right>{{lists.title}}</ion-col>
+    </ion-row>
+    <calendar [eventSource]="eventSource" [markDisabled]="markDisabled" [calendarMode]="calendar.mode"
+        [currentDate]="calendar.currentDate" (onEventSelected)="onEventSelected($event)"
+        (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)" step="30">
+    </calendar>
+    <calendar [markDisabled]="markDisabled" [eventSource]="eventSource1" startHour="6" endHour="24"
+        [calendarMode]="calendar.timemode" [currentDate]="calendar.currenttime" step="30"
+        (onTimeSelected)="onTimeSelected1($event)" [eventSource]="lists.eventtime">
+    </calendar>
+    <form [formGroup]="book">
+        <ion-col size="12">
+            <ion-item class="input-border">
+                <ion-label position="fixed">{{'Choose Stylist'|language}}</ion-label>
+                <ion-select formControlName="stylist">
+                    <ion-select-option *ngFor="let u of lists.userlist" value="{{u.id}}">
+                        {{u.name}}
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-col>
+
+
+        <ion-row *ngIf="!Loyalty_Points_Redeemed">
+            <ion-col size="5">
+                <ion-item class="" (click)='OpenCoupon()'>
+                    <ion-label position="fixed">{{'View Offers'|language}}</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col size="7">
+                <ion-row>
+                    <ion-col size="7">
+                        <ion-input [(ngModel)]="CustomCoupon" formControlName="couponCode" type="text"
+                            placeholder="Paste Coupon Code">
+                        </ion-input>
+                    </ion-col>
+                    <ion-col size="5" class="font-w-600 small-font">
+                        <ion-button (click)="ApplyCoupon()">{{'Apply'|language}}</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+
+        <div *ngIf="ApplyPackage">
+            <ion-row class="">
+                <ion-col size="1"> </ion-col>
+                <ion-col size="8" class="font-w-600 small-font">{{DiscountValues.type}} Applied</ion-col>
+                <ion-col size="3" class="font-w-600 small-font" style="color:green">{{DiscountValues.couponcode}}
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="" *ngFor="let s of lists.packageservicelist">
+                <ion-col size="1"> </ion-col>
+                <ion-col size="8" class="font-w-600 small-font">{{s.service}}</ion-col>
+                <ion-col size="3" class="font-w-600 small-font" style="color:green">
+                    ₹ {{s.serviceprice}}
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="">
+                <ion-col size="1"> </ion-col>
+                <ion-col size="8" class="font-w-600 small-font">Grand Total</ion-col>
+                <ion-col size="3" class="font-w-600 small-font" style="color:green">
+                    ₹ {{DiscountValues.discount}}
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="12" class="font-w-600 small-font align_center">
+                    <ion-button class="remove_of" shape="round" (click)="RemovePackage()">Remove Offer</ion-button>
+                </ion-col>
+            </ion-row>
+        </div>
+
+        <div *ngIf="!ApplyPackage">
+            <ion-item class="input-border" *ngIf="!ApplyPackage">
+                <ion-label position="fixed">{{'Select Service'|language}}</ion-label>
+                <ion-select multiple="true" formControlName="service" (ionChange)="totalamount()">
+                    <ion-select-option *ngFor="let s of lists.servicelist" value="{{s.serviceid}}">
+                        {{('language'|user)=='Hindi'?s.service_hi:s.service}} - Rs.{{s.serviceprice}}
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+
+
+            <ion-row class="input-border pb-1">
+                <ion-col size="1"></ion-col>
+                <ion-col size="8" class="font-w-600 small-font">{{'Total Amount'|language}}</ion-col>
+                <ion-col size="3" class="font-w-600 small-font" style="color:green">
+                    ₹ {{lists.price}}
+                </ion-col>
+
+                <ion-col size="1" *ngIf="!Loyalty_Points_Redeemed"></ion-col>
+                <ion-col size="8" *ngIf="!Loyalty_Points_Redeemed" class="font-w-600 small-font">
+                    {{'Discount'|language}}
+                </ion-col>
+                <ion-col size="3" *ngIf="!Loyalty_Points_Redeemed" class="font-w-600 small-font" style="color:green">
+                    ₹ {{Final_DiscountAvail|| "0"}}
+                </ion-col>
+
+                <ion-col size="1" *ngIf="Loyalty_Points_Redeemed"></ion-col>
+                <ion-col size="8" *ngIf="Loyalty_Points_Redeemed" class="font-w-600 small-font">
+                    {{'Loyalty Points'|language}}
+                </ion-col>
+                <ion-col size="3" *ngIf="Loyalty_Points_Redeemed" class="font-w-600 small-font" style="color:green">
+                    ₹ {{Loyalty_Points_Redemption|| "0"}} (-)
+                </ion-col>
+
+                <ion-col size="1"></ion-col>
+                <ion-col size="8" class="font-w-600 small-font">{{'Grand Total'|language}}</ion-col>
+                <ion-col size="3" class="font-w-600 small-font" style="color:green">
+                    ₹ {{Amount_Pay || "0"}}
+                </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="UserCurrentPoints != 0">
+                <ion-col size="1"></ion-col>
+                <ion-col size="8" class="font-w-600 small-font">Redeem Points</ion-col>
+                <ion-col size="3" class="font-w-600 small-font">
+                    <ion-checkbox [ngModelOptions]="{standalone: true}" color="primary"
+                        (ionChange)="ApplyLoyalty($event.target.value)" [(ngModel)]="Loyalty_Points_Redeemed">
+                    </ion-checkbox>
+                </ion-col>
+            </ion-row>
+
+        </div>
+
+        <!-- <ion-button (click)="ApplyLoyaltyDiscount()">{{'Apply Loyalty'|language}}</ion-button> -->
+
+        <ion-col size="12" class="input-border pb-1 mb-1">
+            <ion-list class="transparent-bg">
+                <ion-radio-group [ngModelOptions]="{standalone: true}" [(ngModel)]="lists.PaymentMode">
+                    <ion-item lines="none" class="item-height-30">
+                        <ion-label class="inputlabel ion-text-uppercase">{{'Payments'|language}}</ion-label>
+                    </ion-item>
+                    <ion-item lines="none" class="item-height-35 small-font">
+                        <ion-label>{{'Paytm'|language}}</ion-label>
+                        <ion-radio slot="start" disabled value="Paytm"></ion-radio>
+                    </ion-item>
+
+                    <ion-item lines="none" class="item-height-35 small-font">
+                        <ion-label>{{'Cash'|language}}</ion-label>
+                        <ion-radio slot="start" value="Cash"></ion-radio>
+                    </ion-item>
+
+                    <ion-item lines="none" class="item-height-35 small-font">
+                        <ion-label>{{'Google Pay'|language}}</ion-label>
+                        <ion-radio slot="start" disabled value="Googlepay"></ion-radio>
+                    </ion-item>
+                </ion-radio-group>
+            </ion-list>
+        </ion-col>
+
+        <ion-col size="12" text-center style="display: block;">
+            <ion-button [disabled]="!book.valid" (click)="SaveAppointment()" shape="round">
+                {{'Request For Booking'|language}}
+            </ion-button>
+        </ion-col>
+    </form>
+
+</ion-content>

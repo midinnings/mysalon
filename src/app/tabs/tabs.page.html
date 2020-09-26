@@ -1,0 +1,48 @@
+<ion-tabs >
+    <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="dashboard">
+            <img class="fticon" src="./assets/icon/home.png" />
+            <ion-label class="lfont">{{'Home'|language}}</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="job">
+            <img class="fticon" src="./assets/icon/checkout.png" />
+            <ion-label class="lfont">{{'History'|language}}</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="employer">
+            <img class="fticon" src="./assets/icon/jobfind.png" />
+            <ion-label class="lfont">{{'List'|language}}</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="checkout">
+            <img class="fticon" src="./assets/icon/addcust.png" />
+            <ion-label class="lfont">{{'Wallet'|language}}</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="profile">
+            <img class="fticon" src="./assets/icon/more.png" />
+            <ion-label class="lfont">{{'Profile'|language}}</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-tabs>
+<ion-tabs *ngIf="favSalon" >
+    <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="featured-dashboard">
+            <img class="fticon" src="./assets/icon/home.png" />
+            <ion-label class="lfont">{{'Home'|language}}</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="job">
+            <img class="fticon" src="./assets/icon/checkout.png" />
+            <ion-label class="lfont">{{'History'|language}}</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="checkout">
+            <img class="fticon" src="./assets/icon/addcust.png" />
+            <ion-label class="lfont">{{'Wallet'|language}}</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="profile">
+            <img class="fticon" src="./assets/icon/more.png" />
+            <ion-label class="lfont">{{'Profile'|language}}</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-tabs>

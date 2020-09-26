@@ -1,0 +1,22 @@
+.fticon {
+    height: 20px !important;
+    width: 20px !important;
+}
+
+.lfont {
+    font-size: 9px !important;
+    font-weight: 600 !important;
+    padding-top: 5px !important;
+}
+
+.tab-has-label .fticon {
+    -webkit-filter: grayscale(100%);
+    /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
+.tab-has-label.tab-selected .fticon {
+    -webkit-filter: grayscale(0%);
+    /* Safari 6.0 - 9.0 */
+    filter: grayscale(0%);
+}

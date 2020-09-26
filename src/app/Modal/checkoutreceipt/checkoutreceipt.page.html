@@ -1,0 +1,144 @@
+<ion-content *ngIf="ShowCheckout">
+    <ion-row *ngIf="lists.UserProfile">
+        <ion-col size="12" text-center class="m-t-p-5">
+            <img class="image"
+                [src]="lists.UserProfile.logo?common.Url+'Files/'+lists.UserProfile.logo:'./assets/img/logo.png'">
+        </ion-col>
+        <ion-col size="12" text-center>
+            <h3> {{lists.UserProfile.name}}</h3>
+        </ion-col>
+        <ion-col size="12" text-center>
+            <ion-label class="address" style="text-align: center;">+91
+                {{lists.UserProfile.mobileno}}<br>{{lists.UserProfile.address}}
+            </ion-label>
+        </ion-col>
+        <ion-col size="12">
+            <ion-label class="ion-text-uppercase pdl">{{'Customer Name'|language}}
+            </ion-label>
+        </ion-col>
+        <ion-col size="6">
+            <ion-label class="number pdl">{{lists.MyProfile.name}}</ion-label>
+        </ion-col>
+        <ion-col size="6" style="text-align: right;">
+            <ion-label class="number">
+                <ion-icon name="call"></ion-icon> +91 {{lists.MyProfile.mobileno}}
+            </ion-label>
+        </ion-col>
+
+        <ion-col *ngIf="!hideDiscount" size="12" style="margin-top: 10px;">
+            <ion-label class="pdl"><strong>{{'Services'|language}}
+                </strong></ion-label>
+        </ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let s of lists.serviceinfo;let i=index" padding class="ntbp">
+        <ion-col size="1">
+            <ion-label>{{i+1}}</ion-label>
+        </ion-col>
+        <ion-col size="6">
+            <ion-label>{{('language'|user)=='Hindi'?s.service_hi:s.service}}</ion-label>
+        </ion-col>
+        <ion-col size="5" style="text-align: right;">
+            <ion-label><i class="fa fa-inr"></i> {{s.serviceprice}}</ion-label>
+        </ion-col>
+    </ion-row>
+
+    <ion-row padding>
+        <ion-col size="6" *ngIf="!hideDiscount"><b>{{'Total Amount'|language}}</b></ion-col>
+        <ion-col size="6" *ngIf="!hideDiscount" text-right>₹ {{totalamount}} </ion-col>
+
+        <ion-col size="6" *ngIf="hideDiscount"><b>{{'Coupon Applied'|language}}</b></ion-col>
+        <ion-col size="6" *ngIf="hideDiscount" text-right>{{lists.appointment.coupon_applied}} </ion-col>
+
+        <ion-col size="6" *ngIf="!hideDiscount"><b>{{'Discount'|language}}</b> - {{CouponApplied}}</ion-col>
+        <ion-col size="6" *ngIf="!hideDiscount" text-right> {{lists.DiscountType=='P'?'%':'₹'}} {{DiscountCost}}
+        </ion-col>
+
+        <ion-col size="6"><b>{{'Grand Total'|language}}</b></ion-col>
+        <ion-col size="6" text-right>₹ {{AppointmentPay}} </ion-col>
+    </ion-row>
+</ion-content>
+
+
+<ion-footer *ngIf="ShowCheckout">
+    <div>
+        <ion-button shape="round" style="padding-left: 16px;" (click)="close()">{{'Back'|language}}
+        </ion-button>
+        <ion-button shape="round" style="padding-right: 16px;float:right" (click)="next()">
+            {{'Next'|language}}
+        </ion-button>
+    </div>
+</ion-footer>
+
+<ion-content *ngIf="!ShowCheckout">
+
+    <ion-row class="griddata">
+
+        <ion-col size="12" class="text_center" style="text-align: center;">
+            <br><br>
+            <h3 class="">{{'Rate Your Expiriences'|language}}</h3>
+        </ion-col>
+    </ion-row>
+    <ion-row class="griddata">
+        <ion-col size="12">
+            <ion-card class="mycardinfo cardsqr">
+                <ion-card-content>
+                    <table>
+                        <tr>
+                            <td size="6" class="td_rating">Overall</td>
+                            <td size="6" class="td_rating">
+                                <ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline"
+                                    activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="true" readonly="false"
+                                    rating="0" fontSize="25px" (ratingChanged)="logRating($event, 'overall_rate')">
+                                </ionic4-star-rating>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td size="6" class="td_rating">Ambiance</td>
+                            <td size="6" class="td_rating">
+                                <ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline"
+                                    activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="true" readonly="false"
+                                    rating="0" fontSize="25px" (ratingChanged)="logRating($event, 'ambiance_rate')">
+                                </ionic4-star-rating>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td size="6" class="td_rating">Corona Safety</td>
+                            <td size="6" class="td_rating">
+                                <ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline"
+                                    activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="true" readonly="false"
+                                    rating="0" fontSize="25px" (ratingChanged)="logRating($event, 'services_rate')">
+                                </ionic4-star-rating>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td size="6" class="td_rating">Waiting</td>
+                            <td size="6" class="td_rating">
+                                <ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline"
+                                    activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="true" readonly="false"
+                                    rating="0" fontSize="25px" (ratingChanged)="logRating($event, 'waiting_rate')">
+                                </ionic4-star-rating>
+                            </td>
+                        </tr>
+
+
+
+                    </table>
+                </ion-card-content>
+
+            </ion-card>
+            <br>
+            <ion-textarea [(ngModel)]="Ratings.feedback" placeholder="Enter Your Feedback" rows="4" cols="20"
+                style=" border: 1px solid #bababa;"></ion-textarea>
+            <br>
+            <ion-button
+                [disabled]="!Ratings.overall_rate || !Ratings.ambiance_rate || !Ratings.services_rate || !Ratings.waiting_rate"
+                shape="round" style="padding-right: 16px;float:right;" (click)="End()">
+                {{'Submit Feedback '|language}}
+            </ion-button>
+
+
+        </ion-col>
+    </ion-row>
+
+</ion-content>

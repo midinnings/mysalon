@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-row>
+      <ion-col size="2" class="ion-text-center">
+        <ion-buttons>
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col size="8" class="ion-text-center">
+        <ion-title>{{'Notifications'|language}}</ion-title>
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        <ion-button mat-icon-button [matMenuTriggerFor]="appMenu" *ngIf="lists.notification.length>0">
+          <ion-icon name="more"></ion-icon>
+        </ion-button>
+        <mat-menu #appMenu="matMenu">
+          <button mat-menu-item (click)="MarkasAllRead()">{{'Mark All Read'|language}}</button>
+        </mat-menu>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <p style="text-align:center" *ngIf="lists.notification.length == 0">Notification not found....</p>
+  <ion-item lines="none" *ngFor="let n of lists.notification" class="list-box mt-2">
+    <ion-avatar slot="start">
+      <img src="./assets/img/logo.png" class="list-img">
+    </ion-avatar>
+    <ion-label>
+      <h2 class="ion-text-uppercase font-w-600">{{n.title}}</h2>
+      <span class="xs-font" style="white-space: normal;">{{n.message}}</span>
+      <span class="xs-font">{{n.ndatetime|date:'dd-MM-yyyy HH:MM:ss a'}}</span>
+    </ion-label>
+    <!-- <ion-note class="p-padding">
+      <p><a (click)="UpdateNotify(n)">More...</a></p>
+    </ion-note> -->
+  </ion-item>
+</ion-content>

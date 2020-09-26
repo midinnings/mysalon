@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-row>
+            <ion-col size="2" class="ion-text-center">
+                <ion-buttons>
+                    <ion-back-button></ion-back-button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col size="8" class="ion-text-center">
+                <ion-title>{{'Services'|language}}</ion-title>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-row *ngFor="let s of lists.Servicelist" class="input-border">
+        <ion-col size="6"><span
+                class="ion-text-uppercase font-w-600">{{('language'|user)=='Hindi'?s.service_hi:s.service}}</span>
+        </ion-col>
+        <ion-col size="6" text-right><span class="small-font"><i class="fa fa-inr"></i> {{s.serviceprice}}</span>
+        </ion-col>
+    </ion-row>
+
+</ion-content>

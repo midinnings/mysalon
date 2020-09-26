@@ -1,0 +1,8 @@
+node_modules/
+www/
+platforms/
+**/platforms
+**/www
+**/node_modules
+plugins/
+**/plugins

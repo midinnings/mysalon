@@ -1,0 +1,108 @@
+ion-title {
+    color: white !important;
+}
+
+.remove_of{
+    height: 22px;
+    font-size: 10px;
+}
+
+.event-detail-container {
+    display: none !important;
+}
+
+.left {
+    padding-left: 5px !important;
+}
+
+.right {
+    padding-right: 5px !important;
+    float: right !important;
+}
+
+.hourslist {
+    ion-label {
+        margin: 0px !important;
+        margin-bottom: 16px !important;
+    }
+    ion-checkbox {
+        margin: 5px !important;
+        margin-bottom: 20px !important;
+    }
+    ion-item {
+        border-bottom: none !important;
+        min-height: 30px !important;
+        height: 30px !important;
+    }
+    ion-col {
+        border: 1px solid #d6d6d6;
+        padding: 0px !important;
+    }
+    .ng-select.ng-select-single .ng-select-container {
+        border: none !important;
+    }
+}
+
+ion-title {
+    color: #FFFF !important;
+    text-align: center !important;
+}
+
+ion-input {
+    text-align: right !important;
+}
+
+ion-textarea {
+    text-align: right !important;
+}
+
+ion-select {
+    width: 100% !important;
+    text-align: right !important;
+}
+
+ion-toggle {
+    text-align: right !important;
+}
+
+ion-back-button {
+    color: white !important;
+}
+
+ion-label {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #000000b0 !important;
+    text-transform: uppercase !important;
+}
+
+ion-input {
+    font-size: 14px !important;
+}
+
+ion-textarea {
+    font-size: 14px !important;
+}
+
+ion-select {
+    font-size: 14px !important;
+}
+
+.typeitem {
+    float: left !important;
+    margin-left: -20px;
+    width: 55%;
+    margin-top: 6px;
+}
+
+ion-radio {
+    margin-right: 16px !important;
+}
+
+.inputlabel {
+    font-size: 17px !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    color: #070404 !important;
+    letter-spacing: 1px;
+}

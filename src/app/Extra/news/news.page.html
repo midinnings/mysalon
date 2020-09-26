@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-row>
+            <ion-col size="2" class="ion-text-center">
+                <ion-buttons>
+                    <ion-back-button></ion-back-button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col size="8" class="ion-text-center" style="color: #fff;">
+                <ion-title>{{'News'|language}}</ion-title>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let e of lists.newslist | slice:0:4">
+            <img class="backimg" [src]="e.coverimage?common.Url+'Files/'+ e.coverimage:'./assets/img/app/homeback.png'">
+            <div class="userdiv">
+                <p class="sliderheader">{{e.title}}</p>
+                <span class="slidersubheader">{{e.ndatetime|date}}</span>
+            </div>
+        </ion-slide>
+    </ion-slides>
+
+    <h3 class="header mt-3"> {{'Top News'|language}}</h3>
+    <ion-item *ngFor="let e of lists.newslist" lines=none class="input-border">
+        <ion-thumbnail slot="start">
+            <img [src]="e.coverimage?common.Url+'Files/'+ e.coverimage:'./assets/img/logo.png'">
+        </ion-thumbnail>
+        <ion-label>
+            <h3 class="gray-text">{{e.ndatetime|date}}</h3>
+            <h4 class="font-w-600">{{e.title}}</h4>
+            <p [innerHTML]="e.news|limitto:150"></p>
+            <p><a (click)="GOtoDetails(e)">{{'Know More'|language}}.....</a>
+            </p>
+        </ion-label>
+
+    </ion-item>
+</ion-content>

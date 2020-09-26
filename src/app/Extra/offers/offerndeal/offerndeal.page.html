@@ -1,0 +1,135 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-row>
+            <ion-col size="2" class="ion-text-center">
+                <ion-buttons>
+                    <ion-back-button></ion-back-button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col size="8" class="ion-text-center">
+                <ion-title>{{'Offers & Deals'|language}}</ion-title>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="offerform">
+        <ion-row>
+            <ion-col size="12">
+                <ion-item class="input-border">
+                    <ion-label class="inputlabel" position="stacked">{{'Type'|language}}</ion-label>
+                    <ion-radio-group formControlName="type" class="w-full">
+                        <ion-item lines="none" class="typeitem">
+                            <ion-label>{{'Offer'|language}}</ion-label>
+                            <ion-radio slot="start" value="Offer"></ion-radio>
+                        </ion-item>
+                        <ion-item lines="none" class="typeitem">
+                            <ion-label>{{'Deal'|language}}</ion-label>
+                            <ion-radio slot="start" value="Deal"></ion-radio>
+                        </ion-item>
+                    </ion-radio-group>
+                </ion-item>
+            </ion-col>
+            <ion-col size="12">
+                <ion-item lines="none" class="input-border">
+                    <ion-label position="fixed">{{'Title'|language}}</ion-label>
+                    <ion-input type="text" formControlName="title" placeholder="Enter Title eg. Hair Style"></ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size="12">
+                <ion-item lines="none" class="input-border">
+                    <ion-label position="fixed">{{'Description'|language}}</ion-label>
+                    <ion-input type="textarea" rows="3" formControlName="description"></ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size="12">
+                <ion-item lines="none" class="input-border">
+                    <ion-label position="fixed">{{'Enter Coupon Code'|language}}</ion-label>
+                    <ion-input type="text" formControlName="couponcode" placeholder="HAIR500"></ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size="12">
+                <ion-item lines="none" class="input-border">
+                    <ion-label position="fixed">{{'Start Date'|language}}</ion-label>
+                    <ion-input readonly formControlName="startdate" [liIonic4Datepicker]="datePickerObj"
+                        placeholder="Enter Date">
+                    </ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size="12">
+                <ion-item lines="none" class="input-border">
+                    <ion-label position="fixed">{{'End Date'|language}}</ion-label>
+                    <ion-input formControlName="enddate" readonly [liIonic4Datepicker]="datePickerObj"
+                        placeholder="Enter Date">
+                    </ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size="12">
+                <ion-item lines="none" class="input-border">
+                    <ion-label position="fixed">{{'Coupon Usage'|language}}</ion-label>
+                    <ion-select formControlName="usage">
+                        <ion-select-option value="O">{{'Once Per User'|language}}</ion-select-option>
+                        <ion-select-option value="M">{{'Multiple Time Per User'|language}}</ion-select-option>
+                        <ion-select-option value="N">{{'New User Only'|language}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col size="12" *ngIf="offerform.value.usage=='M'">
+                <ion-item lines="none" class="input-border">
+                    <ion-label position="fixed">{{'Per User Usage'|language}}</ion-label>
+                    <ion-input type="number" formControlName="noftime">
+                    </ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size="12">
+                <ion-item class="input-border">
+                    <ion-label class="inputlabel" position="stacked">{{'Apply Setting'|language}}</ion-label>
+                    <ion-radio-group formControlName="applysetting" class="w-full">
+                        <ion-item lines="none" class="typeitem">
+                            <ion-label>{{'Complete Bill'|language}}</ion-label>
+                            <ion-radio slot="start" value="B"></ion-radio>
+                        </ion-item>
+                        <ion-item lines="none" class="typeitem">
+                            <ion-label>{{'Special Service'|language}}</ion-label>
+                            <ion-radio slot="start" value="S"></ion-radio>
+                        </ion-item>
+                    </ion-radio-group>
+                </ion-item>
+            </ion-col>
+            <ion-col size="12" *ngIf="offerform.value.applysetting=='S'">\
+                <ion-item lines="none" class="input-border">
+                    <ion-label position="fixed">{{'Applicable Service'|language}}</ion-label>
+                    <ion-select formControlName="services">
+                        <ion-select-option *ngFor="let s of lists.Servicelist" [value]="s.id">{{s.service}}
+                        </ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col size="12">
+                <ion-item lines="none" class="input-border">
+                    <ion-label position="fixed">{{'Discount Type'|language}}</ion-label>
+                    <ion-select formControlName="discounttype">
+                        <ion-select-option value="A">{{'Amount'|language}}</ion-select-option>
+                        <ion-select-option value="P">{{'Percentage'|language}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col size="12" lines="none">
+                <ion-item class="input-border">
+                    <ion-label position="fixed">{{'Discount'|language}}</ion-label>
+                    <ion-input type="number" formControlName="discount"></ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size="6" class="mb-2">
+                <ion-button (click)="Back()" shape="round">{{'Cancel'|language}}</ion-button>
+            </ion-col>
+            <ion-col size="6" class="ion-text-right  mb-2">
+                <ion-button (click)="SaveOffer()" shape="round">{{'Save'|language}}</ion-button>
+            </ion-col>
+        </ion-row>
+    </form>
+
+</ion-content>

@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>{{'Coupons'|language}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="close()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!-- <ion-row>
+        <ion-col size="12">
+            <ion-item>
+                <ion-label position="floating">Enter Coupon Code</ion-label>
+                <ion-input [(ngModel)]="lists.Code"></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col size="12" text-right>
+            <ion-button shape="round" (click)="ApplyCode()">Apply</ion-button>
+        </ion-col>
+    </ion-row> -->
+
+    <ion-row>
+        <ion-col size="12">
+            <ion-card *ngFor="let c of lists.Myoffers">
+                <ion-card-header>
+                    <ion-card-subtitle>Free {{c.type}}<a style="float: right;" (click)="ApplyCupon(c)">{{'Apply Now'|language}}</a>
+                    </ion-card-subtitle>
+                    <ion-card-title>{{c.title}}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                    Date {{c.startdate|date:'dd-MM-yyyy'}} to {{c.enddate|date:'dd-MM-yyyy'}} {{c.description}}.
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+</ion-content>

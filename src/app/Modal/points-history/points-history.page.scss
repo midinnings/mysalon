@@ -1,0 +1,42 @@
+.listing_points{
+    p{
+        padding:0;
+        margin:0;
+    }
+
+    .services_list{
+        font-size: 10px;
+    }
+
+    .costing_btn{
+        border: 1px solid #c73130;
+        border-radius: 10px;
+        padding: 1px 6px;
+        font-size: 10px;
+    }
+
+    .dated{
+        font-size: 9px;
+        color: #adadad;
+    }
+
+    .points{
+        font-size: 22px;
+    color: #c73130;
+    font-weight: 700;
+    }
+}
+
+.shadow_ion{
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    margin:10px;
+   
+}
+
+.close_btn{
+    font-size: 24px;
+    z-index: 99998;
+    top: -10px;
+  
+    color: #c73130;
+}

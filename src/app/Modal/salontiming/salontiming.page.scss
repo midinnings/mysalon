@@ -1,0 +1,33 @@
+.header-md:after{
+    background-image: none !important;
+  }
+  ion-toolbar{
+      background: transparent !important;
+      height: 27px !important;
+
+  }
+ion-content{
+    --background: white !important;
+}
+
+ion-button{
+    font-size: 10px !important;
+    height: 30px !important;
+}
+h5{
+    margin: 0px !important;
+}
+.iconsclose{
+        color: #808080ab !important;
+    font-size: 23px !important;
+}
+ion-row{
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+}
+
+ion-radio{
+    margin:5px !important;
+    height: 15px !important;
+    width:15px !important;
+}

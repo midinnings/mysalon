@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end" style="margin-top: -18px;">
+      <ion-button (click)="close()">
+        <ion-icon class="iconsclose" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h5 text-center>{{'Select Template'|language}}
+  </h5>
+  <ion-list>
+    <ion-radio-group [(ngModel)]="lists.Templatevalue">
+      <ion-item *ngFor="let t of lists.templatelist" lines="none" class="input-border">
+        <ion-label>{{t.messageenglish}}</ion-label>
+        <ion-radio slot="start" value="{{t.id}}"></ion-radio>
+      </ion-item>
+      <ion-item lines="none" class="input-border">
+        <ion-label>{{'Custom'|language}}
+        </ion-label>
+        <ion-radio slot="start" value="0"></ion-radio>
+      </ion-item>
+
+    </ion-radio-group>
+    <ion-item *ngIf="lists.Templatevalue==0" lines="none" class="input-border">
+      <ion-label position="stacked">{{'Custom Message'|language}}
+      </ion-label>
+      <ion-textarea rows="3" [(ngModel)]="lists.Message"></ion-textarea>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer text-right>
+  <ion-button shape="round" (click)="Share(lists.Templatevalue)">
+    {{'Share'|language}}
+
+  </ion-button>
+</ion-footer>

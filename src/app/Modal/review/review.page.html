@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end" style="margin-top: -18px;">
+      <ion-button (click)="close()">
+        <ion-icon class="iconsclose" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-content fullscreen class="register-bg">
+    <ion-grid>
+        <form [formGroup]="customForm" class="item-width login-wrapper">
+            <ion-row>
+                 <ion-col size="12" text-center>
+                        <img class="image mb-3" src="./assets/img/logo.png" />
+                    </ion-col>
+                    <ion-col size="12" text-center>
+                      <ion-item >
+                        <ionic4-star-rating  activeIcon = "ios-star" defaultIcon = "ios-star-outline" activeColor = "#d1301a"(ratingChanged)="logRatingChange($event)"#rating 
+                                    defaultColor = "#aaaaaa" fontSize = "45px" formControlName="starRating" (ratingChanged)="logRatingChange($event)"
+                                    >
+                                      </ionic4-star-rating>
+                        </ion-item>
+                          </ion-col>
+                    <ion-col size="12">
+                        <ion-item class="input-border">
+                            <ion-label class="inputlabel" position="stacked">{{'Comment'|language}}
+                            </ion-label>
+                            <ion-input formControlName="comment"  type="text" placeholder="(Optional)"></ion-input>
+                          
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size="6" class="m-t-p-10" style="text-align:-webkit-center !important;">
+                      <ion-button class="loginbutton" expand="full" shape="round" (click)="Proceed()"
+                         >{{'Post'|language}}
+                      </ion-button>
+                  </ion-col>
+                  <ion-col size="6" text-center class="dtft m-t-p-10 ls-1">
+                   <div class="mt-1"><a class="registerft" (click)="close()">
+                            {{'Not Interested'|language}} </a></div>
+                </ion-col>
+                    </ion-row>
+                    </form>
+                    </ion-grid>
+
+</ion-content>

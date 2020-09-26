@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "61311465595",
+    "firebase_url": "https://my-salon-zone-notification.firebaseio.com",
+    "project_id": "my-salon-zone-notification",
+    "storage_bucket": "my-salon-zone-notification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61311465595:android:7a4939ac3cc06307490ade",
+        "android_client_info": {
+          "package_name": "com.mysalonzone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61311465595-sjhutu5ti8m7b6899efj7122h8nnoi65.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mysalonzone",
+            "certificate_hash": "36b9404366b5da2a0b15160a4f151d74b317181d"
+          }
+        },
+        {
+          "client_id": "61311465595-mu28nb961aj544i6m47uq0iinnr5cvlk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCZ-6BGbaVffb3MKRuNW55vJflz-FX7hU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61311465595-mu28nb961aj544i6m47uq0iinnr5cvlk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

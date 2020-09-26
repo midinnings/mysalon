@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title style="color:white">{{'Find your Favourite Salon'|language}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-searchbar (ionInput)="filterList($event)" [(ngModel)]="searchKey">
+  </ion-searchbar>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button (click)="Openpopup('fliter')" shape="round" class="small_btns">
+        {{lists.fliter}}
+      </ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button shape="round" class="F_Right small_btns" (click)="Openpopup('sort')">{{lists.sort}}</ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="6" class="filter_css align_left">
+      <ion-label>
+        {{lists.flitername}}
+      </ion-label>
+    </ion-col>
+    <ion-col size="6" class="filter_css align_right">
+      <ion-label> {{lists.sortname}}
+      </ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-list>
+    <p *ngIf="filteredItems.length==0" style="text-align: center;">No Salon found using this criteria...</p>
+    <ion-row class="shadow_ion" *ngFor="let item of filteredItems; let i=index" (click)="common.PageGoto('Forward','salon-details',item)"
+      style="cursor: pointer;padding: 0px 8px;margin-bottom: 15px;">
+      <ion-col size="3">
+        <img  (load)="item.loaded = true" [ngClass]="{'img-loaded':item.loaded}" [hidden]="!item.loaded"  [src]="common.Url+'Files/'+item.logo" onerror="this.src='./assets/img/placeholder.jfif';" alt="{{item.name}}" class='round-img border-primary' style="width: 80px">
+        <ion-spinner [ngClass]="{'center':true}" *ngIf="!item.loaded"></ion-spinner>
+      </ion-col>
+      <ion-col size="9">
+        <ion-row>
+          <ion-col size="10" class="ion-no-padding">
+            <h5 class="video-heading">{{item.name}}</h5>
+          </ion-col>
+        </ion-row>
+        <p class="video-desciption">
+          {{'Ratings'|language}}:<ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline"
+            activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="true" readonly="true" rating="{{item.salon_rating}} || 0"
+            fontSize="10px">
+          </ionic4-star-rating>
+        </p>
+        <p class="video-desciption">
+          {{'Reviews'|language}}:{{item.review}}
+        </p>
+        <p class="video-desciption">
+          {{item.distance}}
+        </p>
+
+        <p class="video-desciption address_set" *ngIf="item.Address">
+          <ion-icon name="pin" *ngIf="item.Address"></ion-icon> {{item.Address.address1}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+  <ion-select style="display: none;" (ionChange)="ChangeSort($event)" #searchSort [(ngModel)]="lists.sortname">
+    <ion-select-option *ngFor="let s of lists.sortOptions" value="{{('language'|user)=='Hindi'?s.name_hi:s.name}}">
+      {{('language'|user)=='Hindi'?s.name_hi:s.name}}
+    </ion-select-option>
+  </ion-select>
+  <ion-select style="display: none;" (ionChange)="ChangeFliter($event)" #searchFliter [(ngModel)]="lists.flitername">
+    <ion-select-option *ngFor="let s of lists.fliterOptions" value="{{('language'|user)=='Hindi'?s.name_hi:s.name}}">
+      {{('language'|user)=='Hindi'?s.name_hi:s.name}}
+    </ion-select-option>
+  </ion-select>
+</ion-content>

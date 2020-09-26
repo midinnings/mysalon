@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-row>
+      <ion-col size="2" class="ion-text-center">
+        <ion-buttons>
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col size="8" class="ion-text-center" style="color:white">
+        <ion-title>{{'Business Address'|language}}</ion-title>
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar class="searchbar" [(ngModel)]="lists.addressbar" (ionInput)="updateSearch($event)"
+    placeholder="Search Address">
+  </ion-searchbar>
+  <div *ngIf="lists.autocompleteItems.length>0" class="auto-list">
+    <p *ngFor="let u of lists.autocompleteItems" (click)="geoCode(u.description)" class="autocomplete">
+      {{u.description}}
+    </p>
+  </div>
+  <div class="map" #map id="map"></div>
+  <ion-button class="continuebutton" [disabled]="!lists.address" (click)="Backtoaddress()">{{'Continue this address'|language}}
+    <ion-icon name="
+    md-arrow-round-forward">
+    </ion-icon>
+  </ion-button>
+</ion-content>
