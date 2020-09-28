@@ -52,10 +52,13 @@
         <ion-col class="ion-padding pt-0 pb-0" size="12" *ngIf="lists.eventvidoe">
             <iframe height="315" [src]="lists.eventvidoe" frameborder="0" allowfullscreen></iframe>
         </ion-col>
-        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.contactno">{{'Contact Details'|language}}:<br><span>{{lists.contactno}}</span></ion-col>
-        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.email">{{'Email Address'|language}}:<br>{{lists.email}}</ion-col>
-        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.url">{{'Other Information'|language}}:<br><a (click)="common.OpenUrl(lists.url,0)">{{lists.url}}</a></ion-col>
-        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.informationurl">{{'Registration Details'|language}}:<br>{{lists.informationurl}}</ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.contactno"><b>{{'Contact Details'|language}}:</b><br><span>{{lists.contactno}}</span></ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.email"><b>{{'Email Address'|language}}:</b><br>{{lists.email}}</ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.url" (click)="common.OpenUrl(lists.url,0)"><b>{{'Event URL'|language}}:</b><br><a>{{lists.url}}</a></ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.eventvidoe"><b>{{'Youtube URL'|language}}:</b><br>{{lists.eventvidoe}}</ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.url"><b>{{'Other Information'|language}}:</b><br>{{lists.informationurl}}</ion-col>
+        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.url"><b>{{'Published On'|language}}:</b><br>{{lists.publishingdate}}</ion-col>
+
     </ion-row>
 
 

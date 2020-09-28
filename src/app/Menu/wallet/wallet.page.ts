@@ -46,7 +46,9 @@ export class CheckoutPage implements OnInit {
     }).catch(() => { });
   }
 
-
+  ionViewDidEnter(){
+    this.GetUserLatestProfile();
+  }
 
   async OpenInvite() {
     const modal = await this.Modal.create({
@@ -93,7 +95,7 @@ export class CheckoutPage implements OnInit {
 
 
   ngOnInit() {
-    this.GetUserLatestProfile();
+   
     let SalonData: any = localStorage.getItem('SalonReffered');
     if (SalonData) {
       SalonData = JSON.parse(SalonData);

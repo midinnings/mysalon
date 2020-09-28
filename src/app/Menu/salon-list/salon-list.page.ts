@@ -90,12 +90,12 @@ export class EmployerPage implements OnInit {
     this.nav.pop();
   }
   ChangeSort(ev) {
-    debugger
+    this.lists.flitername = '';
     //  this.searchSort.open();
     if (this.lists.sortname == 'By Distance') {
       this.FilterData('distance', 'all');
     } else {
-      this.FilterData('distance', 'all');
+      this.FilterData('area', 'all');
     }
 
 
@@ -104,9 +104,10 @@ export class EmployerPage implements OnInit {
     console.log(this.lists.sort)
   }
   ChangeFliter(ev) {
-debugger
+    this.lists.sortname = '';
     //   if (ev === 'fliter') {
     // this.searchFliter.open();
+    this.lists.flitername = ev.detail.value;
     this.FilterData('salon_type', ev.detail.value);
     //  }
 

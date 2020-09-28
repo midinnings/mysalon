@@ -70,7 +70,7 @@
                                 </ion-label>
                             </ion-col>
                             <ion-col size='2' (click)="Openpopup()">
-                                <ion-label class="infoname" style="color:#c73130 !important"> more </ion-label>
+                                <ion-fab-button color="primary" class="fab_more">More</ion-fab-button>
                             </ion-col>
                         </ion-row>
                         <ion-row class="griddata timings" *ngIf="!lists.CurrentDayStatus.ValidityStatus">
@@ -81,7 +81,7 @@
                                 <ion-label class="infoname">{{'closed'|language}}</ion-label>
                             </ion-col>
                             <ion-col size='2' (click)="Openpopup()">
-                                <ion-label class="infoname" style="color:#c73130 !important">more</ion-label>
+                                <ion-fab-button color="primary" class="fab_more">More</ion-fab-button>
                             </ion-col>
                         </ion-row>
                     </ion-grid>
@@ -110,25 +110,23 @@
                 <ion-card class="mycardinfo cardsqr">
                     <ion-grid>
                         <ion-row class="griddata">
-                            <ion-col size="3" *ngFor="let services of lists.SalonServices">
-                                <ion-card class="mycardinfo cardsqr">
-                                    <img onerror="this.src='./assets/img/placeholder.jfif';"
-                                    [src]="common.Url+'Files/'+services.icon" />
+                            <ion-col size="10">
+                                <ion-slides class="services_slide" options="{initialSlide: 0,
+                                    slidesPerView: 5,
+                                    autoplay: false,
+                                    pagination: false}">
+                                    <ion-slide style="width: 60px !important;"
+                                        *ngFor="let services of lists.SalonServices">
+                                        <img onerror="this.src='./assets/img/placeholder.jfif';"
+                                            [src]="common.Url+'Files/'+services.icon" />
+                                    </ion-slide>
+                                </ion-slides>
+                            </ion-col>
 
-                                </ion-card>
-                            </ion-col>
-                            <!-- <ion-col size="3">
-                                <ion-card class="mycardinfo cardsqr">
-                                    <img src="./assets/icon/icon2.png" />
-                                </ion-card>
-                            </ion-col>
-                            <ion-col size="3">
-                                <ion-card class="mycardinfo cardsqr">
-                                    <img src="./assets/icon/icon3.png" />
-                                </ion-card>
-                            </ion-col> -->
-                            <ion-col size="3" (click)="OpenpopupServices($event)">
-                                <p class="info iconimg"><a>more</a></p>
+
+                            <ion-col size="2" (click)="OpenpopupServices($event)">
+                                <ion-fab-button style="    top: 3vh;" color="primary" class="fab_more">More
+                                </ion-fab-button>
                             </ion-col>
                         </ion-row>
                     </ion-grid>

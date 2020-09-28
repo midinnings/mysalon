@@ -9,7 +9,7 @@
         <ion-row style="    padding: 10px 20px;">
 
             <ion-col size="6" (click)="OpenHistory()">
-                <p class="points">{{item.wallet.current_amt}}</p>
+                <p class="points">{{item.wallet.current_amt || 0}}</p>
                 <span class="">{{'Loyalty Points'|language}}</span> <br>
                 <!-- <span style="font-size: 10px;"> {{'Expires on 2-Sep-2020'|language}} </span> -->
             </ion-col>

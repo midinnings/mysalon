@@ -61,7 +61,7 @@ export class AppComponent {
     let env = this;
     setTimeout(() => {
       env.splashScreen.hide();
-    }, 2000);
+    }, 10000);
   }
 
   initializeApp() {
@@ -109,7 +109,6 @@ export class AppComponent {
 
 
   NavigateDeepLink(Match) {
-    debugger
     let Path = Match.$link.url;
     if (Path) {
       if (Path.includes('blog/')) {

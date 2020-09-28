@@ -16,7 +16,7 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-grid class="dashboard_content">
+    <ion-grid class="" style="    padding: 0;">
         <ion-slides pager="true">
             <ion-slide *ngFor="let s of lists.sliders">
                 <img [src]="common.Url+'Files/'+s.image">
@@ -25,7 +25,8 @@
                 </div>
             </ion-slide>
         </ion-slides>
-        <ion-grid class="no_padding margin_top">
+    </ion-grid>
+        <ion-grid class="no_padding margin_top dashboard_content">
             <ion-card class="no_margin">
                 <ion-row class="griddata">
                     <ion-col size="10" (click)="Openpopup()">
@@ -207,5 +208,5 @@
                 {{('language'|user)=='Hindi'?s.name_hi:s.name}}
             </ion-select-option>
         </ion-select>
-    </ion-grid>
+
 </ion-content>

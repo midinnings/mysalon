@@ -322,13 +322,8 @@ export class DashboardPage implements OnInit {
   }
 
   GetSlider() {
-    let id = 0;
-    if (localStorage.getItem("UserType") == "2" || localStorage.getItem("UserType") == "6") {
-      id = 1;
-    } else {
-      id = 2;
-    }
-    this.common.PostMethod("GetBanners", { id: id }).then((res: any) => {
+
+    this.common.PostMethod("GetBanners", { id: 1 }).then((res: any) => {
       this.lists.sliders = res.Data;
     });
   }

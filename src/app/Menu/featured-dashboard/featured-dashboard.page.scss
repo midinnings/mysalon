@@ -215,11 +215,22 @@ ion-slides {
     font-size: 15px;
 }
 
+.adjustCardBackground{
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+
 .nav_loc_icon{
     position: absolute;
     right: 5px;
     font-size: 20px;
     top: 15px;
+    color: #c73130;
+}
+
+.services_slide ion-slide {
+    width: 60px !important;
+    margin-right: 10px;
 }
 
 .brands_btn .button-native{
@@ -514,6 +525,9 @@ ion-slides {
 
 
 .deals_slides{
+    img{
+        height: 150px;
+    }
     p{
         text-align: center;
     }
@@ -566,4 +580,17 @@ ion-segment-button.ios{
     ion-slides {
         max-width: 600px;
     }
+}
+
+
+.fab_more{
+    font-size: 10px;
+    height: 30px;
+    position: absolute;
+    width: 30px;
+    top: -6px;
+}
+
+.padding_more_five{
+    padding: 5px;
 }

@@ -33,6 +33,7 @@ export class SalonDetailsPage implements OnInit {
       this.SalonParams = res;
     });
     this.SalonData.Staff = [];
+    this.SalonData.FacilitiesList = [];
   }
   
   GetSlider() {
