@@ -16,17 +16,18 @@ export class NewsPage implements OnInit {
     initialSlide: 0,
     slidesPerView: 1,
     autoplay: true,
-
   };
+
   ngOnInit() {
     this.GetNewslist();
   }
 
   GetNewslist() {
-    this.common.PostMethod("GetNews", { language: new UserPipe().transform('language') }).then((res: any) => {
+    this.common.PostMethod("GetNews", { language: new UserPipe().transform('language'), usertype: localStorage.getItem("UserType") }).then((res: any) => {
       this.lists.newslist = res.Data;
     });
   }
+
   GOtoDetails(ev) {
     this.common.PageGoto('Forward', 'newsdetails', { Data: ev, Type: Event });
   }

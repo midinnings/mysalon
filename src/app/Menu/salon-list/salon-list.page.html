@@ -42,20 +42,20 @@
             <h5 class="video-heading">{{item.name}}</h5>
           </ion-col>
         </ion-row>
-        <p class="video-desciption">
+        <p class="video-desciption" *ngIf="item.salon_rating && item.salon_rating!='0,0,0,0' ">
           {{'Ratings'|language}}:<ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline"
             activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="true" readonly="true" rating="{{item.salon_rating}} || 0"
             fontSize="10px">
           </ionic4-star-rating>
         </p>
-        <p class="video-desciption">
+        <!-- <p class="video-desciption">
           {{'Reviews'|language}}:{{item.review}}
-        </p>
+        </p> -->
         <p class="video-desciption">
           {{item.distance}}
         </p>
 
-        <p class="video-desciption address_set" *ngIf="item.Address">
+        <p class="video-desciption address_set" *ngIf="item.Address.address1">
           <ion-icon name="pin" *ngIf="item.Address"></ion-icon> {{item.Address.address1}}</p>
       </ion-col>
     </ion-row>

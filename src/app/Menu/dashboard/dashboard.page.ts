@@ -121,13 +121,23 @@ export class DashboardPage implements OnInit {
       }
     });
 
-    this.common.PostMethod("GetMyNotification", { userid: localStorage.getItem("UserId") }).then((res: any) => {
-      this.lists.dashboardwid.notifications = res.Data.length;
-    });
+    this.LoadNotifications();
+    let env = this;
+    setInterval
+
+    setInterval(() => {
+      env.LoadNotifications();
+    }, 10000);
   }
 
   ionViewDidLoad() {
 
+  }
+
+  LoadNotifications() {
+    this.common.PostMethod("GetMyNotification", { userid: localStorage.getItem("UserId") }).then((res: any) => {
+      this.lists.dashboardwid.notifications = res.Data.length;
+    });
   }
 
   ionViewWillLeave() {
@@ -229,17 +239,17 @@ export class DashboardPage implements OnInit {
     });
   }
 
-  GetFirstRating(salon_rating){
-      if(salon_rating.includes(',')){
-          var Ratings=salon_rating.split(',');
-          return Ratings[0];
-      }else{
-        0
-      }
+  GetFirstRating(salon_rating) {
+    if (salon_rating.includes(',')) {
+      var Ratings = salon_rating.split(',');
+      return Ratings[0];
+    } else {
+      0
+    }
   }
 
   ChooseOption() {
-    this.common.PageGoto('Forward','/tabs/employer', {'searchKey':this.lists.search})
+    this.common.PageGoto('Forward', '/tabs/employer', { 'searchKey': this.lists.search })
   }
   SlideDidChange(object, slideView) {
     this.checkIfNavDisabled(object, slideView);

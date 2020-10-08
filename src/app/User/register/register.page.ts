@@ -33,7 +33,7 @@ export class RegisterPage implements OnInit {
       confirmpassword: new FormControl('', Validators.required),
       dob: new FormControl('', Validators.required),
       terms: new FormControl(false, [Validators.requiredTrue]),
-      email: new FormControl('', Validators.compose([Validators.required, Validators.pattern(email_pattern)]))
+      email: new FormControl('', Validators.compose([Validators.pattern(email_pattern)]))
     }, { validators: this.checkPasswords })
   }
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group

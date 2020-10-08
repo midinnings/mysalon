@@ -247,4 +247,19 @@ export class CommonService {
       );
   }
 
+  SplitTime(DateTime_V) {
+    if (DateTime_V) {
+      let TimeOnly = DateTime_V.split(' ')[1];
+      let Phase = DateTime_V.split(' ')[2];
+      if (TimeOnly) {
+        return TimeOnly+' '+Phase;
+      } else {
+        return '00:00:00';
+      }
+
+    } else {
+      return '00:00:00';
+    }
+  }
+
 }

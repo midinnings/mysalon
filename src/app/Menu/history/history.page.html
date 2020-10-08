@@ -41,7 +41,7 @@
               <p class="video-heading">{{item.salon}} - {{item.payment_id}}</p>
             </ion-col>
             <ion-col size="12" class="ion-no-padding">
-              <p class="video-desciption">{{item.prefeerddate| date:'dd MMM yyyy HH:mm a'}}</p>
+              <p class="video-desciption">{{item.prefeerddate| date:'dd MMM yyyy'}} {{common.SplitTime(item.prefeerddate)}}</p>
             </ion-col>
             <ion-col size="12" class="ion-no-padding">
               <p class="video-desciption">Status: {{item.appointmentstatus}}</p>

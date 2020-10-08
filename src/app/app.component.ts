@@ -40,6 +40,7 @@ export class AppComponent {
     });
 
 
+
   }
   GotoHome() {
     this.router.navigateByUrl('/tabs/checkout');

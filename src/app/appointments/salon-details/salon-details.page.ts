@@ -72,9 +72,15 @@ export class SalonDetailsPage implements OnInit {
         this.lists.CurrentDayStatus = this.SalonData.available_hour.find(obj => {
           return obj.week == env.Get_Today_DayName();
         });
-
-        let ValidityStatus = this.CheckSalonStatus(this.lists.CurrentDayStatus.day, this.lists.CurrentDayStatus.evening);
-        this.lists.CurrentDayStatus.ValidityStatus = ValidityStatus;
+    
+        if(this.lists.CurrentDayStatus){
+          let ValidityStatus = this.CheckSalonStatus(this.lists.CurrentDayStatus.day, this.lists.CurrentDayStatus.evening);
+          this.lists.CurrentDayStatus.ValidityStatus = ValidityStatus;
+        }else{
+          this.lists.CurrentDayStatus = {};
+          this.lists.CurrentDayStatus.ValidityStatus = false;
+        }
+      
       }else{
           this.BusinessData_Issue = true;
       }
@@ -236,7 +242,6 @@ export class SalonDetailsPage implements OnInit {
           handler: () => {
 
             env.CallPreferedAPI();
-
             localStorage.setItem('SalonReferredID', env.SalonData.b_id);
             localStorage.setItem('SalonReffered', JSON.stringify(env.SalonData));
             env.common.presentLoader();

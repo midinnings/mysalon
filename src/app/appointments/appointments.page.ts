@@ -56,7 +56,7 @@ export class AppointmentsPage implements OnInit {
   }
 
   ngOnInit() {
-
+    let env = this;
     this.lists.Discount = 0;
     this.lists.DiscountType = "P";
     this.lists.applycoupon = {};
@@ -86,6 +86,12 @@ export class AppointmentsPage implements OnInit {
           }
         }
       });
+      
+      this.lists.CurrentDayStatus = this.SalonParams.available_hour.find(obj => {
+        return obj.week == env.Get_Today_DayName();
+      });
+
+
     });
 
     this.common.PostMethod("GetProfile", { Id: localStorage.getItem('UserId') }).then((res: any) => {
@@ -93,6 +99,16 @@ export class AppointmentsPage implements OnInit {
       this.UserCurrentPoints = JSON.parse(DataUser.loyalty_points);
     }, err => {
     });
+  }
+
+
+  Get_Today_DayName() {
+    var days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    var d = new Date();
+    var dayName = days[d.getDay()];
+    console.log(dayName)
+
+    return dayName;
   }
 
 
@@ -117,6 +133,7 @@ export class AppointmentsPage implements OnInit {
   }
 
   ResetDiscounts() {
+    this.lists.packageservicelist = [];
     this.CustomCoupon = '';
     this.Amount_Pay = this.lists.price;
     this.Loyalty_Point_Applied = false;
@@ -166,6 +183,7 @@ export class AppointmentsPage implements OnInit {
   }
 
   ApplyDiscountConcession(DataCoupon) {
+
     this.ResetDiscounts();
     let values = this.DiscountValues = DataCoupon;
     this.lists.applycoupon = values;
@@ -173,6 +191,7 @@ export class AppointmentsPage implements OnInit {
     this.book.controls['couponCode'].setValue(values.couponcode);
     // Apply Check by Percentage or Direct Cost Cutting--------------
     if (DataCoupon.type == 'OnService' || DataCoupon.type == 'Flat') {
+      this.ApplyPackage = false;
       this.DirectDiscount(values);
     } else {
       // Apply Combo/Package Discounts---------------------------------
@@ -267,10 +286,17 @@ export class AppointmentsPage implements OnInit {
     this.calendar.currenttime = ev.selectedTime;
   }
   onTimeSelected1(ev) {
+
+
     var now = new Date();
     if (ev.selectedTime < now) {
       console.log("Selected date is in the past");
       this.common.presentToast('Please select future time for an appointment', 2000);
+      return;
+    }
+
+    if (!this.TimeCheck(this.lists.CurrentDayStatus.day, this.lists.CurrentDayStatus.evening, ev.selectedTime)) {
+      this.common.presentToast('Please select appointment time according to salon availability', 2000);
       return;
     }
 
@@ -327,6 +353,8 @@ export class AppointmentsPage implements OnInit {
           return
         } else {
           this.book.value.service = JSON.stringify(this.book.value.service);
+          this.AppliedCoupon = "";
+          this.DiscountValues.id="";
         }
       }
       let Data = {
@@ -461,4 +489,36 @@ export class AppointmentsPage implements OnInit {
     return false;
   }
 
+
+  TimeCheck(from, to, checktime) {
+
+  //  var dateObj = new Date();
+    var month = checktime.getUTCMonth() + 1; //months from 1-12
+    var day = checktime.getUTCDate();
+    var year = checktime.getUTCFullYear();
+
+    var newdate = year + "/" + month + "/" + day;
+    var FromTime = newdate+' ' + from;
+    var ToTime = newdate+' ' + to;
+    var aDate = new Date(FromTime).getTime();
+    var bDate = new Date(ToTime).getTime();
+    var cDate = Date.parse(checktime);
+    if ((cDate <= bDate && cDate >= aDate)) {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
 }
+
+
+// var start =  8 * 60 + 30;
+// var end   = 17 * 60 + 0;
+
+// function inTime() {
+//   var now = new Date();
+//   var time = now.getHours() * 60 + now.getMinutes();
+//   return time >= start && time < end;
+// }
