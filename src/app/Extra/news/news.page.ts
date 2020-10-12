@@ -23,8 +23,12 @@ export class NewsPage implements OnInit {
   }
 
   GetNewslist() {
+    this.common.presentLoader();
     this.common.PostMethod("GetNews", { language: new UserPipe().transform('language'), usertype: localStorage.getItem("UserType") }).then((res: any) => {
       this.lists.newslist = res.Data;
+      this.common.dismissLoader();
+    },err=>{
+      this.common.dismissLoader();
     });
   }
 

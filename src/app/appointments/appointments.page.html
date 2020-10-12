@@ -21,26 +21,24 @@
         <ion-col size="6" class="small-font mb-1">{{'Selected Date'|language}}</ion-col>
         <ion-col size="6" class="small-font mb-1" text-right>{{lists.title}}</ion-col>
     </ion-row>
-    <calendar [eventSource]="eventSource" [markDisabled]="markDisabled" [calendarMode]="calendar.mode"
-        [currentDate]="calendar.currentDate" (onEventSelected)="onEventSelected($event)"
-        (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)" step="30">
+    <calendar [eventSource]="eventSource" [markDisabled]="markDisabled" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
+        step="30">
     </calendar>
-    <calendar [markDisabled]="markDisabled" [eventSource]="eventSource1" startHour="6" endHour="24"
-        [calendarMode]="calendar.timemode" [currentDate]="calendar.currenttime" step="30"
-        (onTimeSelected)="onTimeSelected1($event)" [eventSource]="lists.eventtime">
+    <calendar [markDisabled]="markDisabled" [eventSource]="eventSource1" startHour="6" endHour="24" [calendarMode]="calendar.timemode" [currentDate]="calendar.currenttime" step="30" (onTimeSelected)="onTimeSelected1($event)" [eventSource]="lists.eventtime">
     </calendar>
     <form [formGroup]="book">
-        <ion-col size="12">
-            <ion-item class="input-border">
-                <ion-label position="fixed">{{'Choose Stylist'|language}}</ion-label>
-                <ion-select formControlName="stylist">
-                    <ion-select-option *ngFor="let u of lists.userlist" value="{{u.id}}">
-                        {{u.name}}
-                    </ion-select-option>
-                </ion-select>
-            </ion-item>
-        </ion-col>
-
+        <ion-row>
+            <ion-col size="12">
+                <ion-item class="input-border">
+                    <ion-label position="fixed">{{'Choose Stylist'|language}}</ion-label>
+                    <ion-select formControlName="stylist">
+                        <ion-select-option *ngFor="let u of lists.userlist" value="{{u.id}}">
+                            {{u.name}}
+                        </ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
 
         <ion-row *ngIf="!Loyalty_Points_Redeemed">
             <ion-col size="5">
@@ -51,12 +49,12 @@
             <ion-col size="7">
                 <ion-row>
                     <ion-col size="7">
-                        <ion-input [(ngModel)]="CustomCoupon" formControlName="couponCode" type="text"
-                            placeholder="Paste Coupon Code">
+                        <ion-input [(ngModel)]="CustomCoupon" formControlName="couponCode" type="text" placeholder="Paste Coupon Code">
                         </ion-input>
                     </ion-col>
                     <ion-col size="5" class="font-w-600 small-font">
-                        <ion-button (click)="ApplyCoupon()">{{'Apply'|language}}</ion-button>
+                        <ion-button class="apply_btn" color="primary" shape="round" (click)="ApplyCoupon()">
+                            {{'Apply'|language}}</ion-button>
                     </ion-col>
                 </ion-row>
             </ion-col>
@@ -75,7 +73,7 @@
                 <ion-col size="1"> </ion-col>
                 <ion-col size="8" class="font-w-600 small-font">{{s.service}}</ion-col>
                 <ion-col size="3" class="font-w-600 small-font" style="color:green">
-                    ₹ {{s.serviceprice}}
+
                 </ion-col>
             </ion-row>
 
@@ -95,17 +93,21 @@
         </div>
 
         <div *ngIf="!ApplyPackage">
-            <ion-item class="input-border" *ngIf="!ApplyPackage">
-                <ion-label position="fixed">{{'Select Service'|language}}</ion-label>
-                <ion-select multiple="true" formControlName="service" (ionChange)="totalamount()">
-                    <ion-select-option *ngFor="let s of lists.servicelist" value="{{s.serviceid}}">
-                        {{('language'|user)=='Hindi'?s.service_hi:s.service}} - Rs.{{s.serviceprice}}
-                    </ion-select-option>
-                </ion-select>
-            </ion-item>
+            <ion-row>
+                <ion-col size="12">
+                    <ion-item class="input-border" *ngIf="!ApplyPackage">
+                        <ion-label position="fixed">{{'Select Service'|language}}</ion-label>
+                        <ion-select multiple="true" formControlName="service" (ionChange)="totalamount()">
+                            <ion-select-option *ngFor="let s of lists.servicelist" value="{{s.serviceid}}">
+                                {{('language'|user)=='Hindi'?s.service_hi:s.service}} - Rs.{{s.serviceprice}}
+                            </ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
 
 
-            <ion-row class="input-border pb-1">
+            <ion-row class="input-border pb-1 mt-1">
                 <ion-col size="1"></ion-col>
                 <ion-col size="8" class="font-w-600 small-font">{{'Total Amount'|language}}</ion-col>
                 <ion-col size="3" class="font-w-600 small-font" style="color:green">
@@ -139,8 +141,7 @@
                 <ion-col size="1"></ion-col>
                 <ion-col size="8" class="font-w-600 small-font">Redeem Points</ion-col>
                 <ion-col size="3" class="font-w-600 small-font">
-                    <ion-checkbox [ngModelOptions]="{standalone: true}" color="primary"
-                        (ionChange)="ApplyLoyalty($event.target.value)" [(ngModel)]="Loyalty_Points_Redeemed">
+                    <ion-checkbox [ngModelOptions]="{standalone: true}" color="primary" (ionChange)="ApplyLoyalty($event.target.value)" [(ngModel)]="Loyalty_Points_Redeemed">
                     </ion-checkbox>
                 </ion-col>
             </ion-row>
@@ -148,30 +149,31 @@
         </div>
 
         <!-- <ion-button (click)="ApplyLoyaltyDiscount()">{{'Apply Loyalty'|language}}</ion-button> -->
+        <ion-row>
+            <ion-col size="12" class="input-border pb-1 mb-1">
+                <ion-list class="transparent-bg">
+                    <ion-radio-group [ngModelOptions]="{standalone: true}" [(ngModel)]="lists.PaymentMode">
+                        <ion-item lines="none" class="item-height-30">
+                            <ion-label class=" ion-text-uppercase">{{'Payments'|language}}</ion-label>
+                        </ion-item>
+                        <ion-item lines="none" class="item-height-35 small-font">
+                            <ion-label>{{'Paytm'|language}}</ion-label>
+                            <ion-radio slot="start" disabled value="Paytm"></ion-radio>
+                        </ion-item>
 
-        <ion-col size="12" class="input-border pb-1 mb-1">
-            <ion-list class="transparent-bg">
-                <ion-radio-group [ngModelOptions]="{standalone: true}" [(ngModel)]="lists.PaymentMode">
-                    <ion-item lines="none" class="item-height-30">
-                        <ion-label class="inputlabel ion-text-uppercase">{{'Payments'|language}}</ion-label>
-                    </ion-item>
-                    <ion-item lines="none" class="item-height-35 small-font">
-                        <ion-label>{{'Paytm'|language}}</ion-label>
-                        <ion-radio slot="start" disabled value="Paytm"></ion-radio>
-                    </ion-item>
+                        <ion-item lines="none" class="item-height-35 small-font">
+                            <ion-label>{{'Cash'|language}}</ion-label>
+                            <ion-radio slot="start" value="Cash"></ion-radio>
+                        </ion-item>
 
-                    <ion-item lines="none" class="item-height-35 small-font">
-                        <ion-label>{{'Cash'|language}}</ion-label>
-                        <ion-radio slot="start" value="Cash"></ion-radio>
-                    </ion-item>
-
-                    <ion-item lines="none" class="item-height-35 small-font">
-                        <ion-label>{{'Google Pay'|language}}</ion-label>
-                        <ion-radio slot="start" disabled value="Googlepay"></ion-radio>
-                    </ion-item>
-                </ion-radio-group>
-            </ion-list>
-        </ion-col>
+                        <ion-item lines="none" class="item-height-35 small-font">
+                            <ion-label>{{'Google Pay'|language}}</ion-label>
+                            <ion-radio slot="start" disabled value="Googlepay"></ion-radio>
+                        </ion-item>
+                    </ion-radio-group>
+                </ion-list>
+            </ion-col>
+        </ion-row>
 
         <ion-col size="12" text-center style="display: block;">
             <ion-button [disabled]="!book.valid" (click)="SaveAppointment()" shape="round">

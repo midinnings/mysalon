@@ -48,9 +48,9 @@ export class JobsPage implements OnInit {
   image: any;
   ngOnInit() {
 
-
     this.common.PostMethod("GetMyAppointments", { id: localStorage.getItem("UserId") }).then((res: any) => {
       this.items1 = res.Data;
+      this.common.dismissLoader();
     });
 
     let profile = JSON.parse(localStorage.getItem("UserProfile"));

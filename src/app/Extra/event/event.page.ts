@@ -25,10 +25,14 @@ export class EventPage implements OnInit {
   }
 
   GetEventsList() {
+    this.common.presentLoader();
     this.common.PostMethod("GetEvents", {
       b_id: new UserPipe().transform('b_id'), userid: localStorage.getItem("UserId"), language: new UserPipe().transform('language'), usertype: localStorage.getItem("UserType")
     }).then((res: any) => {
+      this.common.dismissLoader();
       this.lists.eventlist = res.Data;
+    },err=>{
+      this.common.dismissLoader();
     });
   }
   GOtoDetails(ev) {

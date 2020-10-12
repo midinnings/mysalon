@@ -1,6 +1,7 @@
-.no_margin{
+.no_margin {
     margin: 0 !important;
 }
+
 .userdiv {
     position: absolute;
     color: #fff;
@@ -20,10 +21,12 @@
 .backimg {
     height: 100% !important;
 }
-.round-img{
+
+.round-img {
     height: 60px !important;
     width: 60px !important;
 }
+
 .mycardinfo {
     background: #f1f1f1 !important;
     ion-card-content {
@@ -57,24 +60,24 @@
 
 ion-slides {
     ion-slide {
-       // background: #000; ;
+        // background: #000; ;
     }
     img {
-       // opacity: 0.6;
+        // opacity: 0.6;
     }
 }
-.slider-nav{
-    ion-icon{
+
+.slider-nav {
+    ion-icon {
         height: 100%;
     }
-  }
-  
-  .slide-text{
+}
+
+.slide-text {
     position: absolute;
     color: white;
     bottom: 30px;
-  }
-  
+}
 
 .sliderheader {
     font-size: 19px !important;
@@ -95,14 +98,16 @@ ion-slides {
     }
 }
 
+.set-width-wrapped {
+    width: 83vw !important;
+}
+
 .bottomslide {
-    width: 280px !important;
     .swiper-container-horizontal>.swiper-pagination-bullets,
     .swiper-pagination-custom,
     .swiper-pagination-fraction {
         bottom: 0px !important;
     }
-    ion-card {}
     p {
         position: absolute !important;
         bottom: 15px !important;
@@ -138,10 +143,16 @@ ion-slides {
 }
 
 .griddata {
-    padding-left: 25px !important;
-    padding-right: 25px !important;
+    // padding-left: 25px !important;
+    // padding-right: 25px !important;
     text-align: -webkit-center !important;
     position: relative;
+    ion-slides {
+        border-radius: 5px !important;
+        ion-slide {
+            background: #000;
+        }
+    }
 }
 
 .leftarrow {
@@ -149,18 +160,32 @@ ion-slides {
     position: absolute !important;
     left: 0 !important;
     top: 50% !important;
-    padding-left: 5% !important;
+    padding-left: 4vw !important;
     color: gray !important;
     margin-top: -10px;
 }
-.salon-title{font-family: 'Roboto', sans-serif;text-align:left; font-style: normal; font-weight: bold; font-size: 12px; color: #3C3F4F; margin: 10px 0px 4px; letter-spacing: 0.03em;}   
-.pl-5{padding-left: 5px;}
+
+.salon-title {
+    font-family: 'Roboto', sans-serif;
+    text-align: left;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    color: #3C3F4F;
+    margin: 10px 0px 4px;
+    letter-spacing: 0.03em;
+}
+
+.pl-5 {
+    padding-left: 5px;
+}
+
 .rightarrow {
     font-size: 20px !important;
     position: absolute !important;
     right: 0 !important;
     top: 50% !important;
-    padding-right: 5% !important;
+    padding-right: 4vw !important;
     color: gray !important;
     margin-top: -10px;
 }
@@ -171,16 +196,7 @@ ion-slides {
     border-radius: 0px;
     img {
         width: 100% !important;
-      //  min-height: 38vh;
-    }
-}
-
-.griddata {
-    ion-slides {
-        border-radius: 5px !important;
-        ion-slide {
-            background: #000;
-        }
+        //  min-height: 38vh;
     }
 }
 
@@ -188,59 +204,51 @@ ion-slides {
     max-width: 600px;
 }
 
-.L_10PX{
-    margin-left:10px;
+.L_10PX {
+    margin-left: 10px;
 }
 
 .heading_dash {
-     text-align: center;
+    text-align: center;
     text-transform: uppercase !important;
     margin: 14px 0 0 !important;
     font-size: 14px !important;
     font-weight: 700 !important;
 }
 
-.shadow_ion{
-    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-    margin:10px
+.shadow_ion {
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    margin: 10px
 }
 
-.ionic4-star-rating{
+.ionic4-star-rating {
     display: inline;
 }
 
-.margin_fixed{
+.margin_fixed {
     margin-top: 20px !important;
 }
 
-.featured_salon_slide{
-    
-    width: 180px !important;
+.featured_salon_slide {
+    width: 170px !important;
     margin: 2px 0px;
-    img{
-        width: 100%;
+    margin-right: 0px;
+    img {
         height: 125px;
         min-width: 155px;
     }
 }
 
-.testimonial_slide{
-    width: 240px !important;
-    img{
-        width: 100%;
-        height: 100px;
-    }
-
-    .round-img-testimonials{
-        height: 150px;
-        width: 150px;
+.testimonial_slide {
+    width: 210px !important;
+    .round-img-testimonials {
+        height: 120px;
+        width: 120px;
         border-radius: 50%;
     }
 }
 
-
-
-.notifybadge{
+.notifybadge {
     position: absolute !important;
     // right: 7px !important;
     z-index: 99999 !important;
@@ -248,57 +256,58 @@ ion-slides {
     background: #f1f1f1 !important;
     color: #c73130 !important;
     border-radius: 50% !important;
-    margin-left: 15px !important; 
+    margin-left: 15px !important;
 }
 
-.testimonials_cards{
-    width: 210px;
-    height: 210px;
-    padding: 10px;
-    margin: 10px;
+.testimonials_cards {
+    width: 200px;
+    height: 180px;
+    padding: 8px;
+    margin: 0px;
     text-align: center;
-
-    img{
-        margin:0 auto;
+    img {
+        margin: 0 auto;
         width: 110px;
         height: 110px;
         margin-bottom: 5px;
     }
-    span{
+    span {
         font-size: 11px;
     }
 }
 
-.dashboard_content{
+.dashboard_content {
     margin: 0px 5px;
 }
 
-.testimonial_text{
+.testimonial_text {
     margin-top: 20px;
 }
 
-.search_icon{
-    margin-right: -30px;
+.search_icon {
+    margin-right: -10px;
     font-size: 25px;
 }
-.font_normal{
+
+.font_normal {
     font-size: 12px !important;
 }
-.transparency{
-    img{
+
+.transparency {
+    img {
         opacity: 0.6;
     }
 }
 
-.no_padding{
+.no_padding {
     padding: 0 !important;
 }
 
-.deals_slides{
-    p{
+.deals_slides {
+    p {
         text-align: center;
     }
-    span{
+    span {
         font-size: 10px;
         color: #c73130;
         text-align: center;
@@ -306,12 +315,21 @@ ion-slides {
 }
 
 .BlogsSlider {
-    ion-slide, ion-card{
-       
+    ion-slide,
+    ion-card {
         height: 240px;
     }
 }
 
-.margin_top{
+.margin_top {
     margin-top: 10px;
+}
+
+.margin-left-3 {
+    margin-left: 6vw;
+    margin-right: 6vw;
+}
+
+.small_font_11 {
+    font-size: 11px !important;
 }

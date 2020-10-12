@@ -76,7 +76,7 @@ export class ProfilePage implements OnInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Confirm!',
-      message: 'You are about to leave your preffered salon and that will cause loosing loyalty points, do you still want to continue?',
+      message: 'You are about to leave your preferred salon and that will cause loosing loyalty points, do you still want to continue?',
       buttons: [
         {
           text: 'Cancel',

@@ -32,8 +32,7 @@
                         </ion-label>
                         <ion-input formControlName="name" type="text" placeholder="Enter Your Full Name" [(ngModel)]="UserData.name"></ion-input>
                         <div *ngFor="let item of valid.validation_messages.name;let i=index">
-                            <div class="errormessage"
-                                *ngIf="registerform.get('name').hasError(item.type) && (registerform.get('name').dirty || registerform.get('name').touched)">
+                            <div class="errormessage" *ngIf="registerform.get('name').hasError(item.type) && (registerform.get('name').dirty || registerform.get('name').touched)">
                                 <ion-icon name="alert"></ion-icon>{{item.message}}
                             </div>
                         </div>
@@ -44,16 +43,13 @@
                         <ion-icon slot="start" class="mobile-icon"></ion-icon>
                         <ion-label class="inputlabel" position="stacked">{{'Mobile Number'|language}}
                         </ion-label>
-                        <ion-input formControlName="mobile" type="tel" maxlength="10" placeholder="912345678"
-                            (ionBlur)="CheckUserAvalability()" [(ngModel)]="UserData.mobileno" ></ion-input>
+                        <ion-input formControlName="mobile" type="tel" maxlength="10" placeholder="912345678" (ionBlur)="CheckUserAvalability()" [(ngModel)]="UserData.mobileno"></ion-input>
                     </ion-item>
-                    <div class="errormessage"
-                            *ngIf="lists.Avalabile == false">
-                            <ion-icon name="alert"></ion-icon>Mobile Number is Already Registered with Another User
-                        </div>
+                    <div class="errormessage" *ngIf="lists.Avalabile == false">
+                        <ion-icon name="alert"></ion-icon>Mobile Number is Already Registered with Another User
+                    </div>
                     <div *ngFor="let item of valid.validation_messages.mobile;let i=index">
-                        <div class="errormessage"
-                            *ngIf="registerform.get('mobile').hasError(item.type) && (registerform.get('mobile').dirty || registerform.get('mobile').touched)">
+                        <div class="errormessage" *ngIf="registerform.get('mobile').hasError(item.type) && (registerform.get('mobile').dirty || registerform.get('mobile').touched)">
                             <ion-icon name="alert"></ion-icon>{{item.message}}
                         </div>
                     </div>
@@ -63,9 +59,7 @@
                         <!-- <img src="assets/icon/calendar-grey.svg" slot="start"alt="calendar-icon" width="22" height="22"/> -->
                         <ion-icon name="calendar" slot="start"></ion-icon>
                         <ion-label class="inputlabel" position="stacked">{{'DOB'|language}}</ion-label>
-                        <ion-input class="align_left" readonly formControlName="dob"
-                            (ionChange)="CheckDateValidate($event)" [liIonic4Datepicker]="datePickerObj"
-                            placeholder="Enter DOB" [(ngModel)]="UserData.dob">
+                        <ion-input class="align_left" readonly formControlName="dob" (ionChange)="CheckDateValidate($event)" [liIonic4Datepicker]="datePickerObj" placeholder="Enter DOB" [(ngModel)]="UserData.dob">
                         </ion-input>
                     </ion-item>
                 </ion-col>
@@ -77,8 +71,7 @@
                         <ion-input formControlName="email" placeholder="mailid@domain.com" type="email" [(ngModel)]="UserData.email"></ion-input>
                     </ion-item>
                     <div *ngFor="let item of valid.validation_messages.email;let i=index">
-                        <div class="errormessage"
-                            *ngIf="registerform.get('email').hasError(item.type) && (registerform.get('email').dirty || registerform.get('email').touched)">
+                        <div class="errormessage" *ngIf="registerform.get('email').hasError(item.type) && (registerform.get('email').dirty || registerform.get('email').touched)">
                             <ion-icon name="alert"></ion-icon>{{item.message}}
                         </div>
                     </div>
@@ -90,18 +83,15 @@
                         <ion-input formControlName="password" placeholder="" type="{{lists.passwordtype}}" [(ngModel)]="UserData.password">
                         </ion-input>
                         <div *ngFor="let item of valid.validation_messages.password;let i=index">
-                            <div class="errormessage"
-                                *ngIf="registerform.get('password').hasError(item.type) && (registerform.get('password').dirty || registerform.get('password').touched)">
+                            <div class="errormessage" *ngIf="registerform.get('password').hasError(item.type) && (registerform.get('password').dirty || registerform.get('password').touched)">
                                 <ion-icon name="alert"></ion-icon>{{item.message}}
                             </div>
                         </div>
-                        <p class="dtft showpassword" *ngIf="lists.passwordtype=='password'"
-                            (click)="lists.passwordtype='text'">
+                        <p class="dtft showpassword" *ngIf="lists.passwordtype=='password'" (click)="lists.passwordtype='text'">
                             <ion-icon name="eye" style="vertical-align: bottom;"></ion-icon>
                             {{'Show Password'|language}}
                         </p>
-                        <p class="dtft showpassword" (click)="lists.passwordtype='password'"
-                            *ngIf="lists.passwordtype=='text'">
+                        <p class="dtft showpassword" (click)="lists.passwordtype='password'" *ngIf="lists.passwordtype=='text'">
                             <ion-icon name="eye-off" style="vertical-align: bottom;"></ion-icon>
                             {{'Hide Password'|language}}
                         </p>
@@ -111,15 +101,12 @@
                     <ion-item class="input-border">
                         <ion-icon slot="start" class="lock-icon"></ion-icon>
                         <ion-label class="inputlabel" position="stacked">{{'Confirm Password'|language}}</ion-label>
-                        <ion-input formControlName="confirmpassword" placeholder="" [(ngModel)]="UserData.confirmpassword"
-                        type="{{lists.confpasswordtype}}"></ion-input>
-                        <p class="dtft showpassword" *ngIf="lists.confpasswordtype=='password'"
-                            (click)="lists.confpasswordtype='text'">
+                        <ion-input formControlName="confirmpassword" placeholder="" [(ngModel)]="UserData.confirmpassword" type="{{lists.confpasswordtype}}"></ion-input>
+                        <p class="dtft showpassword" *ngIf="lists.confpasswordtype=='password'" (click)="lists.confpasswordtype='text'">
                             <ion-icon name="eye" style="vertical-align: bottom;"></ion-icon>
                             {{'Show Password'|language}}
                         </p>
-                        <p class="dtft showpassword" (click)="lists.confpasswordtype='password'"
-                            *ngIf="lists.confpasswordtype=='text'">
+                        <p class="dtft showpassword" (click)="lists.confpasswordtype='password'" *ngIf="lists.confpasswordtype=='text'">
                             <ion-icon name="eye-off" style="vertical-align: bottom;"></ion-icon>
                             {{'Hide Password'|language}}
                         </p>
@@ -152,22 +139,21 @@
                 <ion-col size="12">
                     <ion-item lines="none">
                         <ion-checkbox formControlName="terms" slot="start"></ion-checkbox>
-                        <ion-label style="white-space: normal;" class="terms font_normal">
+                        <ion-label style="white-space: normal;font-size: 12px !important;" class="terms font_normal">
                             {{'Agree To Terms and Conditions'|language}}.
+                            <br> {{'I have read and agree with all Terms and Conditions'|language}}.<a (click)="Readterms()">Click here</a>
                         </ion-label>
                     </ion-item>
                 </ion-col>
-                <ion-col size="12">
+                <!-- <ion-col size="12">
                     <ion-item lines="none">
                         <ion-label style="white-space: normal;" class="terms font_normal">
-                            {{'I have read and agree with all Terms and Conditions'|language}}.<a
-                                (click)="Readterms()">Click here</a>
+                            {{'I have read and agree with all Terms and Conditions'|language}}.<a (click)="Readterms()">Click here</a>
                         </ion-label>
                     </ion-item>
-                </ion-col>
+                </ion-col> -->
                 <ion-col size="12" class="" style="text-align:-webkit-center !important;">
-                    <ion-button class="loginbutton" expand="full" shape="round" (click)="Proceed()"
-                        [disabled]="!registerform.valid || lists.Avalabile == false ">{{'Register'|language}}
+                    <ion-button class="loginbutton" expand="full" shape="round" (click)="Proceed()" [disabled]="!registerform.valid || lists.Avalabile == false ">{{'Register'|language}}
                     </ion-button>
                 </ion-col>
 

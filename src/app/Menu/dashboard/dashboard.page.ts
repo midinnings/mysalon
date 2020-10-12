@@ -21,10 +21,10 @@ export class DashboardPage implements OnInit {
   subscription: Subscription;
   item: any = {};
   @ViewChild('searchSalon', { static: false }) searchSalon: IonSelect;
-  @ViewChild('slides1', { static: false }) slides1: IonSlides;
-  @ViewChild('slides2', { static: true }) slides2: IonSlides;
-  @ViewChild('slides3', { static: false }) slides3: IonSlides;
-  @ViewChild('slideWithNav3', { static: false }) slideWithNav3: IonSlides;
+  @ViewChild('slides1', { static: false }) slides: IonSlides;
+  @ViewChild('slides2', { static: true }) slides_one: IonSlides;
+  @ViewChild('slides3', { static: false }) slides_two: IonSlides;
+  @ViewChild('slides4', { static: false }) slides_four: IonSlides;
   @ViewChild('map', { static: false }) mapElement: ElementRef;
 
   FeaturedSlideOptions = {
@@ -141,9 +141,9 @@ export class DashboardPage implements OnInit {
   }
 
   ionViewWillLeave() {
-    this.slides1.stopAutoplay();
-    this.slides2.stopAutoplay();
-    this.slides3.stopAutoplay();
+    this.slides.stopAutoplay();
+    this.slides_one.stopAutoplay();
+    this.slides_two.stopAutoplay();
   }
   slidesDidLoad(slides) {
     slides.startAutoplay();
@@ -309,25 +309,27 @@ export class DashboardPage implements OnInit {
   }
 
   next(ev) {
+    debugger
     if (ev == 1) {
-      this.slides1.slideNext();
+      this.slides.slideNext();
     }
     if (ev == 2) {
-      this.slides2.slideNext();
+      this.slides_one.slideNext();
     }
     if (ev == 3) {
-      this.slides3.slideNext();
+      this.slides_two.slideNext();
     }
   }
   pre(ev) {
+    debugger
     if (ev == 1) {
-      this.slides1.slidePrev();
+      this.slides.slidePrev();
     }
     if (ev == 2) {
-      this.slides2.slidePrev();
+      this.slides_one.slidePrev();
     }
     if (ev == 3) {
-      this.slides3.slidePrev();
+      this.slides_two.slidePrev();
     }
   }
 

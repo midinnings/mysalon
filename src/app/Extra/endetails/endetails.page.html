@@ -40,8 +40,7 @@
             <ion-icon name="calendar" class="primary-text"></ion-icon> {{lists.startdatetime|date}}
         </ion-col> -->
         <ion-col size="12" class="ion-padding pt-0 pb-1 small-font">
-            <ion-icon name="calendar" class="primary-text"></ion-icon> {{lists.startdatetime|date}}
-            -{{lists.enddatetime|date}}
+            <ion-icon name="calendar" class="primary-text"></ion-icon> {{lists.startdatetime|date}} -{{lists.enddatetime|date}}
         </ion-col>
         <ion-col size="12" class="ion-padding pt-0 pb-0 small-font">
             <ion-icon name="pin" class="primary-text"> </ion-icon>{{lists.venu}}
@@ -55,7 +54,7 @@
         <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.contactno"><b>{{'Contact Details'|language}}:</b><br><span>{{lists.contactno}}</span></ion-col>
         <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.email"><b>{{'Email Address'|language}}:</b><br>{{lists.email}}</ion-col>
         <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.url" (click)="common.OpenUrl(lists.url,0)"><b>{{'Event URL'|language}}:</b><br><a>{{lists.url}}</a></ion-col>
-        <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.eventvidoe"><b>{{'Youtube URL'|language}}:</b><br>{{lists.eventvidoe}}</ion-col>
+        <!-- <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.eventvidoe"><b>{{'Youtube URL'|language}}:</b><br>{{lists.eventvidoe}}</ion-col> -->
         <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.url"><b>{{'Other Information'|language}}:</b><br>{{lists.informationurl}}</ion-col>
         <ion-col size="12" class="ion-padding pt-0 pb-1 small-font lh-small-p" *ngIf="lists.url"><b>{{'Published On'|language}}:</b><br>{{lists.publishingdate}}</ion-col>
 

@@ -35,6 +35,11 @@ export class EmployerPage implements OnInit {
       { id: 1, name: 'By Distance', name_hi: 'Distance' },
       { id: 2, name: 'By Area', name_hi: 'By Area' },
     ]
+    this.geolocation.getCurrentPosition().then((resp) => {
+      console.log({ lat: resp.coords.latitude, lng: resp.coords.longitude });
+      this.myLat = resp.coords.latitude;
+      this.myLong = resp.coords.longitude;
+    });
     this.Arouter.queryParams.subscribe((res: any) => {
       let SearchKey = res.searchKey;
       if (res.searchKey) {
@@ -42,25 +47,27 @@ export class EmployerPage implements OnInit {
         if (SearchKey == 'On Going Deals') { Filter = 'deals' };
         this.FilterData(Filter, '');
       } else {
-        this.common.PostMethod("Get_Filtered_Salons", { id: localStorage.getItem("UserId"), FilterBy: 'all' }).then((res: any) => {
-          if (res.Status == 1) {
-            this.items = this.filteredItems = res.Data.salons;
-            
-          }
-          this.common.dismissLoader();
-        },err=>{
-          this.common.dismissLoader();
+        this.geolocation.getCurrentPosition().then((resp) => {
+          console.log({ lat: resp.coords.latitude, lng: resp.coords.longitude });
+          this.myLat = resp.coords.latitude;
+          this.myLong = resp.coords.longitude;
+
+          this.common.PostMethod("Get_Filtered_Salons", { id: localStorage.getItem("UserId"), FilterBy: 'distance', lat: this.myLat, long: this.myLong }).then((res: any) => {
+            if (res.Status == 1) {
+              this.items = this.filteredItems = res.Data.salons;
+            }
+            this.common.dismissLoader();
+          }, err => {
+            this.common.dismissLoader();
+          });
         });
+
       }
     });
   }
 
   ngAfterViewInit(): void {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      console.log({ lat: resp.coords.latitude, lng: resp.coords.longitude });
-      this.myLat = resp.coords.latitude;
-      this.myLong = resp.coords.longitude;
-    });
+
   }
 
 
@@ -76,10 +83,10 @@ export class EmployerPage implements OnInit {
       return salon.name.toLowerCase().startsWith(searchTerm.toLowerCase());
     });
   }
-  
-  
+
+
   ngOnInit() {
-   this.common.presentLoader();
+    this.common.presentLoader();
     // this.lists.language = localStorage.getItem("language")||"English";
   }
   GotoSalon(ev) {
@@ -140,7 +147,7 @@ export class EmployerPage implements OnInit {
         this.items = this.filteredItems = res.Data.salons;
       }
       this.common.dismissLoader();
-    },err=>{
+    }, err => {
       this.common.dismissLoader();
     });
   }

@@ -3,14 +3,13 @@
         <ion-row>
             <ion-col size="10">
                 <ion-title style="color:white">
-                    {{'name'|user}}
+                    {{SalonParams.name}}
                 </ion-title>
             </ion-col>
             <ion-col size="2" class="ion-text-center">
                 <ion-badge class="notifybadge">
                     {{lists.dashboardwid.notifications||0}}</ion-badge>
-                <ion-icon name="notifications" size="large" (click)="common.PageGoto('Forward','notifications')"
-                    style="color: #fff !important;"></ion-icon>
+                <ion-icon name="notifications" size="large" (click)="common.PageGoto('Forward','notifications')" style="color: #fff !important;"></ion-icon>
             </ion-col>
         </ion-row>
     </ion-toolbar>
@@ -25,8 +24,7 @@
             </a>
         </ion-col>
         <ion-col size="4">
-            <ion-button class="top_header_btns" (click)="common.PageGoto('Forward','appointments', SalonParams)"
-                color="primary" fill="solid" shape="round">
+            <ion-button class="top_header_btns" (click)="common.PageGoto('Forward','appointments', SalonParams)" color="primary" fill="solid" shape="round">
                 Book Now
             </ion-button>
         </ion-col>
@@ -36,15 +34,22 @@
             <img onerror="this.src='./assets/img/placeholder.jfif';" src="{{SalonBanner}}" (click)="common.OpenUrl()">
         </ion-slide>
     </ion-slides>
-    <ion-grid>
+
+
+    <ion-grid class="wrapper">
+        <ion-row class="griddata" *ngIf="SalonData.Address">
+            <ion-col size="12" class="no_padding">
+                <h3 class="header">{{'Location'|language}}</h3>
+            </ion-col>
+        </ion-row>
         <ion-row class="griddata" *ngIf="SalonData.Address">
             <ion-col size="12" *ngIf="SalonData.Address.address1">
-                <ion-card class="mycardinfo cardsqr">
+                <ion-card class="mycardinfo cardsqr card_grey">
                     <ion-card-content>
                         <ion-row>
                             <ion-col size="11" (click)="LaunchNav()">
                                 <ion-label>
-                                    <p style="font-size: 10px;">{{SalonData.Address.address1}}</p>
+                                    <p class="align_left" style="font-size: 10px;">{{SalonData.Address.address1}}</p>
                                 </ion-label>
                             </ion-col>
                             <ion-col size="1" (click)="LaunchNav()">
@@ -57,31 +62,37 @@
         </ion-row>
 
         <ion-row class="griddata">
+            <ion-col size="12" class="no_padding">
+                <h3 class="header">{{'Timing'|language}}</h3>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="griddata">
             <ion-col size="12">
-                <ion-card class="mycardinfo cardsqr">
+                <ion-card class="mycardinfo cardsqr card_grey">
                     <ion-grid>
                         <ion-row class="griddata timings" *ngIf="lists.CurrentDayStatus.ValidityStatus">
-                            <ion-col size="2">
+                            <ion-col size="3">
                                 <ion-label class="infoname">{{'Today'|language}} </ion-label>
                             </ion-col>
-                            <ion-col size="8">
+                            <ion-col size="6">
                                 <ion-label class="infoname">
                                     {{lists.CurrentDayStatus.day}} - {{lists.CurrentDayStatus.evening}}
                                 </ion-label>
                             </ion-col>
-                            <ion-col size='2' (click)="Openpopup()">
-                                <ion-fab-button color="primary" class="fab_more">More</ion-fab-button>
+                            <ion-col size='3' (click)="Openpopup()" class="no_padding">
+                                <ion-button color="primary" shape="round" class="time_more_btn">More</ion-button>
                             </ion-col>
                         </ion-row>
                         <ion-row class="griddata timings" *ngIf="!lists.CurrentDayStatus.ValidityStatus">
-                            <ion-col size="2">
+                            <ion-col size="3">
                                 <ion-label class="infoname"> {{'Today'|language}}</ion-label>
                             </ion-col>
-                            <ion-col size="8">
+                            <ion-col size="6">
                                 <ion-label class="infoname">{{'closed'|language}}</ion-label>
                             </ion-col>
-                            <ion-col size='2' (click)="Openpopup()">
-                                <ion-fab-button color="primary" class="fab_more">More</ion-fab-button>
+                            <ion-col size='3' (click)="Openpopup()" class="no_padding">
+                                <ion-button color="primary" shape="round" class="time_more_btn">More</ion-button>
                             </ion-col>
                         </ion-row>
                     </ion-grid>
@@ -94,20 +105,20 @@
                 <h3 class="header">{{'Gallery'|language}}</h3>
             </ion-col>
         </ion-row>
-        <ion-slides pager="true" class="image-slider">
+        <ion-slides pager="true" class="image-slider margin_3">
             <ion-slide *ngFor="let Addons of Add_On_Images" options="{pagination: false}">
                 <img [src]="common.Url+'Files/'+Addons">
             </ion-slide>
         </ion-slides>
 
         <ion-row class="griddata">
-            <ion-col size="12">
-                <h3 class="header">{{'Our Services'|language}}</h3>
+            <ion-col size="12" class="no-padding-bottom">
+                <h3 class="header">{{'Services'|language}}</h3>
             </ion-col>
         </ion-row>
         <ion-row class="griddata">
             <ion-col size="12">
-                <ion-card class="mycardinfo cardsqr">
+                <ion-card class="mycardinfo cardsqr card_grey">
                     <ion-grid>
                         <ion-row class="griddata">
                             <ion-col size="10">
@@ -115,18 +126,15 @@
                                     slidesPerView: 5,
                                     autoplay: false,
                                     pagination: false}">
-                                    <ion-slide style="width: 60px !important;"
-                                        *ngFor="let services of lists.SalonServices">
-                                        <img onerror="this.src='./assets/img/placeholder.jfif';"
-                                            [src]="common.Url+'Files/'+services.icon" />
+                                    <ion-slide style="width: 60px !important;" *ngFor="let services of lists.SalonServices">
+                                        <img onerror="this.src='./assets/img/placeholder.jfif';" [src]="common.Url+'Files/'+services.icon" />
                                     </ion-slide>
                                 </ion-slides>
                             </ion-col>
 
 
-                            <ion-col size="2" (click)="OpenpopupServices($event)">
-                                <ion-fab-button style="    top: 3vh;" color="primary" class="fab_more">More
-                                </ion-fab-button>
+                            <ion-col size="2" (click)="OpenpopupServices($event)" class="no_padding">
+                                <ion-button color="primary" class="more_square">More</ion-button>
                             </ion-col>
                         </ion-row>
                     </ion-grid>
@@ -135,22 +143,20 @@
         </ion-row>
 
         <ion-row class="griddata" *ngIf="Ratings">
-            <ion-col size="12">
-                <h3 class="header">{{'Rating'|language}}:</h3>
+            <ion-col size="12" class="no-padding-bottom">
+                <h3 class="header">{{'Rating'|language}}</h3>
             </ion-col>
         </ion-row>
         <ion-row class="griddata" *ngIf="Ratings">
             <ion-col size="12">
-                <ion-card class="mycardinfo cardsqr">
+                <ion-card class="mycardinfo cardsqr card_grey">
                     <ion-card-content>
-                        <table>
+                        <table class="rating_table">
                             <tr *ngFor="let item of lists.salonRating">
 
                                 <td size="6" style="padding-right: 16px;">{{item.rating_Name}}:</td>
                                 <td size="6" style="padding-right: 16px;">
-                                    <ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline"
-                                        activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="true" readonly="true"
-                                        rating="{{item.rating_Count}}" fontSize="15px">
+                                    <ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline" activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="true" readonly="true" rating="{{item.rating_Count}}" fontSize="15px">
                                     </ionic4-star-rating>
                                 </td>
                             </tr>
@@ -161,217 +167,126 @@
             </ion-col>
         </ion-row>
 
-        <!-- <ion-row class="griddata" *ngIf="SalonData.FacilitiesList">
-            <ion-col size="12">
-                <h3 class="custom_med_heading">{{'Our Facilities'|language}}:</h3>
-            </ion-col>
-        </ion-row>
-        <ion-card>
-            <ion-row class="griddata">
-                <ion-col size="6" *ngFor="let item of SalonData.FacilitiesList">
-                    <p style="margin: 5px;">{{item.facilitiesname}}</p>
-                </ion-col>
-            </ion-row>
-        </ion-card>
-
-        <ion-row class="griddata" *ngIf="SalonData.Staff">
-            <ion-col size="12">
-                <h3 class="custom_med_heading">{{'Our Staff'|language}}:</h3>
-            </ion-col>
-        </ion-row>
-        <ion-segment scrollable class="segment-button-month">
-            <ion-segment-button *ngFor="let item of SalonData.Staff; let i=index" class="br-6">
-                <img src="{{common.Url}}Files/{{item.logo}}" onerror="this.src='./assets/img/placeholder.jfif';"
-                    class='round-img border-primary' style="width: 60px">
-                <ion-label style="text-transform: capitalize;">{{item.name}}</ion-label>
-            </ion-segment-button>
-        </ion-segment>
-
-        <ion-row class="griddata" *ngIf="BrandsListing">
-            <ion-col size="12">
-                <h3 class="custom_med_heading">{{'Our Preferred Products'|language}}:</h3>
-            </ion-col>
-        </ion-row>
-        <ion-segment scrollable class="segment-button-month" *ngIf="BrandsListing.length!=0">
-            <ion-segment-button *ngFor="let brandslist of BrandsListing; let i=index" class="br-6 brands_btn">
-                <img [src]="common.Url+'Files/'+brandslist.logo" style="width: 100px"
-                    onerror="this.src='./assets/img/placeholder.jfif';">
-              
-            </ion-segment-button>
-        </ion-segment> -->
-
-        <!-- <ion-row class="griddata" style="margin-top: 20px;">
-            <table class="social_links_table">
-                <tr class="sociallinks" *ngIf="SalonData.OtherServices">
-                
-                    <td *ngIf="SalonData.OtherServices.facebook">
-                        <ion-icon class="fb" name="logo-facebook" (click)="common.OpenUrl(
-                    SalonData.OtherServices.facebook,false)"></ion-icon>
-                    </td>
-                    <td *ngIf="SalonData.OtherServices.intagram">
-                        <ion-icon class="insta" name="logo-instagram" (click)="common.OpenUrl(
-                            SalonData.OtherServices.intagram,false)"></ion-icon>
-                    </td>
-                    <td *ngIf="SalonData.OtherServices.youtube">
-                        <ion-icon class="you" name="logo-youtube"
-                            (click)="common.OpenUrl(SalonData.OtherServices.youtube,false)">
-                        </ion-icon>
-                    </td>
-                    <td>
-                        <ion-icon class="twitt" name="browsers"
-                            (click)="common.OpenUrl(SalonData.OtherServices.website,false)"></ion-icon>
-                    </td>
-                </tr>
-            </table>
-
-        </ion-row> -->
         <ion-row *ngIf="Offers.length!=0">
             <ion-col size="12">
                 <h3 class="header">{{'Deals Of The Day'|language}} </h3>
             </ion-col>
         </ion-row>
 
-        <!-- <ion-slides *ngIf="Offers.length!=0" style="margin-left: 12px;" [options]="slideOptsThree" #slideWithNav3 class="deals_slides">
-            <ion-slide *ngFor="let s of Offers" class="deals_slide" (click)="OfferDetail(s)">
-                <ion-card [style.background]="('url('+common.Url+'Files/'+s.backgroundImage+')')|santize:'css'"
-                    class="ion-no-margin recipe-card" style="margin-right:20px;">
-                    <img [src]="common.Url+'Files/'+s.imageurl" alt="Summer Salad" width="100%" height="auto">
-                </ion-card>
-            </ion-slide>
-        </ion-slides> -->
+
 
 
         <ion-slides *ngIf="Offers.length!=0" [options]="slideOptsThree" #slideWithNav3 class="deals_slides main_slides">
             <ion-slide *ngFor="let s of Offers" class="deals_slide slide_deal" (click)="OfferDetail(s)">
-                <ion-card [style.background]="('url('+common.Url+'Files/'+s.backgroundImage+')')|santize:'css'"
-                    class="ion-no-margin recipe-card adjustCardBackground">
-                    <img onerror="this.src='./assets/img/placeholder.jfif';" [src]="common.Url+'Files/'+s.imageurl"
-                        alt="Summer Salad" width="100%" height="auto">
+                <ion-card [style.background]="('url('+common.Url+'Files/'+s.backgroundImage+')')|santize:'css'" class="ion-no-margin recipe-card adjustCardBackground">
+                    <img onerror="this.src='./assets/img/placeholder.jfif';" [src]="common.Url+'Files/'+s.imageurl" alt="Summer Salad" width="100%" height="auto">
                 </ion-card>
             </ion-slide>
         </ion-slides>
 
-
-        <ion-row class="blog_slides">
-            <ion-col size="12">
-                <h3 class="header">{{'NEWS'|language}}</h3>
-
-                <ion-row class=" griddata ">
-                    <ion-icon (click)="pre(2)" name="ios-arrow-back" class="leftarrow"></ion-icon>
-                    <ion-col size="12">
-                        <ion-slides #slides2 [options]="slideOpts1" class="bottomslide">
-                            <ion-slide class="newsslides" *ngFor="let b of lists.newslist" (click)="Gotoenpage('news')">
-                                <ion-card class="slidecard">
-                                    <p>{{b.title}} <br> <span>{{b.ndatetime|date:'dd-MMM-yyyy'}}</span></p>
-                                    <img onerror="this.src='./assets/img/placeholder.jfif';"
-                                        [src]="common.Url+'Files/'+ b.coverimage" />
-                                </ion-card>
-                            </ion-slide>
-                        </ion-slides>
-                    </ion-col>
-                    <ion-icon (click)="next(2)" class="rightarrow" name="ios-arrow-forward">
-                    </ion-icon>
-                </ion-row>
+    </ion-grid>
 
 
-                <!-- <ion-row class="griddata image-slider">
-                    <ion-icon (click)="pre(2)" name="ios-arrow-back" class="leftarrow"></ion-icon>
-                    <ion-col size="12">
-                        <ion-slides #slides2 pager="true" [options]="slideOpts1" class="bottomslide">
-                            <ion-slide class="newsslides" *ngFor="let b of lists.newslist" (click)="Gotoenpage('news')">
-                                <ion-card class="slidecard">
-                                    <p>{{b.title}} <br> <span>{{b.ndatetime|date:'dd-MMM-yyyy'}}</span></p>
+    <ion-row class="blog_slides">
+        <ion-col size="12">
+            <h3 class="header">{{'NEWS'|language}}</h3>
 
-                                    <img onerror="this.src='./assets/img/placeholder.jfif';"
-                                        [src]="common.Url+'Files/'+ b.coverimage" />
-                                </ion-card>
-                            </ion-slide>
-                        </ion-slides>
-                    </ion-col>
-                    <ion-icon (click)="next(2)" class="rightarrow" name="ios-arrow-forward">
-                    </ion-icon>
-                </ion-row> -->
+            <ion-row class=" griddata image-slider">
+                <ion-icon (click)="pre(2)" name="ios-arrow-back" class="leftarrow"></ion-icon>
+                <ion-col size="12">
+                    <ion-slides #slides2 [options]="slideOpts1" class="bottomslide set-width-wrapped">
+                        <ion-slide class="newsslides" *ngFor="let b of lists.newslist" (click)="Gotoenpage('news')">
+                            <ion-card class="slidecard">
+                                <p>{{b.title}} </p>
+                                <span>{{b.ndatetime|date:'dd-MMM-yyyy'}}</span>
+                                <img onerror="this.src='./assets/img/placeholder.jfif';" [src]="common.Url+'Files/'+ b.coverimage" />
+                            </ion-card>
+                        </ion-slide>
+                    </ion-slides>
+                </ion-col>
+                <ion-icon (click)="next(2)" class="rightarrow" name="ios-arrow-forward">
+                </ion-icon>
+            </ion-row>
+
+            <h3 class="header">{{'BLOGS'|language}}</h3>
+            <ion-row class="griddata image-slider">
+                <ion-icon (click)="pre(1)" name="ios-arrow-back" class="leftarrow"></ion-icon>
+                <ion-col size="12">
+                    <ion-slides #slides1 [options]="slideOpts2" class="bottomslide set-width-wrapped">
+                        <ion-slide *ngFor="let b of lists.bloglist" (click)="Gotoenpage('blog')">
+                            <ion-card class="slidecard">
+                                <p>{{b.title}} </p>
+                                <span>{{b.publishedon|date:'dd-MMM-yyyy'}}</span>
+                                <!-- <span>{{b.publishedon|date:'dd-MMM-yyyy'}}</span> -->
+                                <img onerror="this.src='./assets/img/placeholder.jfif';" [src]="common.Url+'Files/'+ b.coverImage" />
+                            </ion-card>
+                        </ion-slide>
+                    </ion-slides>
+                </ion-col>
+                <ion-icon (click)="next(1)" class="rightarrow" name="ios-arrow-forward">
+                </ion-icon>
+            </ion-row>
+
+            <h3 class="header">{{'EVENTS'|language}}</h3>
+            <ion-row class="griddata image-slider">
+                <ion-icon (click)="pre(3)" name="ios-arrow-back" class="leftarrow"></ion-icon>
+                <ion-col size="12">
+                    <ion-slides #slides3 [options]="slideOpts3" pager="true" class="bottomslide set-width-wrapped">
+                        <ion-slide *ngFor="let b of lists.eventlist" (click)="Gotoenpage('event')">
+                            <ion-card class="slidecard">
+                                <p>{{b.eventname}}</p>
+                                <span>{{b.publishingdate|date:'dd-MMM-yyyy'}}</span>
+                                <!-- <span>{{b.publishingdate|date:'dd-MMM-yyyy'}}</span> -->
+                                <img onerror="this.src='./assets/img/placeholder.jfif';" [src]="common.Url+'Files/'+ b.coverImage" />
+                            </ion-card>
+                        </ion-slide>
+                    </ion-slides>
+                </ion-col>
+                <ion-icon (click)="next(3)" class="rightarrow" name="ios-arrow-forward">
+                </ion-icon>
+            </ion-row>
+        </ion-col>
+    </ion-row>
 
 
-                <h3 class="header">{{'BLOGS'|language}}</h3>
-                <ion-row class="griddata image-slider">
-                    <ion-icon (click)="pre(1)" name="ios-arrow-back" class="leftarrow"></ion-icon>
-                    <ion-col size="12">
-                        <ion-slides #slides1 [options]="slideOpts2" class="bottomslide">
-                            <ion-slide *ngFor="let b of lists.bloglist" (click)="Gotoenpage('blog')">
-                                <ion-card class="slidecard">
-                                    <p>{{b.title}}</p>
-                                    <!-- <span>{{b.publishedon|date:'dd-MMM-yyyy'}}</span> -->
-                                    <img onerror="this.src='./assets/img/placeholder.jfif';"
-                                        [src]="common.Url+'Files/'+ b.coverImage" />
-                                </ion-card>
-                            </ion-slide>
-                        </ion-slides>
-                    </ion-col>
-                    <ion-icon (click)="next(1)" class="rightarrow" name="ios-arrow-forward">
-                    </ion-icon>
-                </ion-row>
-
-                <h3 class="header">{{'EVENTS'|language}}</h3>
-                <ion-row class="griddata image-slider">
-                    <ion-icon (click)="pre(3)" name="ios-arrow-back" class="leftarrow"></ion-icon>
-                    <ion-col size="12">
-                        <ion-slides #slides3 [options]="slideOpts3" pager="true" class="bottomslide">
-                            <ion-slide *ngFor="let b of lists.eventlist" (click)="Gotoenpage('event')">
-                                <ion-card class="slidecard">
-                                    <p>{{b.eventname}}</p>
-                                    <!-- <span>{{b.publishingdate|date:'dd-MMM-yyyy'}}</span> -->
-                                    <img onerror="this.src='./assets/img/placeholder.jfif';"
-                                        [src]="common.Url+'Files/'+ b.coverImage" />
-                                </ion-card>
-                            </ion-slide>
-                        </ion-slides>
-                    </ion-col>
-                    <ion-icon (click)="next(3)" class="rightarrow" name="ios-arrow-forward">
-                    </ion-icon>
-                </ion-row>
-            </ion-col>
-        </ion-row>
-
-
-        <ion-row class="griddata" style="margin-bottom: 20px;">
-            <ion-col size="12">
-                <h3 class="header">{{'Our Online Presence'|language}}</h3>
-            </ion-col>
-            <table class="social_links_table">
-                <tr class="sociallinks" *ngIf="SalonData.OtherServices">
-                    <!-- <td> {{'Contact Us'|language}}@
+    <ion-row class="griddata" style="margin-bottom: 20px;">
+        <ion-col size="12">
+            <h3 class="header">{{'Online Presence'|language}}</h3>
+        </ion-col>
+        <table class="social_links_table">
+            <tr class="sociallinks" *ngIf="SalonData.OtherServices">
+                <!-- <td> {{'Contact Us'|language}}@
                     </td> -->
-                    <td *ngIf="SalonData.OtherServices.facebook">
-                        <div class="social_icons_btm" (click)="common.OpenUrl(
+                <td *ngIf="SalonData.OtherServices.facebook">
+                    <div class="social_icons_btm" (click)="common.OpenUrl(
                             SalonData.OtherServices.facebook,false)"> <img src="../../../assets/icon/fb.png"> </div>
-                        <!-- <ion-icon class="fb" name="logo-facebook" ></ion-icon> -->
-                    </td>
-                    <td *ngIf="SalonData.OtherServices.intagram">
-                        <div class="social_icons_btm" (click)="common.OpenUrl(
+                    <!-- <ion-icon class="fb" name="logo-facebook" ></ion-icon> -->
+                </td>
+                <td *ngIf="SalonData.OtherServices.intagram">
+                    <div class="social_icons_btm" (click)="common.OpenUrl(
                             SalonData.OtherServices.intagram,false)"> <img src="../../../assets/icon/insta.png"> </div>
-                        <!-- <ion-icon class="insta" name="logo-instagram" ></ion-icon> -->
-                    </td>
-                    <td *ngIf="SalonData.OtherServices.youtube">
-                        <div class="social_icons_btm" (click)="common.OpenUrl(SalonData.OtherServices.youtube,false)">
-                            <img src="../../../assets/icon/yt.png"> </div>
-                        <!-- <ion-icon class="you" name="logo-youtube"
+                    <!-- <ion-icon class="insta" name="logo-instagram" ></ion-icon> -->
+                </td>
+                <td *ngIf="SalonData.OtherServices.youtube">
+                    <div class="social_icons_btm" (click)="common.OpenUrl(SalonData.OtherServices.youtube,false)">
+                        <img src="../../../assets/icon/yt.png"> </div>
+                    <!-- <ion-icon class="you" name="logo-youtube"
                             >
                         </ion-icon> -->
-                    </td>
-                    <td>
-                        <div class="social_icons_btm" (click)="common.OpenUrl(SalonData.OtherServices.website,false)">
-                            <img src="../../../assets/icon/web.png"> </div>
-                        <!-- <ion-icon class="twitt" name="browsers"
+                </td>
+                <td *ngIf="SalonData.OtherServices.website">
+                    <div class="social_icons_btm" (click)="common.OpenUrl(SalonData.OtherServices.website,false)">
+                        <img src="../../../assets/icon/web.png"> </div>
+                    <!-- <ion-icon class="twitt" name="browsers"
                             ></ion-icon> -->
-                    </td>
-                </tr>
-            </table>
+                </td>
+            </tr>
+        </table>
 
-        </ion-row>
+    </ion-row>
 
 
-    </ion-grid>
+
 
 
 

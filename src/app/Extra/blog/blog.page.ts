@@ -23,8 +23,12 @@ export class BlogPage implements OnInit {
   }
 
   GetEventsList() {
+    this.common.presentLoader();
     this.common.PostMethod("GetBloglist", { language: new UserPipe().transform('language'), usertype: localStorage.getItem("UserType") }).then((res: any) => {
       this.lists.bloglist = res.Data;
+      this.common.dismissLoader();
+    },err=>{
+      this.common.dismissLoader();
     });
   }
   GOtoDetails(ev) {
