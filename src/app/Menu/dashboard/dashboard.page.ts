@@ -249,7 +249,9 @@ export class DashboardPage implements OnInit {
   }
 
   ChooseOption() {
-    this.common.PageGoto('Forward', '/tabs/employer', { 'searchKey': this.lists.search })
+
+    this.common.PageGoto('Forward', '/tabs/employer', { 'searchKey': this.lists.search });
+    this.lists.search = 'Choose An Option To Find Salon';
   }
   SlideDidChange(object, slideView) {
     this.checkIfNavDisabled(object, slideView);

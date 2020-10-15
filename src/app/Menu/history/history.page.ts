@@ -8,6 +8,7 @@ import * as pdfmake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { CheckoutreceiptPage } from 'src/app/Modal/checkoutreceipt/checkoutreceipt.page';
 import { ModalController, AlertController } from '@ionic/angular';
+// var _ = require('lodash');
 @Component({
   selector: 'app-jobs',
   templateUrl: './history.page.html',
@@ -70,8 +71,21 @@ export class JobsPage implements OnInit {
       this.common.PostMethod("GetMyAppointments", { id: localStorage.getItem("UserId") }).then((res: any) => {
         this.items1 = res.Data;
       });
-    }, 15000);
+    }, 30000);
   }
+
+  // ReloadHistory_Fluc() {
+  //   this.common.PostMethod("GetMyAppointments", { id: localStorage.getItem("UserId") }).then((res: any) => {
+  //     let NewData = res.Data;
+  //     var Obj3 = _.differenceWith(NewData, this.items1, function (o1, o2) {
+  //       return o1['id'] === o2['_id']
+  //     });
+  //   });
+   
+
+  // }
+
+
   GotoHistory(itm) {
     console.log(itm);
   }

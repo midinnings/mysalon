@@ -1,15 +1,12 @@
 .listjob {
     background: transparent !important;
-
     ion-item {
         margin-left: 30px !important;
         margin-right: 30px !important;
-
         ion-label {
             font-size: 16px !important;
         }
     }
-
     img {
         height: 25px !important;
         width: 35px !important;
@@ -53,7 +50,6 @@ ion-slides {
         background: #000;
         ;
     }
-
     img {
         opacity: 0.6;
     }
@@ -81,15 +77,12 @@ ion-slides {
 
 .mycardinfo {
     background: #7c7b7b30 !important;
-
     ion-card-content {
         padding: 5px !important;
         text-align: center !important;
-
         .info {
             color: #c73130 !important;
         }
-
         .infoname {
             font-size: 10px !important;
             text-transform: uppercase !important;
@@ -116,24 +109,20 @@ ion-slides {
 
 .iconimg {
     text-align: -webkit-center !important;
-
     img {
         width: 20px !important;
     }
 }
 
 .bottomslide {
-
     .swiper-container-horizontal>.swiper-pagination-bullets,
     .swiper-pagination-custom,
     .swiper-pagination-fraction {
         bottom: 0px !important;
     }
-
     ion-card {
         height: 150px !important;
     }
-
     p {
         position: absolute !important;
         bottom: 3px !important;
@@ -141,7 +130,6 @@ ion-slides {
         color: white !important;
         font-weight: 600 !important;
     }
-
     span {
         position: absolute !important;
         left: 5px !important;
@@ -149,8 +137,6 @@ ion-slides {
         color: white !important;
         font-size: 9px !important;
     }
-
-
 }
 
 .marg {
@@ -178,6 +164,10 @@ ion-slides {
     margin: 5px;
 }
 
+.greyshade {
+    background: #f1f1f1;
+}
+
 .light_border {
     border-bottom: 1px solid #d7d7d7;
 }
@@ -189,4 +179,6 @@ ion-slides {
     margin: 0;
 }
 
-
+.no_btm_padding {
+    padding-bottom: 0px !important;
+}

@@ -1,33 +1,43 @@
-.contactsrow{
+.contactsrow {
     margin: 5px 15px;
     padding-bottom: 5px;
     border-bottom: 1px solid #e3e3e3;
-
-    .contactname{
+    .contactname {
         font-size: 18px;
         font-weight: 600;
         margin: 0;
         margin-bottom: 5px;
     }
-
-    ion-button{
+    ion-button {
         height: 22px;
         font-size: 12px;
     }
-
-    ion-icon{
+    ion-icon {
         color: #c73130;
     }
-
     .checkmark_icon {
-            color:white;
+        color: white;
     }
-
-
-
 }
 
-.bottom_row{
+.fixed[scrollx=true],
+div[scrolly=true] {
+    position: relative;
+    overflow: hidden;
+     ::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.fixed[scrollx=true] {
+    overflow-x: auto;
+}
+
+.fixed[scrolly=true] {
+    overflow-y: auto;
+}
+
+.bottom_row {
     position: fixed;
     bottom: 0;
     width: 100%;

@@ -45,7 +45,12 @@ export class EmployerPage implements OnInit {
       if (res.searchKey) {
         var Filter = 'distance';
         if (SearchKey == 'On Going Deals') { Filter = 'deals' };
-        this.FilterData(Filter, '');
+        this.geolocation.getCurrentPosition().then((resp) => {
+          this.myLat = resp.coords.latitude;
+          this.myLong = resp.coords.longitude;
+          this.FilterData(Filter, '');
+        });
+
       } else {
         this.geolocation.getCurrentPosition().then((resp) => {
           console.log({ lat: resp.coords.latitude, lng: resp.coords.longitude });

@@ -129,6 +129,9 @@ ion-slides {
         font-size: 9px !important;
         z-index: 99999 !important;
     }
+    img {
+        max-height: 210px;
+    }
 }
 
 .cardsqr {
@@ -235,7 +238,7 @@ ion-slides {
     margin-right: 0px;
     img {
         height: 125px;
-        min-width: 155px;
+        width: 155px;
     }
 }
 

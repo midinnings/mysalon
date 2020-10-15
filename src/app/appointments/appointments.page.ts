@@ -123,7 +123,6 @@ export class AppointmentsPage implements OnInit {
     await custmodal.present();
     let { data } = await custmodal.onWillDismiss();
     if (data.status) {
-
       this.ApplyDiscountConcession(data.Data);
     }
     // } else {
@@ -187,8 +186,8 @@ export class AppointmentsPage implements OnInit {
     this.ResetDiscounts();
     let values = this.DiscountValues = DataCoupon;
     this.lists.applycoupon = values;
-    this.lists.couponCode = values.couponcode;
-    this.book.controls['couponCode'].setValue(values.couponcode);
+   
+    //this.book.controls['couponCode'].setValue(values.couponcode);
     // Apply Check by Percentage or Direct Cost Cutting--------------
     if (DataCoupon.type == 'OnService' || DataCoupon.type == 'Flat') {
       this.ApplyPackage = false;
@@ -213,18 +212,20 @@ export class AppointmentsPage implements OnInit {
     else { this.common.presentToast("Coupon is not valid or expired..", 2000); return; }
     // Apply Date Check Now--------------------------------------------
     if (!this.dateCheck(values.startdate, values.enddate)) { this.common.presentToast("Coupon is expired..", 2000); return; }
-
+    this.lists.couponCode = values.couponcode;
+    this.book.controls['couponCode'].setValue(values.couponcode);
     //---Applying Discount on Flat or service basis----------------------------------------
     if (this.DiscountValues.type == 'OnService') {
       let CountServices = this.book.value.service.length;
-      this.AppliedCoupon = this.lists.couponcode;
+      this.AppliedCoupon = this.lists.couponCode;
+     
       this.lists.Discount = parseInt(this.lists.Discount);
       this.Final_DiscountAvail = CountServices * this.lists.Discount;
       this.Amount_Pay = this.lists.price - this.Final_DiscountAvail;
       this.lists.payableamount = this.Amount_Pay;
     }
     else if (this.DiscountValues.type == 'Flat') {
-      this.AppliedCoupon = this.lists.couponcode;
+      this.AppliedCoupon = this.lists.couponCode;
       this.Final_DiscountAvail = this.lists.Discount = parseInt(this.lists.Discount);
       this.Amount_Pay = this.lists.price - this.lists.Discount;
       this.lists.payableamount = this.Amount_Pay;
@@ -232,6 +233,7 @@ export class AppointmentsPage implements OnInit {
   }
 
   PackageDiscount(values) {
+    this.lists.couponCode = values.couponcode;
     // Applying package discounts and making other service carges-----------------
     this.Amount_Pay = values.discount;
     this.AppliedCoupon = values.couponcode;
@@ -286,8 +288,6 @@ export class AppointmentsPage implements OnInit {
     this.calendar.currenttime = ev.selectedTime;
   }
   onTimeSelected1(ev) {
-
-
     var now = new Date();
     if (ev.selectedTime < now) {
       console.log("Selected date is in the past");
@@ -295,11 +295,13 @@ export class AppointmentsPage implements OnInit {
       return;
     }
 
-    if (!this.TimeCheck(this.lists.CurrentDayStatus.day, this.lists.CurrentDayStatus.evening, ev.selectedTime)) {
-      this.common.presentToast('Please select appointment time according to salon availability', 2000);
-      return;
+    if(this.lists.CurrentDayStatus){
+      if (!this.TimeCheck(this.lists.CurrentDayStatus.day, this.lists.CurrentDayStatus.evening, ev.selectedTime)) {
+        this.common.presentToast('Please select appointment time according to salon availability', 2000);
+        return;
+      }
     }
-
+  
     this.lists.selectedtime = ev.selectedTime;
     let startDate: any = moment(ev.selectedTime);
     let end: any = moment(ev.selectedTime).add(1, 'hours');
@@ -331,6 +333,7 @@ export class AppointmentsPage implements OnInit {
   }
 
   async SaveAppointment() {
+    debugger
     let UserProfile = JSON.parse(localStorage.getItem('UserProfile'));
     this.common.presentLoader();
     let id = 0;
@@ -350,11 +353,11 @@ export class AppointmentsPage implements OnInit {
       } else {
         if (this.book.value.service.length == 0) {
           this.common.presentToast('Please select atleast one service..', 2000);
-          return
+          return;
         } else {
           this.book.value.service = JSON.stringify(this.book.value.service);
-          this.AppliedCoupon = "";
-          this.DiscountValues.id="";
+          //this.AppliedCoupon = "";
+          //this.DiscountValues.id="";
         }
       }
       let Data = {
@@ -459,8 +462,6 @@ export class AppointmentsPage implements OnInit {
     console.log(this.book.value.couponCode);
     let data = { file: 'offer', name: 'couponcode', value: this.CustomCoupon };
     this.common.PostMethod("GetFilterData", data).then((res: any) => {
-      console.log(res);
-      debugger
       if (res.Status == 1) {
         if (res.Data.length != 0) {
           let CouponExtractData = res.Data[0];

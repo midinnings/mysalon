@@ -231,7 +231,7 @@ ion-slides {
 }
 
 .more_square {
-    width: 53px;
+    width: 48px;
     height: 59px;
     font-size: 12px;
 }
@@ -361,6 +361,9 @@ ion-slides {
         color: white !important;
         font-size: 9px !important;
         z-index: 99999 !important;
+    }
+    img {
+        max-height: 210px;
     }
 }
 

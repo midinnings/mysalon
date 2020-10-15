@@ -1,44 +1,43 @@
 <ion-header>
-  <!-- <ion-toolbar color="primary">
+    <!-- <ion-toolbar color="primary">
     <ion-title>{{'Invite Your Friends'|language}}</ion-title>
   </ion-toolbar> -->
 
-  <ion-toolbar color="primary">
-    <ion-buttons slot="secondary" color="success">
-      <ion-button (click)="Close()">
-        <ion-icon slot="icon-only" name="close-circle" class="checkmark_icon"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>{{'Invite Your Friends'|language}}</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="secondary" color="success">
+            <ion-button (click)="Close()">
+                <ion-icon slot="icon-only" name="close-circle" class="checkmark_icon"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>{{'Invite Your Friends'|language}}</ion-title>
+    </ion-toolbar>
 
 
-  <!-- <ion-button color="success" (click)="sendSMS()">Send Invites</ion-button> -->
+    <!-- <ion-button color="success" (click)="sendSMS()">Send Invites</ion-button> -->
 </ion-header>
 
 <ion-content>
 
-  <ion-card style="padding-bottom: 10vh;">
-    <p *ngIf="MyContacts.length==0">Contacts not fetched..</p>
-    <ion-row *ngFor="let contact of MyContacts; let i=index;" class="contactsrow">
-      <ion-col size="9">
-        <p class="contactname">{{ contact.displayName }}</p>
-        <span class="contactnumber">
-          <ion-icon name="call"></ion-icon> {{ contact.phoneNumbers[0].value }}
-        </span>
-      </ion-col>
-      <ion-col size="3">
-        <ion-button shape="round" [color]="contact.disabled ? 'success' : 'danger'"
-          (click)="Invite(contact.phoneNumbers[0].value, i)">
-          <ion-icon name="checkmark" class="checkmark_icon"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-card>
+    <ion-card style="padding-bottom: 10vh;">
+        <p *ngIf="MyContacts.length==0">Contacts not fetched..</p>
+        <ion-row *ngFor="let contact of MyContacts; let i=index;" class="contactsrow">
+            <ion-col size="9">
+                <p class="contactname">{{ contact.displayName }}</p>
+                <span class="contactnumber">
+          <ion-icon name="call"></ion-icon> <span *ngIf="contact.phoneNumbers">{{ contact.phoneNumbers[0].value }}</span>
+                </span>
+            </ion-col>
+            <ion-col size="3">
+                <ion-button shape="round" [color]="contact.disabled ? 'success' : 'danger'" (click)="Invite(contact.phoneNumbers[0].value, i)">
+                    <ion-icon name="checkmark" class="checkmark_icon"></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-row>z
+    </ion-card>
 
-  <ion-row class="bottom_row">
-    <ion-col size="12">
-      <ion-button (click)="sendSMS()" [disabled]="InviteContacts.length==0 ">Send Invites</ion-button>
-    </ion-col>
-  </ion-row>
+    <ion-row class="bottom_row">
+        <ion-col size="12">
+            <ion-button (click)="sendSMS()" [disabled]="InviteContacts.length==0 ">Send Invites</ion-button>
+        </ion-col>
+    </ion-row>
 </ion-content>

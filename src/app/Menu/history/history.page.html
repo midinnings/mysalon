@@ -1,97 +1,92 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-row>
-      <!-- <ion-col size="2" class="ion-text-center">
+    <ion-toolbar color="primary">
+        <ion-row>
+            <!-- <ion-col size="2" class="ion-text-center">
         <ion-buttons>
           <ion-back-button></ion-back-button>
         </ion-buttons>
       </ion-col> -->
-      <ion-col size="12">
-        <ion-title style="color:white">{{'My Appointments'|language}}
-        </ion-title>
-      </ion-col>
-      <!-- <ion-col size="2" class="ion-text-center">
+            <ion-col size="12">
+                <ion-title style="color:white">{{'My Appointments'|language}}
+                </ion-title>
+            </ion-col>
+            <!-- <ion-col size="2" class="ion-text-center">
                 <ion-badge class="notifybadge">
                     {{lists.dashboardwid.notifications||0}}</ion-badge>
                 <ion-icon name="notifications" size="large" (click)="common.PageGoto('Forward','notifications')"
                     style="color: #fff !important;"></ion-icon>
             </ion-col> -->
-    </ion-row>
-  </ion-toolbar>
+        </ion-row>
+    </ion-toolbar>
 </ion-header>
 <ion-content>
 
 
-  <ion-list *ngIf="items1.length!=0">
-    <ion-list-header class="light_border">
-      Upcoming
-    </ion-list-header>
+    <ion-list *ngIf="items1.length!=0">
+        <ion-list-header class="light_border">
+            Upcoming
+        </ion-list-header>
 
-    <div *ngFor="let item of items1; let i=index" class="shadow_ion">
-      <ion-row
-        *ngIf=" item.appointmentstatus == 'Waiting' || item.appointmentstatus == 'Accepted' || item.appointmentstatus == 'Pending' || item.appointmentstatus == 'Confirm' || item.appointmentstatus == 'Confirmed' ">
-        <ion-col size="3">
-          <img (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded"
-            [src]="common.Url+'Files/'+item.SalonData.logo" class='round-img border-primary' style="width: 80px" />
-          <ion-spinner [ngClass]="{'center_spinner':true}" *ngIf="!loaded"></ion-spinner>
-        </ion-col>
-        <ion-col size="6">
-          <ion-row>
-            <ion-col size="12" class="ion-no-padding">
-              <p class="video-heading">{{item.salon}} - {{item.payment_id}}</p>
-            </ion-col>
-            <ion-col size="12" class="ion-no-padding">
-              <p class="video-desciption">{{item.prefeerddate| date:'dd MMM yyyy'}} {{common.SplitTime(item.prefeerddate)}}</p>
-            </ion-col>
-            <ion-col size="12" class="ion-no-padding">
-              <p class="video-desciption">Status: {{item.appointmentstatus}}</p>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col size="3" class="align_center">
-          <ion-button shape="round" color="danger" class="action_btns" (click)="ChangeStatus(item,'Cancelled')">
-            Cancel
-          </ion-button>
-          <ion-button
-            *ngIf=" item.appointmentstatus == 'Accepted' || item.appointmentstatus == 'Confirm' || item.appointmentstatus == 'Confirmed' "
-            (click)='OpenSucessCheckout(item)' shape="round" color="success" class="action_btns">Checkout</ion-button>
-        </ion-col>
-      </ion-row>
-    </div>
+        <div *ngFor="let item of items1; let i=index" class="shadow_ion">
+            <ion-row *ngIf=" item.appointmentstatus == 'Waiting' || item.appointmentstatus == 'Accepted' || item.appointmentstatus == 'Pending' || item.appointmentstatus == 'Confirm' || item.appointmentstatus == 'Confirmed' ">
+                <ion-col size="3">
+                    <img (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" [src]="common.Url+'Files/'+item.SalonData.logo" class='round-img border-primary' style="width: 80px" />
+                    <ion-spinner [ngClass]="{'center_spinner':true}" *ngIf="!loaded"></ion-spinner>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-row>
+                        <ion-col size="12" class="ion-no-padding">
+                            <p class="video-heading">{{item.salon}}</p>
+                        </ion-col>
+                        <ion-col size="12" class="ion-no-padding">
+                            <p class="video-desciption">{{item.prefeerddate| date:'dd MMM yyyy'}} {{common.SplitTime(item.prefeerddate)}}</p>
+                        </ion-col>
+                        <ion-col size="12" class="ion-no-padding">
+                            <p class="video-desciption">Status: {{item.appointmentstatus}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+                <ion-col size="3" class="align_center">
+                    <ion-button shape="round" color="danger" class="action_btns" (click)="ChangeStatus(item,'Cancelled')">
+                        Cancel
+                    </ion-button>
+                    <ion-button *ngIf=" item.appointmentstatus == 'Accepted' || item.appointmentstatus == 'Confirm' || item.appointmentstatus == 'Confirmed' " (click)='OpenSucessCheckout(item)' shape="round" color="success" class="action_btns">Checkout</ion-button>
+                </ion-col>
+            </ion-row>
+        </div>
 
-    <ion-list-header class="light_border">
-      History
-    </ion-list-header>
+        <ion-list-header class="light_border">
+            History
+        </ion-list-header>
 
-    <div *ngFor="let item of items1; let i=index" class="shadow_ion">
-      <ion-row *ngIf=" item.appointmentstatus == 'Cancelled' || item.appointmentstatus == 'Checkout' ">
-        <ion-col size="3">
-          <img (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded"
-            [src]="common.Url+'Files/'+item.SalonData.logo" class='round-img border-primary' style="width: 80px" />
-          <ion-spinner [ngClass]="{'center_spinner':true}" *ngIf="!loaded"></ion-spinner>
-        </ion-col>
-        <ion-col size="9">
-          <ion-row>
-            <ion-col size="12" class="ion-no-padding">
-              <p class="video-heading">{{item.salon}} - {{item.payment_id}}</p>
-            </ion-col>
-            <ion-col size="12" class="ion-no-padding">
-              <p class="video-desciption">{{item.prefeerddate| date:'dd MMM yyyy HH:mm a'}}</p>
-            </ion-col>
-            <ion-col size="12" class="ion-no-padding">
-              <p class="video-desciption">Status: {{item.appointmentstatus}}</p>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-      </ion-row>
-    </div>
+        <div *ngFor="let item of items1; let i=index" class="shadow_ion">
+            <ion-row class="greyshade" *ngIf=" item.appointmentstatus == 'Cancelled' || item.appointmentstatus == 'Checkout' ">
+                <ion-col size="3" class="no_btm_padding">
+                    <img (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" [src]="common.Url+'Files/'+item.SalonData.logo" class='round-img border-primary' style="width: 80px" />
+                    <ion-spinner [ngClass]="{'center_spinner':true}" *ngIf="!loaded"></ion-spinner>
+                </ion-col>
+                <ion-col size="9" class="no_btm_padding">
+                    <ion-row>
+                        <ion-col size="12" class="ion-no-padding">
+                            <p class="video-heading">{{item.salon}}</p>
+                        </ion-col>
+                        <ion-col size="12" class="ion-no-padding">
+                            <p class="video-desciption">{{item.prefeerddate| date:'dd MMM yyyy HH:mm a'}}</p>
+                        </ion-col>
+                        <ion-col size="12" class="ion-no-padding">
+                            <p class="video-desciption">Status: {{item.appointmentstatus}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </div>
 
 
-  </ion-list>
+    </ion-list>
 
-  <p *ngIf="items1.length==0" style="text-align: center;">No appointment history found....</p>
+    <p *ngIf="items1.length==0" style="text-align: center;">No appointment history found....</p>
 
-  <!-- <ion-list>
+    <!-- <ion-list>
     <ion-list-header>
       History
     </ion-list-header>
@@ -120,7 +115,7 @@
   </ion-list> -->
 
 
-  <!-- <ion-list>
+    <!-- <ion-list>
     <ion-list-header>
       History
     </ion-list-header>

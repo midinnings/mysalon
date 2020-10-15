@@ -230,7 +230,7 @@ export class CommonService {
 
   GetRefferalCode(Code) {
     let Code_P = Code;
-    let BCodeSize = 7;
+    let BCodeSize = 8;
     if (Code_P) {
       return Code_P = Code_P.substring(0, BCodeSize);
     } else {

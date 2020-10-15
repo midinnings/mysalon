@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Contacts } from '@ionic-native/contacts/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { SMS } from '@ionic-native/sms/ngx';
-import { ModalController } from '@ionic/angular';
+import { ModalController, } from '@ionic/angular';
 import { CommonService } from 'src/app/Service/common.service';
-
+import { IonInfiniteScroll } from '@ionic/angular';
 
 @Component({
   selector: 'app-invite-friends',
@@ -17,24 +17,34 @@ export class InviteFriendsPage implements OnInit {
   InviteContacts = [];
   UserData: any = {};
   SalonData: any = {};
+  slices: number = 10;
+  @ViewChild(IonInfiniteScroll, { static: false }) infiniteScroll: IonInfiniteScroll;
 
   constructor(public common: CommonService, public modal: ModalController, private contacts: Contacts, public androidPermissions: AndroidPermissions, public sms: SMS) { }
 
   ngOnInit() {
-    let env=this;
+    let env = this;
     this.common.presentLoader();
     this.UserData = JSON.parse(localStorage.getItem('UserProfile'));
     this.SalonData = JSON.parse(localStorage.getItem('SalonReffered'));
     this.MyContacts = [];
     this.contacts.find(['displayName', 'name', 'phoneNumbers', 'emails'], { filter: "", multiple: true })
       .then(data => {
-        this.MyContacts = data;
-        this.MyContacts = data.sort((a, b) => a.displayName.localeCompare(b.displayName));
+        //let AContacts = data.sort((a, b) => a.displayName.localeCompare(b.displayName));
+        let SortedEL = data.sort(function (a, b) {
+          var keyA = new Date(a.displayName),
+            keyB = new Date(b.displayName);
+          // Compare the 2 dates
+          if (keyA < keyB) return -1;
+          if (keyA > keyB) return 1;
+          return 0;
+        });
+        env.MyContacts = SortedEL;
 
         setTimeout(() => {
-            if(env.MyContacts.length==0){
-              this.TryAgain();
-            }
+          if (env.MyContacts.length == 0) {
+            this.TryAgain();
+          }
         }, 5000);
       }, err => {
         console.log(err, 'err while getting contacts');
@@ -44,15 +54,31 @@ export class InviteFriendsPage implements OnInit {
   }
 
 
-  TryAgain(){
+  loadData(event) {
+    setTimeout(() => {
+      console.log('Done');
+      event.target.complete();
+
+      // if (data.length == 1000) {
+      //   event.target.disabled = true;
+      // }
+    }, 500);
+  }
+
+  toggleInfiniteScroll() {
+    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  }
+
+  TryAgain() {
     this.common.presentLoader();
     this.contacts.find(['displayName', 'name', 'phoneNumbers', 'emails'], { filter: "", multiple: true })
-    .then(data => {
-      this.MyContacts = data;
-      this.MyContacts = data.sort((a, b) => a.displayName.localeCompare(b.displayName));
-    }, err => {
-      console.log(err, 'err while getting contacts');
-    });
+      .then(data => {
+        //this.MyContacts = data;
+        let AContacts = data.sort((a, b) => a.displayName.localeCompare(b.displayName));
+        localStorage.setItem(JSON.stringify(AContacts), 'MyAllContacts');
+      }, err => {
+        console.log(err, 'err while getting contacts');
+      });
   }
 
 
@@ -67,7 +93,7 @@ export class InviteFriendsPage implements OnInit {
       code: this.common.GetRefferalCode(this.UserData.referralcode) + '' + this.UserData.id,
       b_id: this.SalonData.b_id,
       referredfrom: this.UserData.id,
-      referredto_contact: mobile.replace(/ /g,""),
+      referredto_contact: mobile.replace(/ /g, ""),
       b_name: this.SalonData.name
     }
     this.common.PostMethod("ReferUsers", DataSend).then((res: any) => {
