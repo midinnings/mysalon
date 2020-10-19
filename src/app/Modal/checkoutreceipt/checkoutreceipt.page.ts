@@ -19,6 +19,7 @@ export class CheckoutreceiptPage implements OnInit {
   constructor(public common: CommonService, public modal: ModalController, public navParams: NavParams) { }
 
   ngOnInit() {
+    this.common.presentLoader();
     let env = this;
     this.lists = this.navParams.data;
     console.log(this.navParams.data);
@@ -28,7 +29,7 @@ export class CheckoutreceiptPage implements OnInit {
     if(this.lists.appointment.coupon_applied && this.lists.appointment.coupon_applied!='')
     {this.CouponApplied =  this.lists.appointment.coupon_applied}
     this.AppointmentPay = this.lists.appointment.cost;
-debugger
+
     var ServicesIDS = this.lists.appointment.service;
     if (ServicesIDS) {
       ServicesIDS = JSON.parse(ServicesIDS);

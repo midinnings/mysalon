@@ -24,14 +24,24 @@
 
     <ion-row>
         <ion-col size="12">
+            <p *ngIf="lists.Myoffers.length==0" text-center>Please wait.. Getting Offers/Deals</p>
             <ion-card *ngFor="let c of lists.Myoffers">
                 <ion-card-header>
-                    <ion-card-subtitle>Free {{c.type}}<a style="float: right;" (click)="ApplyCupon(c)">{{'Apply Now'|language}}</a>
+                    <ion-card-subtitle>
+                        <span *ngIf="c.type=='Flat' ">{{'Offer Type'|language}} - Flat Discount</span>
+                        <span *ngIf="c.type=='OnService' ">{{'Offer Type'|language}} - Service Discount</span>
+                        <span *ngIf="c.type=='Combo' || c.type=='Package'  ">{{'Offer Type'|language}} -
+                            {{c.type}}</span>
+                        <a style="float: right;" (click)="ApplyCupon(c)">{{'Apply Now'|language}}</a>
                     </ion-card-subtitle>
                     <ion-card-title>{{c.title}}</ion-card-title>
                 </ion-card-header>
                 <ion-card-content>
-                    Date {{c.startdate|date:'dd-MM-yyyy'}} to {{c.enddate|date:'dd-MM-yyyy'}} {{c.description}}.
+                    Date {{c.startdate|date:'dd-MM-yyyy'}} to {{c.enddate|date:'dd-MM-yyyy'}}
+                    <br>
+                    <span *ngIf="c.services_data.length!=0">{{'Services'|language}} - </span>
+                    <span *ngFor="let allservices of c.services_data">{{allservices.service}}, </span>
+                    <br> {{c.description}}.
                 </ion-card-content>
             </ion-card>
         </ion-col>

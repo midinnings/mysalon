@@ -35,7 +35,6 @@ export class AppointmentsPage implements OnInit {
   Amount_Pay: number = 0;
   CustomCoupon: any = '';
   AppliedCoupon: any = '';
-  Loyalty_Points_Redeemed: boolean = false;
   Loyalty_Points_Redemption: any = 0;
   MAX_Apply: any = 0;
   PointsValue: any = 0;
@@ -145,6 +144,7 @@ export class AppointmentsPage implements OnInit {
 
   ApplyLoyaltyDiscount() {
     this.CustomCoupon = '';
+    
     //When User Points is more than max apply----------then apply till max apply points
     if (this.Loyalty_Point_Applied == true) {
       this.ResetDiscounts();
@@ -152,26 +152,61 @@ export class AppointmentsPage implements OnInit {
     }
     if (this.UserCurrentPoints >= this.MAX_Apply) {
       //When Max Apply Points is current then billing-----------------------
-      if (this.MAX_Apply >= this.lists.price) {
+      //Check MaxApply is greater than billing price or not
+      let MaxApply_Converted = this.MAX_Apply/this.PointsValue;
+      if (MaxApply_Converted >= this.lists.price) {
         this.Loyalty_Points_Redemption = this.lists.price;
         this.Amount_Pay = 0;
       } else {
-        // Simple Substraction of Loyalty point
-        this.Loyalty_Points_Redemption = this.MAX_Apply;
-        this.Amount_Pay = this.lists.price - this.Loyalty_Points_Redemption;
+        // Substract only max values
+        this.Loyalty_Points_Redemption = MaxApply_Converted;
+        this.Amount_Pay = this.lists.price - MaxApply_Converted;
       }
     } else {
       // When Current User Points is more than Payable amount----------------------------
-      if (this.UserCurrentPoints > this.lists.price) {
+      let UserWalletPoints_Converted = this.UserCurrentPoints/this.PointsValue;
+      if (UserWalletPoints_Converted > this.lists.price) {
         this.Loyalty_Points_Redemption = this.lists.price;
         this.Amount_Pay = 0;
       } else {
-        this.Loyalty_Points_Redemption = this.UserCurrentPoints;
+        this.Loyalty_Points_Redemption = UserWalletPoints_Converted;
         this.Amount_Pay = this.lists.price - this.Loyalty_Points_Redemption;
       }
     }
     this.Loyalty_Point_Applied = true;
   }
+
+
+  // ApplyLoyaltyDiscount() {
+    //old code when loyalty points shows ruppee equals
+  //   this.CustomCoupon = '';
+  //   //When User Points is more than max apply----------then apply till max apply points
+  //   if (this.Loyalty_Point_Applied == true) {
+  //     this.ResetDiscounts();
+  //     return
+  //   }
+  //   if (this.UserCurrentPoints >= this.MAX_Apply) {
+  //     //When Max Apply Points is current then billing-----------------------
+  //     if (this.MAX_Apply >= this.lists.price) {
+  //       this.Loyalty_Points_Redemption = this.lists.price;
+  //       this.Amount_Pay = 0;
+  //     } else {
+  //       // Simple Substraction of Loyalty point
+  //       this.Loyalty_Points_Redemption = this.MAX_Apply;
+  //       this.Amount_Pay = this.lists.price - this.Loyalty_Points_Redemption;
+  //     }
+  //   } else {
+  //     // When Current User Points is more than Payable amount----------------------------
+  //     if (this.UserCurrentPoints > this.lists.price) {
+  //       this.Loyalty_Points_Redemption = this.lists.price;
+  //       this.Amount_Pay = 0;
+  //     } else {
+  //       this.Loyalty_Points_Redemption = this.UserCurrentPoints;
+  //       this.Amount_Pay = this.lists.price - this.Loyalty_Points_Redemption;
+  //     }
+  //   }
+  //   this.Loyalty_Point_Applied = true;
+  // }
 
   UpdateLoyaltyPoints() {
 
@@ -394,7 +429,7 @@ export class AppointmentsPage implements OnInit {
           }, 100);
           this.book.reset();
           this.eventSource1 = [];
-          if (res.Data && this.Loyalty_Points_Redeemed) this.DeductLoyaltyPoints(res.Data);
+          if (res.Data && this.Loyalty_Point_Applied) this.DeductLoyaltyPoints(res.Data);
           this.nav.pop();
         } else {
           this.common.dismissLoader();

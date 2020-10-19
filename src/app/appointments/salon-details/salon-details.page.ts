@@ -23,19 +23,34 @@ export class SalonDetailsPage implements OnInit {
   BrandsListing: any = [];
   SalonParams: any;
   Ratings: any;
-  Offers:any = [];
-  BusinessData_Issue:boolean = false;
+  Offers: any = [];
+  BusinessData_Issue: boolean = false;
   constructor(public modalController: PopoverController, public router: ActivatedRoute, public alertController: AlertController,
     public geolocation: Geolocation, public nav: NavController, public common: CommonService, public events: Events) {
     this.getCurrentPosition();
-
+    let env = this;
     this.router.queryParams.subscribe((res: any) => {
       this.SalonParams = res;
+      if (this.SalonParams.ApplyPreferredSalon_Now) {
+        this.common.presentLoader();
+        setTimeout(() => {
+          env.SetPreferedCustom();
+        }, 3000);
+      }
     });
     this.SalonData.Staff = [];
     this.SalonData.FacilitiesList = [];
   }
-  
+
+  SetPreferedCustom() {
+    let env = this;
+    env.CallPreferedAPI();
+    localStorage.setItem('SalonReferredID', env.SalonData.b_id);
+    localStorage.setItem('SalonReffered', JSON.stringify(env.SalonData));
+    env.common.presentLoader();
+    env.events.publish('ReloadDashboard');
+  }
+
   GetSlider() {
     let id = 0;
     if (localStorage.getItem("UserType") == "2" || localStorage.getItem("UserType") == "6") {
@@ -48,8 +63,8 @@ export class SalonDetailsPage implements OnInit {
     });
   }
 
-  FilterOffers(){
-    this.Offers = this.Offers.filter( i => i.type == 'OnService' || i.type == 'Package' || i.type == 'BuynGet' || i.type == 'Flat' || i.type == 'Combo' );
+  FilterOffers() {
+    this.Offers = this.Offers.filter(i => i.type == 'OnService' || i.type == 'Package' || i.type == 'BuynGet' || i.type == 'Flat' || i.type == 'Combo');
   }
 
   ngOnInit() {
@@ -60,10 +75,10 @@ export class SalonDetailsPage implements OnInit {
     this.common.PostMethod("Get_Salonby_ID", { id: this.SalonParams.id }).then((res: any) => {
       this.SalonData = res.Data;
       this.SalonLogo = this.common.Url + 'Files/' + this.SalonData.logo;
-      if(this.SalonData.Offers){this.Offers = this.SalonData.Offers;this.FilterOffers();}
+      if (this.SalonData.Offers) { this.Offers = this.SalonData.Offers; this.FilterOffers(); }
       if (this.SalonData.OtherServices) {
         this.SalonBanner = this.common.Url + 'Files/' + this.SalonData.OtherServices.salon_banner;
-        if(this.SalonData.OtherServices.additional_images) this.Add_On_Images = this.SalonData.OtherServices.additional_images.split(",");
+        if (this.SalonData.OtherServices.additional_images) this.Add_On_Images = this.SalonData.OtherServices.additional_images.split(",");
         this.BrandsListing = this.SalonData.BrandsList;
         this.lists.salonTiming = this.SalonData.available_hour;
         this.lists.SalonServices = this.SalonData.SalonServices;
@@ -72,17 +87,17 @@ export class SalonDetailsPage implements OnInit {
         this.lists.CurrentDayStatus = this.SalonData.available_hour.find(obj => {
           return obj.week == env.Get_Today_DayName();
         });
-    
-        if(this.lists.CurrentDayStatus){
+
+        if (this.lists.CurrentDayStatus) {
           let ValidityStatus = this.CheckSalonStatus(this.lists.CurrentDayStatus.day, this.lists.CurrentDayStatus.evening);
           this.lists.CurrentDayStatus.ValidityStatus = ValidityStatus;
-        }else{
+        } else {
           this.lists.CurrentDayStatus = {};
           this.lists.CurrentDayStatus.ValidityStatus = false;
         }
-      
-      }else{
-          this.BusinessData_Issue = true;
+
+      } else {
+        this.BusinessData_Issue = true;
       }
 
       if (this.SalonData.salon_rating) {
@@ -276,10 +291,10 @@ export class SalonDetailsPage implements OnInit {
 
   }
 
- async OfferDetail(OfferDetail){
+  async OfferDetail(OfferDetail) {
     const modal = await this.modalController.create({
       component: OfferDetailsPage,
-      componentProps: { data: OfferDetail}
+      componentProps: { data: OfferDetail }
     });
     return await modal.present();
   }

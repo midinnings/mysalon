@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { Events, ModalController } from '@ionic/angular';
 import { CommonService } from 'src/app/Service/common.service';
 import { AlertController } from '@ionic/angular';
 
@@ -14,7 +14,7 @@ export class RefferalPage implements OnInit {
   item: any = {};
   RefferalCode: any;
   SalonName_Show: '';
-  constructor(public modal: ModalController, public Fb: FormBuilder, public common: CommonService, public alertController: AlertController) {
+  constructor(public events:Events,public modal: ModalController, public Fb: FormBuilder, public common: CommonService, public alertController: AlertController) {
     this.item.refervalid = false;
     this.item.message = null;
     this.item.TempSalonData = {};
@@ -44,6 +44,14 @@ export class RefferalPage implements OnInit {
         localStorage.setItem('UserProfile', JSON.stringify(UserProfile));
         env.modal.dismiss({ Status: true, refercode: env.referform.value.refercode });
       } else {
+
+        if(this.RefferalCode.length==8){
+            if(res.Data){
+              res.Data['ApplyPreferredSalon_Now']=true;
+              env.modal.dismiss({});
+              this.common.PageGoto('Forward','salon-details',res.Data)
+            }
+        }
         env.item.refervalid = false;
         env.item.message = "your applied referal code not valid! Please Try Again"
       }
@@ -51,7 +59,6 @@ export class RefferalPage implements OnInit {
       //  this.modal.dismiss({ Status: true, refercode: this.referform.value.refercode});
       //localStorage.setItem('SalonReffered', '{"id":"15"}');
     });
-
   }
 
 
@@ -64,6 +71,7 @@ export class RefferalPage implements OnInit {
         this.item.message = null;
         this.item.TempSalonData = res.Data;
         if(res.Data.name) { this.SalonName_Show = res.Data.name; } else { this.SalonName_Show = '' }
+       
       } else {
         this.item.refervalid = false;
         this.item.message = "Your applied refferal code is not valid! Please check & try again";
@@ -116,6 +124,48 @@ export class RefferalPage implements OnInit {
 
     await alert.present();
   }
+
+
+  // async MarkAsPrefered() {
+
+  //   let env = this;
+  //   const alert = await this.alertController.create({
+  //     cssClass: 'my-custom-class',
+  //     header: 'Confirm!',
+  //     message: 'You are about to become loyal customer to this salon: ' + env.SalonData.name,
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         role: 'cancel',
+  //         cssClass: 'secondary',
+  //         handler: (blah) => {
+  //           console.log('Confirm Cancel: ');
+  //         }
+  //       }, {
+  //         text: 'Okay',
+  //         handler: () => {
+
+  //           env.CallPreferedAPI();
+  //           localStorage.setItem('SalonReferredID', env.SalonData.b_id);
+  //           localStorage.setItem('SalonReffered', JSON.stringify(env.SalonData));
+  //           env.common.presentLoader();
+  //           env.events.publish('ReloadDashboard');
+  //         }
+  //       }
+  //     ]
+  //   });
+
+  //   await alert.present();
+  // }
+
+
+  // CallPreferedAPI() {
+  //   let UserProfile = JSON.parse(localStorage.getItem('UserProfile'));
+  //   this.common.PostMethod("SetPrefferedSalon", { mobile: UserProfile.mobileno, b_name: this.SalonData.name, code: this.SalonData.referralcode, userid: localStorage.getItem("UserId") }).then((res: any) => {
+  //     console.log(res);
+  //     //this.lists.Servicelist = res.Data;
+  //   });
+  // }
 
 
 }
