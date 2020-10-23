@@ -18,8 +18,11 @@
 
 <ion-content>
 
+    <ion-searchbar showCancelButton="always" (input)="SearchByName($event.target.value)"></ion-searchbar>
+
+
     <ion-card style="padding-bottom: 10vh;">
-        <p *ngIf="MyContacts.length==0">Contacts not fetched..</p>
+        <p style="text-align: center;font-weight: bolder;" *ngIf="MyContacts.length==0">Contacts are being fetched or try search by contact name..</p>
         <ion-row *ngFor="let contact of MyContacts; let i=index;" class="contactsrow">
             <ion-col size="9">
                 <p class="contactname">{{ contact.displayName }}</p>
@@ -32,7 +35,7 @@
                     <ion-icon name="checkmark" class="checkmark_icon"></ion-icon>
                 </ion-button>
             </ion-col>
-        </ion-row>z
+        </ion-row>
     </ion-card>
 
     <ion-row class="bottom_row">

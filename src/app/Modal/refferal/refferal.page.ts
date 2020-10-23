@@ -45,7 +45,7 @@ export class RefferalPage implements OnInit {
         env.modal.dismiss({ Status: true, refercode: env.referform.value.refercode });
       } else {
 
-        if(this.RefferalCode.length==8){
+        if(this.RefferalCode.length==7){
             if(res.Data){
               res.Data['ApplyPreferredSalon_Now']=true;
               env.modal.dismiss({});

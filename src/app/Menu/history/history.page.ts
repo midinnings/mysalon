@@ -51,6 +51,7 @@ export class JobsPage implements OnInit {
 
     this.common.PostMethod("GetMyAppointments", { id: localStorage.getItem("UserId") }).then((res: any) => {
       this.items1 = res.Data;
+      this.CheckRating();
       this.common.dismissLoader();
     });
 
@@ -70,8 +71,28 @@ export class JobsPage implements OnInit {
     setInterval(() => {
       this.common.PostMethod("GetMyAppointments", { id: localStorage.getItem("UserId") }).then((res: any) => {
         this.items1 = res.Data;
+       
       });
     }, 30000);
+  }
+
+  CheckRating() {
+    
+ 
+    var filteredArray = this.items1.filter(function(itm){
+      return itm.checkout_app=='business';
+    });
+
+    if (filteredArray.length!=0) {
+      filteredArray[0].name=filteredArray[0].salon;
+      this.OpenSucessCheckout(filteredArray[0]);
+    }
+  }
+
+
+  ChangeRatingStatus(appointid){
+    this.common.PostMethod("RatingSaved", { id: appointid }).then((res: any) => {    
+    });
   }
 
   // ReloadHistory_Fluc() {
@@ -81,7 +102,7 @@ export class JobsPage implements OnInit {
   //       return o1['id'] === o2['_id']
   //     });
   //   });
-   
+
 
   // }
 
@@ -93,8 +114,20 @@ export class JobsPage implements OnInit {
     this.common.PageGoto('Forward', 'appointments', ev);
   }
 
+  // OpenRatingsModel(item){
+  //   let env=this;
+  //   if(item.checkout_app=='business'){
+  //     setTimeout(() => {
+  //    //   env.OpenSucessCheckout(item);
+  //     }, 3000); 
+  //   }
+
+  // }
+
   async OpenSucessCheckout(item) {
     let env = this;
+    this.lists.checkout_app = item.checkout_app;
+    this.lists.salonname = item.name;
     localStorage.setItem('SalonData', JSON.stringify(item.SalonData));
     localStorage.setItem('AppointmentData', JSON.stringify(item));
     this.common.GetMethod('StatusNotification?id=' + item.id);
@@ -107,6 +140,10 @@ export class JobsPage implements OnInit {
     await custmodal.present();
     let { data } = await custmodal.onWillDismiss();
     if (data.Status) {
+
+      if(item.checkout_app=='business'){
+          this.ChangeRatingStatus(item.id);
+      }
 
       env.common.PostMethod("AppointmentStatus", { id: item.id, status: 'Checkout', cost: this.totalamount }).then((res: any) => {
         //  this.items1 = res.Data;

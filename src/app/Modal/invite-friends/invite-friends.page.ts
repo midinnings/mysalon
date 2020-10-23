@@ -18,20 +18,23 @@ export class InviteFriendsPage implements OnInit {
   UserData: any = {};
   SalonData: any = {};
   slices: number = 10;
+  ReferalInviteCode='';
   @ViewChild(IonInfiniteScroll, { static: false }) infiniteScroll: IonInfiniteScroll;
 
   constructor(public common: CommonService, public modal: ModalController, private contacts: Contacts, public androidPermissions: AndroidPermissions, public sms: SMS) { }
 
   ngOnInit() {
+    this.checkSMSPermission();
     let env = this;
     this.common.presentLoader();
     this.UserData = JSON.parse(localStorage.getItem('UserProfile'));
     this.SalonData = JSON.parse(localStorage.getItem('SalonReffered'));
     this.MyContacts = [];
-    this.contacts.find(['displayName', 'name', 'phoneNumbers', 'emails'], { filter: "", multiple: true })
+    this.contacts.find(['displayName', 'name', 'phoneNumbers', 'emails'], { filter: "", multiple: true,  })
       .then(data => {
         //let AContacts = data.sort((a, b) => a.displayName.localeCompare(b.displayName));
-        let SortedEL = data.sort(function (a, b) {
+        var SlicedContacts = data.slice(0, 100);
+        var SortedEL = SlicedContacts.sort(function (a, b) {
           var keyA = new Date(a.displayName),
             keyB = new Date(b.displayName);
           // Compare the 2 dates
@@ -49,8 +52,33 @@ export class InviteFriendsPage implements OnInit {
       }, err => {
         console.log(err, 'err while getting contacts');
       });
+  }
 
 
+  SearchByName(SearchString){
+    if(SearchString.length >= 4){
+    }else{
+      return
+    }
+    let env=this;
+    this.MyContacts = [];
+    this.contacts.find(['displayName', 'name', 'phoneNumbers', 'emails'], { filter: SearchString, multiple: true,  })
+      .then(data => {
+        var SlicedContacts = data.slice(0, 100);
+        var SortedEL = SlicedContacts.sort(function (a, b) {
+          var keyA = new Date(a.displayName),
+            keyB = new Date(b.displayName);
+          // Compare the 2 dates
+          if (keyA < keyB) return -1;
+          if (keyA > keyB) return 1;
+          return 0;
+        });
+        env.MyContacts = SortedEL;
+
+       
+      }, err => {
+        console.log(err, 'err while getting contacts');
+      });
   }
 
 
@@ -90,7 +118,7 @@ export class InviteFriendsPage implements OnInit {
     }
 
     let DataSend = {
-      code: this.common.GetRefferalCode(this.UserData.referralcode) + '' + this.UserData.id,
+      code: this.ReferalInviteCode,
       b_id: this.SalonData.b_id,
       referredfrom: this.UserData.id,
       referredto_contact: mobile.replace(/ /g, ""),
@@ -119,10 +147,11 @@ export class InviteFriendsPage implements OnInit {
   sendSMS() {
     this.checkSMSPermission();
     let env = this;
+    this.ReferalInviteCode = env.SalonData.referralcode.substring(0,7) + '' + env.UserData.id;
 
     this.InviteContacts.forEach(function (element, index) {
       env.SaveRefferal(element);
-      let message = "Hello, I have started using My Salon Zone App to manage appointments, billing and much more. Check out the App Now. Use Code - " + env.UserData.referralcode + '' + env.UserData.id;
+      let message = "Hello, I have started using My Salon Zone App to manage appointments, billing and much more. Check out the App Now. Use Code - " + this.ReferalInviteCode;
 
       const options = {
         replaceLineBreaks: false,

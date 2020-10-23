@@ -85,7 +85,7 @@ export class AppointmentsPage implements OnInit {
           }
         }
       });
-      
+
       this.lists.CurrentDayStatus = this.SalonParams.available_hour.find(obj => {
         return obj.week == env.Get_Today_DayName();
       });
@@ -112,6 +112,11 @@ export class AppointmentsPage implements OnInit {
 
 
   async OpenCoupon() {
+
+    this.common.presentToast('Offers/Deals not available....', 2000);
+    return
+
+
     let env = this;
     const custmodal = await this.modal.create({
       component: CuponsPage,
@@ -144,7 +149,7 @@ export class AppointmentsPage implements OnInit {
 
   ApplyLoyaltyDiscount() {
     this.CustomCoupon = '';
-    
+
     //When User Points is more than max apply----------then apply till max apply points
     if (this.Loyalty_Point_Applied == true) {
       this.ResetDiscounts();
@@ -153,23 +158,23 @@ export class AppointmentsPage implements OnInit {
     if (this.UserCurrentPoints >= this.MAX_Apply) {
       //When Max Apply Points is current then billing-----------------------
       //Check MaxApply is greater than billing price or not
-      let MaxApply_Converted = this.MAX_Apply/this.PointsValue;
+      let MaxApply_Converted = this.MAX_Apply / this.PointsValue;
       if (MaxApply_Converted >= this.lists.price) {
         this.Loyalty_Points_Redemption = this.lists.price;
         this.Amount_Pay = 0;
       } else {
         // Substract only max values
-        this.Loyalty_Points_Redemption = MaxApply_Converted;
+        this.Loyalty_Points_Redemption = Math.floor(MaxApply_Converted);
         this.Amount_Pay = this.lists.price - MaxApply_Converted;
       }
     } else {
       // When Current User Points is more than Payable amount----------------------------
-      let UserWalletPoints_Converted = this.UserCurrentPoints/this.PointsValue;
+      let UserWalletPoints_Converted = this.UserCurrentPoints / this.PointsValue;
       if (UserWalletPoints_Converted > this.lists.price) {
         this.Loyalty_Points_Redemption = this.lists.price;
         this.Amount_Pay = 0;
       } else {
-        this.Loyalty_Points_Redemption = UserWalletPoints_Converted;
+        this.Loyalty_Points_Redemption = Math.floor(UserWalletPoints_Converted);
         this.Amount_Pay = this.lists.price - this.Loyalty_Points_Redemption;
       }
     }
@@ -178,7 +183,7 @@ export class AppointmentsPage implements OnInit {
 
 
   // ApplyLoyaltyDiscount() {
-    //old code when loyalty points shows ruppee equals
+  //old code when loyalty points shows ruppee equals
   //   this.CustomCoupon = '';
   //   //When User Points is more than max apply----------then apply till max apply points
   //   if (this.Loyalty_Point_Applied == true) {
@@ -221,7 +226,7 @@ export class AppointmentsPage implements OnInit {
     this.ResetDiscounts();
     let values = this.DiscountValues = DataCoupon;
     this.lists.applycoupon = values;
-   
+
     //this.book.controls['couponCode'].setValue(values.couponcode);
     // Apply Check by Percentage or Direct Cost Cutting--------------
     if (DataCoupon.type == 'OnService' || DataCoupon.type == 'Flat') {
@@ -246,14 +251,14 @@ export class AppointmentsPage implements OnInit {
     else if (values.discounttype == 'Percent') { this.lists.Discount = (this.lists.price * (parseInt(values.discount) / 100)); }
     else { this.common.presentToast("Coupon is not valid or expired..", 2000); return; }
     // Apply Date Check Now--------------------------------------------
-    if (!this.dateCheck(values.startdate, values.enddate)) { this.common.presentToast("Coupon is expired..", 2000); return; }
+    if (!this.dateCheck(values.startdate, values.enddate)) { this.common.presentToast("Coupon is not valid or expired..", 2000); return; }
     this.lists.couponCode = values.couponcode;
     this.book.controls['couponCode'].setValue(values.couponcode);
     //---Applying Discount on Flat or service basis----------------------------------------
     if (this.DiscountValues.type == 'OnService') {
       let CountServices = this.book.value.service.length;
       this.AppliedCoupon = this.lists.couponCode;
-     
+
       this.lists.Discount = parseInt(this.lists.Discount);
       this.Final_DiscountAvail = CountServices * this.lists.Discount;
       this.Amount_Pay = this.lists.price - this.Final_DiscountAvail;
@@ -330,13 +335,13 @@ export class AppointmentsPage implements OnInit {
       return;
     }
 
-    if(this.lists.CurrentDayStatus){
+    if (this.lists.CurrentDayStatus) {
       if (!this.TimeCheck(this.lists.CurrentDayStatus.day, this.lists.CurrentDayStatus.evening, ev.selectedTime)) {
         this.common.presentToast('Please select appointment time according to salon availability', 2000);
         return;
       }
     }
-  
+
     this.lists.selectedtime = ev.selectedTime;
     let startDate: any = moment(ev.selectedTime);
     let end: any = moment(ev.selectedTime).add(1, 'hours');
@@ -368,7 +373,7 @@ export class AppointmentsPage implements OnInit {
   }
 
   async SaveAppointment() {
-    debugger
+    let PointsRedeemed = 0;
     let UserProfile = JSON.parse(localStorage.getItem('UserProfile'));
     this.common.presentLoader();
     let id = 0;
@@ -390,13 +395,15 @@ export class AppointmentsPage implements OnInit {
           this.common.presentToast('Please select atleast one service..', 2000);
           return;
         } else {
+          PointsRedeemed = this.Loyalty_Points_Redemption;
           this.book.value.service = JSON.stringify(this.book.value.service);
           //this.AppliedCoupon = "";
           //this.DiscountValues.id="";
         }
       }
       let Data = {
-        id: id,
+        'id': id,
+        'points_redeem': PointsRedeemed,
         'userid': localStorage.getItem("UserId"),
         'b_id': this.SalonParams.b_id,
         'customer_name': UserProfile.name,
@@ -421,7 +428,10 @@ export class AppointmentsPage implements OnInit {
         total: parseInt(this.lists.payableamount) + parseInt(this.lists.Discount)
       }
       this.common.PostMethod("CreateAppointment", Data).then((res: any) => {
-        if (res.Status == "1") {
+        if (res.Status == 1) {
+          if (res.Data && this.Loyalty_Point_Applied==true) {
+            this.DeductLoyaltyPoints(res.Data);
+          }
           this.common.dismissLoader();
           this.common.presentToast(res.Message, 3000);
           setTimeout(() => {
@@ -429,7 +439,7 @@ export class AppointmentsPage implements OnInit {
           }, 100);
           this.book.reset();
           this.eventSource1 = [];
-          if (res.Data && this.Loyalty_Point_Applied) this.DeductLoyaltyPoints(res.Data);
+         
           this.nav.pop();
         } else {
           this.common.dismissLoader();
@@ -440,6 +450,7 @@ export class AppointmentsPage implements OnInit {
   }
 
   DeductLoyaltyPoints(AppointmentID) {
+    
     let env = this;
     let Data = {
       'userid': localStorage.getItem('UserId'),
@@ -494,6 +505,9 @@ export class AppointmentsPage implements OnInit {
   }
   ApplyCoupon() {
 
+    this.common.presentToast('Offers/Deals not available....', 2000);
+    return
+
     console.log(this.book.value.couponCode);
     let data = { file: 'offer', name: 'couponcode', value: this.CustomCoupon };
     this.common.PostMethod("GetFilterData", data).then((res: any) => {
@@ -518,8 +532,10 @@ export class AppointmentsPage implements OnInit {
     fDate = Date.parse(from);
     lDate = Date.parse(to);
     cDate = Date.parse(new Date().toJSON().slice(0, 10));
+    var appointDate = Date.parse(this.lists.appointmentdate);
+    // take only appointment date selected-----------not current-----
 
-    if ((cDate <= lDate && cDate >= fDate)) {
+    if ((appointDate <= lDate && appointDate >= fDate)) {
       return true;
     }
     return false;
@@ -528,14 +544,14 @@ export class AppointmentsPage implements OnInit {
 
   TimeCheck(from, to, checktime) {
 
-  //  var dateObj = new Date();
+    //  var dateObj = new Date();
     var month = checktime.getUTCMonth() + 1; //months from 1-12
     var day = checktime.getUTCDate();
     var year = checktime.getUTCFullYear();
 
     var newdate = year + "/" + month + "/" + day;
-    var FromTime = newdate+' ' + from;
-    var ToTime = newdate+' ' + to;
+    var FromTime = newdate + ' ' + from;
+    var ToTime = newdate + ' ' + to;
     var aDate = new Date(FromTime).getTime();
     var bDate = new Date(ToTime).getTime();
     var cDate = Date.parse(checktime);

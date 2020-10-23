@@ -13,6 +13,7 @@ export class CuponsPage implements OnInit {
   constructor(public modal: ModalController, public common: CommonService) { }
   lists: any = {};
   ngOnInit() {
+    this.lists.Myoffers=[];
     this.GetMyOffers();
     
   }

@@ -21,7 +21,11 @@ export class CheckoutreceiptPage implements OnInit {
   ngOnInit() {
     this.common.presentLoader();
     let env = this;
+    
     this.lists = this.navParams.data;
+    if(this.lists.checkout_app=='business'){
+      this.ShowCheckout=false;
+    }
     console.log(this.navParams.data);
     this.lists.UserProfile = JSON.parse(localStorage.getItem("SalonData"));
     this.lists.MyProfile = JSON.parse(localStorage.getItem("UserProfile"));

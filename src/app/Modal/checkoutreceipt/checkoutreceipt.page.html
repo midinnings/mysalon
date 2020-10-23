@@ -1,15 +1,14 @@
 <ion-content *ngIf="ShowCheckout">
     <ion-row *ngIf="lists.UserProfile">
         <ion-col size="12" text-center class="m-t-p-5">
-            <img class="image"
-                [src]="lists.UserProfile.logo?common.Url+'Files/'+lists.UserProfile.logo:'./assets/img/logo.png'">
+            <img class="image" [src]="lists.UserProfile.logo?common.Url+'Files/'+lists.UserProfile.logo:'./assets/img/logo.png'">
         </ion-col>
         <ion-col size="12" text-center>
             <h3> {{lists.UserProfile.name}}</h3>
         </ion-col>
         <ion-col size="12" text-center>
-            <ion-label class="address" style="text-align: center;">+91
-                {{lists.UserProfile.mobileno}}<br>{{lists.UserProfile.address}}
+            <ion-label class="address" style="text-align: center;">+91 {{lists.UserProfile.mobileno}}
+                <br>{{lists.UserProfile.address}}
             </ion-label>
         </ion-col>
         <ion-col size="12">
@@ -76,7 +75,7 @@
 
         <ion-col size="12" class="text_center" style="text-align: center;">
             <br><br>
-            <h3 class="">{{'Rate Your Expiriences'|language}}</h3>
+            <h4 class="">{{'Rate Your Expirience'|language}} - {{lists.salonname}}</h4>
         </ion-col>
     </ion-row>
     <ion-row class="griddata">
@@ -87,36 +86,28 @@
                         <tr>
                             <td size="6" class="td_rating">Overall</td>
                             <td size="6" class="td_rating">
-                                <ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline"
-                                    activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="false" readonly="false"
-                                    rating="0" fontSize="25px" (ratingChanged)="logRating($event, 'overall_rate')">
+                                <ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline" activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="false" readonly="false" rating="0" fontSize="25px" (ratingChanged)="logRating($event, 'overall_rate')">
                                 </ionic4-star-rating>
                             </td>
                         </tr>
                         <tr>
                             <td size="6" class="td_rating">Ambiance</td>
                             <td size="6" class="td_rating">
-                                <ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline"
-                                    activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="false" readonly="false"
-                                    rating="0" fontSize="25px" (ratingChanged)="logRating($event, 'ambiance_rate')">
+                                <ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline" activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="false" readonly="false" rating="0" fontSize="25px" (ratingChanged)="logRating($event, 'ambiance_rate')">
                                 </ionic4-star-rating>
                             </td>
                         </tr>
                         <tr>
                             <td size="6" class="td_rating">Corona Safety</td>
                             <td size="6" class="td_rating">
-                                <ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline"
-                                    activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="false" readonly="false"
-                                    rating="0" fontSize="25px" (ratingChanged)="logRating($event, 'services_rate')">
+                                <ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline" activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="false" readonly="false" rating="0" fontSize="25px" (ratingChanged)="logRating($event, 'services_rate')">
                                 </ionic4-star-rating>
                             </td>
                         </tr>
                         <tr>
                             <td size="6" class="td_rating">Waiting</td>
                             <td size="6" class="td_rating">
-                                <ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline"
-                                    activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="false" readonly="false"
-                                    rating="0" fontSize="25px" (ratingChanged)="logRating($event, 'waiting_rate')">
+                                <ionic4-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline" activeColor="#d1301a" defaultColor="#aaaaaa" halfStar="false" readonly="false" rating="0" fontSize="25px" (ratingChanged)="logRating($event, 'waiting_rate')">
                                 </ionic4-star-rating>
                             </td>
                         </tr>
@@ -128,12 +119,9 @@
 
             </ion-card>
             <br>
-            <ion-textarea [(ngModel)]="Ratings.feedback" placeholder="Enter Your Feedback" rows="4" cols="20"
-                style=" border: 1px solid #bababa;"></ion-textarea>
+            <ion-textarea [(ngModel)]="Ratings.feedback" placeholder="Enter Your Feedback" rows="4" cols="20" style=" border: 1px solid #bababa;"></ion-textarea>
             <br>
-            <ion-button
-                [disabled]="!Ratings.overall_rate || !Ratings.ambiance_rate || !Ratings.services_rate || !Ratings.waiting_rate"
-                shape="round" style="padding-right: 16px;float:right;" (click)="End()">
+            <ion-button [disabled]="!Ratings.overall_rate || !Ratings.ambiance_rate || !Ratings.services_rate || !Ratings.waiting_rate" shape="round" style="padding-right: 16px;float:right;" (click)="End()">
                 {{'Submit Feedback '|language}}
             </ion-button>
 

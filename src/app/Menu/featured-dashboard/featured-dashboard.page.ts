@@ -97,7 +97,7 @@ export class FeaturedDashboardPage implements OnInit {
         });
 
         let ValidityStatus = this.CheckSalonStatus(this.lists.CurrentDayStatus.day, this.lists.CurrentDayStatus.evening);
-        this.lists.CurrentDayStatus.ValidityStatus = ValidityStatus;
+        if(ValidityStatus)this.lists.CurrentDayStatus.ValidityStatus = ValidityStatus;
       }
 
       if (this.SalonData.salon_rating) {

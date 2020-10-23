@@ -42,6 +42,7 @@ export class UpdateProfilePage implements OnInit {
   }
 
   Update() {
+    this.UserData.mobile = this.UserData.mobileno;
     this.common.PostMethod("CustomerRegistration", this.UserData ).then((res: any) => {
     if(res.Data)  localStorage.setItem('UserProfile', JSON.stringify(res.Data));
       this.common.presentToast('Profile Updated Successfully', 4000);

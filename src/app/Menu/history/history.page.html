@@ -28,7 +28,7 @@
         </ion-list-header>
 
         <div *ngFor="let item of items1; let i=index" class="shadow_ion">
-            <ion-row *ngIf=" item.appointmentstatus == 'Waiting' || item.appointmentstatus == 'Accepted' || item.appointmentstatus == 'Pending' || item.appointmentstatus == 'Confirm' || item.appointmentstatus == 'Confirmed' ">
+            <ion-row class="greyshade" *ngIf=" item.appointmentstatus == 'Waiting' || item.appointmentstatus == 'Accepted' || item.appointmentstatus == 'Pending' || item.appointmentstatus == 'Confirm' || item.appointmentstatus == 'Confirmed' ">
                 <ion-col size="3">
                     <img (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" [src]="common.Url+'Files/'+item.SalonData.logo" class='round-img border-primary' style="width: 80px" />
                     <ion-spinner [ngClass]="{'center_spinner':true}" *ngIf="!loaded"></ion-spinner>
@@ -74,10 +74,14 @@
                             <p class="video-desciption">{{item.prefeerddate| date:'dd MMM yyyy HH:mm a'}}</p>
                         </ion-col>
                         <ion-col size="12" class="ion-no-padding">
-                            <p class="video-desciption">Status: {{item.appointmentstatus}}</p>
+                            <p class="video-desciption">Status: {{item.appointmentstatus}} </p>
+                            <!-- <p *ngIf="item.checkout_app=='business'">{{OpenRatingsModel(item)}} </p> -->
                         </ion-col>
                     </ion-row>
                 </ion-col>
+                <!-- <ion-col size="3" class="align_center">
+                    <ion-button *ngIf=" item.checkout_app == 'business' " (click)='OpenSucessCheckout(item)' shape="round" color="warning" class="action_btns">Rate Now</ion-button>
+                </ion-col> -->
             </ion-row>
         </div>
 
