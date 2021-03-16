@@ -18,10 +18,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OtpPage } from './Modal/otp/otp.page';
 import { Camera } from '@ionic-native/Camera/ngx';
-import { File } from '@ionic-native/file/ngx';
+//import { File } from '@ionic-native/file/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { NgOtpInputModule } from 'ng-otp-input';
-import { SMS } from '@ionic-native/sms/ngx';
+//import { SMS } from '@ionic-native/sms/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { CheckoutreceiptPage } from './Modal/checkoutreceipt/checkoutreceipt.page';
@@ -65,8 +65,8 @@ import { OfferDetailsPage } from './Modal/offer-details/offer-details.page';
     SplashScreen,
     AndroidPermissions,
     Camera,
-    File,
-    SMS,
+   // File,
+   // SMS,
     SocialSharing,
     Diagnostic,
     FileOpener,

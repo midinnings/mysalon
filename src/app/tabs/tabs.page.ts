@@ -23,6 +23,8 @@ export class TabsPage {
       this.favSalon = false;
     }
 
+    this.usertype = localStorage.getItem('UserType');
+
     events.subscribe('ReloadDashboard', (user) => {
       var CheckSalon_1 = localStorage.getItem('SalonReffered');
       if (CheckSalon_1 != 'null' && CheckSalon_1 != null && CheckSalon_1 != undefined) {
@@ -32,6 +34,8 @@ export class TabsPage {
         this.favSalon = false;
       }
       console.log('reloading tabs');
+
+      this.usertype = localStorage.getItem('UserType');
     });
 
 

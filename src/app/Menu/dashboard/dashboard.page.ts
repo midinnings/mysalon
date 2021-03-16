@@ -100,11 +100,13 @@ export class DashboardPage implements OnInit {
       name: 'Near By',
       name_hi: 'Near By'
     },
-    {
-      id: 2,
-      name: 'On Going Deals',
-      name_hi: 'On Going Deals'
-    }]
+    // {
+    //   id: 2,
+    //   name: 'On Going Deals',
+    //   name_hi: 'On Going Deals'
+    // }
+  
+  ]
     this.item.title = "my salon app";
     this.lists.search = "Choose An Option To Find Salon";
     this.item.visteddate = new Date()
@@ -115,7 +117,7 @@ export class DashboardPage implements OnInit {
         setTimeout(() => {
           this.lists.usertype = localStorage.getItem("UserType");
         }, 500);
-        this.GetDashboardInfo();
+      
         this.GetBlogs();
         this.GetSlider();
       }
@@ -131,7 +133,7 @@ export class DashboardPage implements OnInit {
   }
 
   ionViewDidLoad() {
-
+    this.GetDashboardInfo();
   }
 
   LoadNotifications() {
@@ -148,6 +150,8 @@ export class DashboardPage implements OnInit {
   slidesDidLoad(slides) {
     slides.startAutoplay();
   }
+
+
 
   ngOnInit() {
     this.GetDashboardInfo();
@@ -186,6 +190,8 @@ export class DashboardPage implements OnInit {
       );
   }
   ionViewWillEnter() {
+
+    this.GetDashboardInfo();
 
     this.lists.prefferdProducts = [{
       img: './assets/img/logo.png',
@@ -289,18 +295,15 @@ export class DashboardPage implements OnInit {
       this.lists.eventlist = res.Data.Event;
     });
   }
+
   GetDashboardInfo() {
     this.common.PostMethod("Get_Customer_Dashboard", { userid: localStorage.getItem("UserId"), usertype: localStorage.getItem("UserType"), b_id: new UserPipe().transform('b_id'), from: moment().format('YYYY-MM-DD'), to: moment().format('YYYY-MM-DD') }).then((res: any) => {
       this.Dashboard_Data = res.Data;
       if (res.Data.lastvisited) {
         if (res.Data.lastvisited.length != 0) {
           this.LastVisited = res.Data.lastvisited;
-
         }
       }
-
-
-
     }, err => {
       this.common.presentToast("Server Error Occured, Please Try After Sometime...", 8000);
     });
@@ -309,6 +312,8 @@ export class DashboardPage implements OnInit {
       this.Testimonials = res.Data;
     });
   }
+
+
 
   next(ev) {
     debugger

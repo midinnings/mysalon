@@ -21,7 +21,7 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-row class="griddata">
+    <ion-row class="griddata" *ngIf="UserType!='0'">
         <ion-col size="2" class="no_padding">
             <a href="tel:{{SalonData.mobileno}}">
                 <ion-icon name="call" size="large" style="margin-top: 5px; color:#d90e0e; "></ion-icon>
@@ -129,7 +129,7 @@
                 <ion-card class="mycardinfo cardsqr card_grey">
                     <ion-grid>
                         <ion-row class="griddata">
-                            <ion-col size="10">
+                            <ion-col size="10" class="adjust_more">
                                 <ion-slides class="services_slide" options="{initialSlide: 0,
                                     slidesPerView: 5,
                                     autoplay: false,

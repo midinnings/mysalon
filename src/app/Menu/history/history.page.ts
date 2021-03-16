@@ -1,7 +1,7 @@
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { CommonService } from 'src/app/Service/common.service';
 import { Component, OnInit } from '@angular/core';
-import { File } from '@ionic-native/file/ngx';
+//import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import * as moment from 'moment';
 import * as pdfmake from 'pdfmake/build/pdfmake';
@@ -21,7 +21,7 @@ export class JobsPage implements OnInit {
   externalDataRetrievedFromServer = [];
 
   constructor(public alertCtrl: AlertController, public fileopen: FileOpener, public modal: ModalController, public common: CommonService,
-    public file: File, public social: SocialSharing) {
+     public social: SocialSharing) {
     for (let i = 1; i < 5; i++) {
       let appointmentStatus = "";
       if (i == 1) {

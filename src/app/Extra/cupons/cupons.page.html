@@ -28,7 +28,7 @@
             <ion-card *ngFor="let c of lists.Myoffers">
                 <ion-card-header style="padding-bottom: 0px;">
                     <ion-card-subtitle>
-                        <ion-button size="small" style="float: right;" color="primary" shape="round">
+                        <ion-button (click)="ApplyCupon(c)" size="small" style="float: right;" color="primary" shape="round">
                             {{'Apply Now'|language}}</ion-button>
                     </ion-card-subtitle>
                     <ion-row>

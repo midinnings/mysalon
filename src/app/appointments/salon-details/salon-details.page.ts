@@ -24,6 +24,7 @@ export class SalonDetailsPage implements OnInit {
   SalonParams: any;
   Ratings: any;
   Offers: any = [];
+  UserType:any;
   BusinessData_Issue: boolean = false;
   constructor(public modalController: PopoverController, public router: ActivatedRoute, public alertController: AlertController,
     public geolocation: Geolocation, public nav: NavController, public common: CommonService, public events: Events) {
@@ -40,6 +41,8 @@ export class SalonDetailsPage implements OnInit {
     });
     this.SalonData.Staff = [];
     this.SalonData.FacilitiesList = [];
+
+    this.UserType = localStorage.getItem('UserType');
   }
 
   SetPreferedCustom() {

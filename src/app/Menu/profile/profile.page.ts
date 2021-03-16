@@ -12,6 +12,7 @@ export class ProfilePage implements OnInit {
   lists: any = {}
   PrefSalon: any = false;
   UserData: any = {};
+  UserType:any = {};
   @ViewChild('stylistselect', { static: false }) stylistselect: IonSelect;
 
   constructor(public events: Events, public alertController: AlertController, public social: SocialSharing, public fcmmessage: FcmmessageService, public router: Router, public common: CommonService) {
@@ -22,7 +23,7 @@ export class ProfilePage implements OnInit {
    }
 
   ngOnInit() {
-
+    this.UserType = localStorage.getItem("UserType");
     //  env.events.publish('ProfileUpdated');
 
    

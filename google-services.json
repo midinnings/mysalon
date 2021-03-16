@@ -1,42 +1,33 @@
 {
   "project_info": {
-    "project_number": "276653145131",
-    "firebase_url": "https://mysalonzone-customer.firebaseio.com",
-    "project_id": "mysalonzone-customer",
-    "storage_bucket": "mysalonzone-customer.appspot.com"
+    "project_number": "136611520056",
+    "project_id": "dev-all-projects-687fa",
+    "storage_bucket": "dev-all-projects-687fa.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:276653145131:android:2896cd810e2d6a3806fe6e",
+        "mobilesdk_app_id": "1:136611520056:android:4e59156cffb5e2c61dd0cd",
         "android_client_info": {
           "package_name": "com.mysalonzonecustomer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "276653145131-o926oq850205vnjoka3f6h0g6fcrh5tp.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.mysalonzonecustomer",
-            "certificate_hash": "f865faa9e897a7542849fd8cd7fd8fa9553a54ff"
-          }
-        },
-        {
-          "client_id": "276653145131-7773dhqk3dvhjicnd721gp28uq703kak.apps.googleusercontent.com",
+          "client_id": "136611520056-qk191h8u7k1n4hptu6jmkkvo8m1cefs6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA-tz9uLpd0pvkSj7ltXx4zsI4-USvJHDQ"
+          "current_key": "AIzaSyCcrYdn8BnIwjlka6WHF5lxcaEAewQfzzc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "276653145131-7773dhqk3dvhjicnd721gp28uq703kak.apps.googleusercontent.com",
+              "client_id": "136611520056-qk191h8u7k1n4hptu6jmkkvo8m1cefs6.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

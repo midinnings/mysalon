@@ -81,4 +81,11 @@ export class LoginPage implements OnInit {
   ChangeLanguage() {
     localStorage.setItem("language", this.lists.language);
   }
+
+  GuestLogin(){
+    localStorage.setItem("UserProfile", JSON.stringify({"UserType":"0", "name":"Welcome as a Guest"}));
+    localStorage.setItem('UserType', '0');
+    this.common.PageGoto("Root", "/tabs/dashboard");
+  }
+
 }

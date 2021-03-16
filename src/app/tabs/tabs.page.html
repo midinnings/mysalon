@@ -5,17 +5,17 @@
             <ion-label class="lfont">{{'Home'|language}}</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="job">
+        <ion-tab-button tab="job" *ngIf="usertype!='0'">
             <img class="fticon" src="./assets/icon/checkout.png" />
             <ion-label class="lfont">{{'History'|language}}</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="employer">
+        <ion-tab-button tab="employer" *ngIf="usertype!='0'">
             <img class="fticon" src="./assets/icon/jobfind.png" />
             <ion-label class="lfont">{{'List'|language}}</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="checkout">
+        <ion-tab-button tab="checkout" *ngIf="usertype!='0'">
             <img class="fticon" src="./assets/icon/addcust.png" />
             <ion-label class="lfont">{{'Wallet'|language}}</ion-label>
         </ion-tab-button>

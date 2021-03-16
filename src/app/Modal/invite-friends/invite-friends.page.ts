@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Contacts } from '@ionic-native/contacts/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import { SMS } from '@ionic-native/sms/ngx';
+//import { SMS } from '@ionic-native/sms/ngx';
 import { ModalController, } from '@ionic/angular';
 import { CommonService } from 'src/app/Service/common.service';
 import { IonInfiniteScroll } from '@ionic/angular';
@@ -21,7 +21,7 @@ export class InviteFriendsPage implements OnInit {
   ReferalInviteCode='';
   @ViewChild(IonInfiniteScroll, { static: false }) infiniteScroll: IonInfiniteScroll;
 
-  constructor(public common: CommonService, public modal: ModalController, private contacts: Contacts, public androidPermissions: AndroidPermissions, public sms: SMS) { }
+  constructor(public common: CommonService, public modal: ModalController, private contacts: Contacts, public androidPermissions: AndroidPermissions) { }
 
   ngOnInit() {
     this.checkSMSPermission();
@@ -133,46 +133,46 @@ export class InviteFriendsPage implements OnInit {
 
 
   checkSMSPermission() {
-    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.SEND_SMS).then(
-      result => console.log('Has permission?', result.hasPermission),
-      err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.SEND_SMS)
-    );
+    // this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.SEND_SMS).then(
+    //   result => console.log('Has permission?', result.hasPermission),
+    //   err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.SEND_SMS)
+    // );
   }
   requestSMSPermission() {
     // tslint:disable-next-line: max-line-length
-    this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.SEND_SMS, this.androidPermissions.PERMISSION.BROADCAST_SMS]);
+   // this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.SEND_SMS, this.androidPermissions.PERMISSION.BROADCAST_SMS]);
   }
 
 
   sendSMS() {
-    this.checkSMSPermission();
-    let env = this;
-    this.ReferalInviteCode = env.SalonData.referralcode.substring(0,7) + '' + env.UserData.id;
+    // this.checkSMSPermission();
+    // let env = this;
+    // this.ReferalInviteCode = env.SalonData.referralcode.substring(0,7) + '' + env.UserData.id;
 
-    this.InviteContacts.forEach(function (element, index) {
-      env.SaveRefferal(element);
-      let message = "Hello, I have started using My Salon Zone App to manage appointments, billing and much more. Check out the App Now. Use Code - " + this.ReferalInviteCode;
+    // this.InviteContacts.forEach(function (element, index) {
+    //   env.SaveRefferal(element);
+    //   let message = "Hello, I have started using My Salon Zone App to manage appointments, billing and much more. Check out the App Now. Use Code - " + this.ReferalInviteCode;
 
-      const options = {
-        replaceLineBreaks: false,
-        android: { intent: '' }
-      };
-      env.sms.send(element, message, options).then(() => {
-        console.log('in success');
-      })
-        .catch(error => {
-          console.log('error while sending sms', error);
-        });
-
-
-      if (env.InviteContacts.length - 1 == index) {
-        env.common.presentToast('Invitation Sent Successfully', 4000);
-        env.modal.dismiss({ Status: false });
-      }
-
-    });
+    //   const options = {
+    //     replaceLineBreaks: false,
+    //     android: { intent: '' }
+    //   };
+    //   env.sms.send(element, message, options).then(() => {
+    //     console.log('in success');
+    //   })
+    //     .catch(error => {
+    //       console.log('error while sending sms', error);
+    //     });
 
 
+    //   if (env.InviteContacts.length - 1 == index) {
+    //     env.common.presentToast('Invitation Sent Successfully', 4000);
+    //     env.modal.dismiss({ Status: false });
+    //   }
+
+    // });
+
+    this.modal.dismiss({ Status: false });
   }
 
 

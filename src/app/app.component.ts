@@ -8,7 +8,7 @@ import { Platform, Events } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar, } from '@ionic-native/status-bar/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx/index';
-import { File } from '@ionic-native/file/ngx';
+//import { File } from '@ionic-native/file/ngx';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 import { Router } from '@angular/router';
 import { CommonService } from './Service/common.service';
@@ -25,7 +25,7 @@ export class AppComponent {
     private statusBar: StatusBar,
     private diagno: Diagnostic,
     public fcmmessage: FcmmessageService,
-    public file: File,
+    //public file: File,
     private deeplinks: Deeplinks,
     public events: Events,
     public common: CommonService

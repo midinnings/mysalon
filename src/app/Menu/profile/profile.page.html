@@ -7,19 +7,16 @@
 <ion-content>
     <ion-grid style="height: 100%">
         <ion-row justify-content-center align-items-center style="height: 100%; flex-direction: column">
-            <div text-center (click)="GotoUpdate()">
-                <img (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded"
-                    src="{{UserData.logo?common.Url+'Files/'+UserData.logo:'./assets/img/app/profile_placeholder.jpg'}}"
-                    class='round-img border-primary' style="width: 120px" />
+            <div *ngIf="UserType!='0'" text-center (click)="GotoUpdate()">
+                <img (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" src="{{UserData.logo?common.Url+'Files/'+UserData.logo:'./assets/img/app/profile_placeholder.jpg'}}" class='round-img border-primary' style="width: 120px" />
                 <ion-spinner [ngClass]="{'center_spinner':true}" *ngIf="!loaded"></ion-spinner>
-                <h4 style="margin:0px">{{'name'|user}} <ion-icon style="color: #c73130;" ios="ios-create" md="md-create"
-                        name="ios-create"></ion-icon>
+                <h4 style="margin:0px">{{'name'|user}}
+                    <ion-icon style="color: #c73130;" ios="ios-create" md="md-create" name="ios-create"></ion-icon>
                 </h4>
             </div>
             <ion-col>
                 <ion-list class="menu_listing">
-                    <ion-item style="color: #c73130;" *ngIf="PrefSalon" class="input-border small-font"
-                        (click)="LeaveSalon()">
+                    <ion-item style="color: #c73130;" *ngIf="PrefSalon" class="input-border small-font" (click)="LeaveSalon()">
                         {{'Leave Salon'|language}}
                     </ion-item>
                     <ion-item class="input-border small-font" (click)="common.PageGoto('Forward','about')">

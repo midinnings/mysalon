@@ -113,8 +113,8 @@ export class AppointmentsPage implements OnInit {
 
   async OpenCoupon() {
 
-    this.common.presentToast('Offers/Deals not available....', 2000);
-    return
+    // this.common.presentToast('Offers/Deals not available....', 2000);
+    // return
 
 
     let env = this;
@@ -367,7 +367,7 @@ export class AppointmentsPage implements OnInit {
   }
 
   GetStylist() {
-    this.common.PostMethod("GetFilterData", { file: "userlogin", name: "b_id", value: this.SalonParams.b_id }).then((res: any) => {
+    this.common.PostMethod("Get_Filtered_Staff", { file: "userlogin", name: "b_id", value: this.SalonParams.b_id }).then((res: any) => {
       this.lists.userlist = res.Data;
     });
   }
